@@ -3,8 +3,8 @@ public class Globals
 	public static final int FRAME_HI = 1080;
 	public static final int FRAME_WI = 1920;
 	
-	public static final int CARD_HI = 350;
-	public static final int CARD_WI = 250;
+	public static final int CARD_HI = 250;
+	public static final int CARD_WI = 200;
 	public static final int COLUMN_SPACING = 300;
 	public static final int CARD_SPACING = 50;
 	
