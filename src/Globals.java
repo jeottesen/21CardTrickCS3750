@@ -1,11 +1,9 @@
 public class Globals 
 {
-	public static final int FRAME_HI = 1080;
-	public static final int FRAME_WI = 1920;
-	
-	public static final int CARD_HI = 250;
 	public static final int CARD_WI = 200;
-	public static final int COLUMN_SPACING = 300;
+	public static final int CARD_HI = (int) (CARD_WI * 1.25); // Keep aspect ratio of card
+	
+	public static final int COLUMN_SPACING = CARD_WI + 100;
 	public static final int CARD_SPACING = 50;
 	
 	public static final int COLUMN_ONE_LOCX = 20;
@@ -19,7 +17,7 @@ public class Globals
 	
 	public static final int CARDS_PER_COLUMN = 7;
 	
-	
-	
+	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
+	public static final int FRAME_HI = 768;
 	
 }

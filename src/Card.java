@@ -1,70 +1,121 @@
-public class Card 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+public class Card  extends JPanel
 {
 	private CardValues value;
-    private CardSuits suit;
+	private CardSuits suit;
+	private BufferedImage image;
+
+	public CardValues getValue() {
+		return value;
+	}
+
+	public CardSuits getSuit() {
+		return suit;
+	}
 
 	public Card(CardValues v, CardSuits s) {
-        value = v;
-        suit = s;
-    }
-	
-	public void equals(Card otherCard)
-	{
-		//  Sets the values of the other card equal to the values of the current card
-		this.suit = otherCard.suit;
-		this.value = otherCard.value;
+		value = v;
+		suit = s;
+
+		setPreferredSize(new Dimension(Globals.CARD_WI, Globals.CARD_HI));
+		setSize(Globals.CARD_WI, Globals.CARD_HI);
+		image = getCardImage();
+		setOpaque(false);
 	}
-	
-    @Override
-    public String toString() {
-        String string;
-        switch (value) {
-            /*case BACK:
+
+	@Override
+	public void paintComponent(Graphics g)
+	{
+
+		//setVisible(true);
+		Graphics2D g2d = (Graphics2D)g;
+		super.paintComponent(g2d);
+
+		if(image == null)
+		{
+			setVisible(false);
+		}
+		else
+		{				
+			g2d.drawImage(
+					image.getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_SMOOTH)
+					, 0, 0, this);
+		}	
+	}
+
+	private BufferedImage getCardImage()
+	{
+		try
+		{
+			return ImageIO.read(getClass().getResourceAsStream("/images/" + this.toString() + ".png"));
+		} catch(IOException e)
+		{
+			System.err.println(e);
+			return null;
+		}
+	}
+
+
+	@Override
+	public String toString() {
+		String string;
+		switch (value) {
+		/*case BACK:
                 string = "card_back";
                 break;*/
-            case ACE:
-            //case ONE:
-                string = "Ace" + suit.getValue();
-                break;
-            case JACK:
-                string = "Jack"+ suit.getValue();
-                break;
-            case QUEEN:
-                string = "Queen" + suit.getValue();
-                break;
-            case KING:
-                string = "King" + suit.getValue();
-                break;
-            case TWO:
-                string = "Two" + suit.getValue();
-                break;
-            case THREE:
-                string = "Three" + suit.getValue();
-                break;
-            case FOUR:
-                string = "Four" + suit.getValue();
-                break;
-            case FIVE:
-                string = "Five" + suit.getValue();
-                break;
-            case SIX:
-                string = "Six" + suit.getValue();
-                break;
-            case SEVEN:
-                string = "Seven" + suit.getValue();
-                break;
-            case EIGHT:
-                string = "Eight" + suit.getValue();
-                break;
-            case NINE:
-                string = "Nine" + suit.getValue();
-                break;
-            case TEN:
-                string = "Ten" + suit.getValue();
-                break;
-            default:
-                string = value.getValue() + suit.getValue();
-        }
-        return string;
-    }
+		case ACE:
+			//case ONE:
+			string = "Ace" + suit.getValue();
+			break;
+		case JACK:
+			string = "Jack"+ suit.getValue();
+			break;
+		case QUEEN:
+			string = "Queen" + suit.getValue();
+			break;
+		case KING:
+			string = "King" + suit.getValue();
+			break;
+		case TWO:
+			string = "Two" + suit.getValue();
+			break;
+		case THREE:
+			string = "Three" + suit.getValue();
+			break;
+		case FOUR:
+			string = "Four" + suit.getValue();
+			break;
+		case FIVE:
+			string = "Five" + suit.getValue();
+			break;
+		case SIX:
+			string = "Six" + suit.getValue();
+			break;
+		case SEVEN:
+			string = "Seven" + suit.getValue();
+			break;
+		case EIGHT:
+			string = "Eight" + suit.getValue();
+			break;
+		case NINE:
+			string = "Nine" + suit.getValue();
+			break;
+		case TEN:
+			string = "Ten" + suit.getValue();
+			break;
+		default:
+			string = value.getValue() + suit.getValue();
+		}
+		return string;
+	}
 }

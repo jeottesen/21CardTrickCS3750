@@ -9,8 +9,17 @@ import javax.swing.JPanel;
 public class Board extends JPanel {
 	
 	public BufferedImage backgroundImg;
+	
+	// Since the UML Diagram shows these are a composition
+	// relationship they need to be final. They would be
+	// an Aggregation relationship without it.
+	private final Column column1 = new Column();
+	private final Column column2 = new Column();
+	private final Column column3 = new Column();
 
 	public Board() {
+		setLayout(null);
+		
 		//load background image
 		try
 		{
@@ -21,10 +30,22 @@ public class Board extends JPanel {
 			System.out.println("ERROR: " + e.getMessage());
 		}
 		
-		System.out.println("Making a test card");
-		Card test = new Card(CardValues.ACE, CardSuits.SPADES);
-		CardPanel c = new CardPanel(test);
-		add(c);
+		// Temporary deck for testing. Will be getting cards from dealer later
+		Deck deck = new Deck();
+		
+		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
+		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
+		column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+		
+		add(column1);
+		add(column2);
+		add(column3);
+		
+		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
+			column1.addCard(deck.draw());
+			column2.addCard(deck.draw());
+			column3.addCard(deck.draw());
+		}
 	}
 
 	@Override
