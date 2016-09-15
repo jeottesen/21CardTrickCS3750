@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
@@ -23,6 +24,10 @@ public class Deck {
         }
         return cards.pop();
 
+    }
+    
+    public ArrayList<Card> random21() {
+    	return null;
     }
 
     //Function to shuffle the deck

@@ -41,10 +41,26 @@ public class Board extends JPanel {
 		add(column2);
 		add(column3);
 		
+		// Will move to Dealers deal function
 		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
-			column1.addCard(deck.draw());
-			column2.addCard(deck.draw());
-			column3.addCard(deck.draw());
+			addToColumn(1, deck.draw());
+			addToColumn(2, deck.draw());
+			addToColumn(3, deck.draw());
+		}
+	}
+	
+	public void addToColumn(int columnId, Card card) {
+		
+		switch (columnId) {
+		case 1:
+			column1.addCard(card);
+			break;
+		case 2:
+			column2.addCard(card);
+			break;
+		case 3:
+			column3.addCard(card);
+			break;
 		}
 	}
 
