@@ -57,3 +57,4 @@ public class CardTrick extends JFrame
 //geese:  testing a commit to git
 //geese:  testing a commit to geese_branch
 //geese:  testing Windows style line endings
+//geese:  well, this is fun...trying another fix for line endings
