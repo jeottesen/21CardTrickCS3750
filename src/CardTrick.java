@@ -20,7 +20,6 @@ public class CardTrick extends JFrame
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
 		add(new Board());
-		
 		setVisible(true);
 
 	}

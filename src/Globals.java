@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class Globals 
 {
 	public static final int CARD_WI = 200;
@@ -19,5 +21,7 @@ public class Globals
 	
 	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
 	public static final int FRAME_HI = 768;
+	
+	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136);
 	
 }

@@ -8,7 +8,7 @@ public class Dealer {
 	
 	// Association between Player and Dealer
 	// Making player final so that the Column can get a reference to it.
-	private Player player = new Player();
+	private final Player player = new Player();
 	
 	//Association with Board class
 	private Board board;

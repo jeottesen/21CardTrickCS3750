@@ -50,6 +50,7 @@ public class Card  extends JPanel
 			g2d.drawImage(
 					image.getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_SMOOTH)
 					, 0, 0, this);
+			
 		}	
 	}
 
