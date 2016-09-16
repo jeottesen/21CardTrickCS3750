@@ -28,7 +28,7 @@ public class Column extends JPanel {
 	public void addCard(Card card) {
 		cards.add(card);
 		drawCards();
-		setCardListener(card);
+		//setCardListener(card);
 	}
 	
 	private void drawCards() {
