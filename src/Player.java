@@ -16,8 +16,8 @@ public class Player {
 	//setter method to build association relationship
 	public void setDealer(Dealer dealer){this.dealer = dealer;}
 	
-	public void indicateColumn() {
-		
+	public void indicateColumn(int columnId) {
+		System.out.println("Player picks " + columnId);
 	}
 	
 	public void pickCard() {

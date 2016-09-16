@@ -74,9 +74,17 @@ public class Board extends JPanel {
 		}
 	}
 
-
+	/*
+	 * getter method to give access to private Dealer.
+	 * I don't know if this is good form, OOP-wise, because
+	 * I'm returning a reference to an object.  I'll take
+	 * anyone's input about this.  --geese
+	 */
+	public Dealer getDealer(){
+		return dealer;
+	}
 	
-	
+		
 	@Override
 	public void paintComponent(Graphics g)
 	{

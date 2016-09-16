@@ -58,7 +58,17 @@ public class Column extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				Column clickedColumn = (Column)card.getParent();
 				int clickedColumnId = clickedColumn.id;
-				System.out.println(clickedColumnId);				
+				
+				Board board = (Board)clickedColumn.getParent();
+				
+				Dealer dealer = (Dealer)(board.getDealer());
+				Player player = (Player)(dealer.getPlayer());
+				
+				player.indicateColumn(clickedColumnId);
+				
+				//System.out.println("Dealer==null: " + (dealer==null));
+				//System.out.println("Player==null: " + (player==null));
+				
 			}
 		});
 	}
