@@ -1,5 +1,6 @@
+import javax.swing.JPanel;
 
-public class Player {
+public class Player  extends JPanel{
 	
 	// Association between Player and Dealer
 	private Dealer dealer;
@@ -12,6 +13,10 @@ public class Player {
 	private Card card;
 	
 	private boolean hasSelectedCard;
+	
+	public Player(Dealer dealer) {
+		this.dealer = dealer;
+	}
 	
 	public void indicateColumn() {
 		

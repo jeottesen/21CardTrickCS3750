@@ -16,6 +16,8 @@ public class Board extends JPanel {
 	private final Column column1 = new Column();
 	private final Column column2 = new Column();
 	private final Column column3 = new Column();
+	
+	private Dealer dealer;
 
 	public Board() {
 		setLayout(null);
@@ -30,6 +32,8 @@ public class Board extends JPanel {
 			System.out.println("ERROR: " + e.getMessage());
 		}
 		
+		dealer = new Dealer(this);
+		
 		// Temporary deck for testing. Will be getting cards from dealer later
 		Deck deck = new Deck();
 		
@@ -41,12 +45,7 @@ public class Board extends JPanel {
 		add(column2);
 		add(column3);
 		
-		// Will move to Dealers deal function
-		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
-			addToColumn(1, deck.draw());
-			addToColumn(2, deck.draw());
-			addToColumn(3, deck.draw());
-		}
+		dealer.deal();
 	}
 	
 	public void addToColumn(int columnId, Card card) {
