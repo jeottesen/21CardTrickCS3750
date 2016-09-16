@@ -56,7 +56,6 @@ public class Column extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Card clickedCard = (Card)e.getSource();
 				Column clickedColumn = (Column)card.getParent();
 				int clickedColumnId = clickedColumn.id;
 				System.out.println(clickedColumnId);				
