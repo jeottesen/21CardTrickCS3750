@@ -18,11 +18,11 @@ public class Board extends JPanel {
 	private final Column column2 = new Column();
 	private final Column column3 = new Column();
 
-	protected CardTrick cardTrick;
-	
-	
-	public Board(CardTrick cardTrick) {
-		this.cardTrick = cardTrick;
+	private Dealer dealer;	
+
+	public Board() {
+		dealer = new Dealer();
+		dealer.setBoard(this);
 		
 		setLayout(null);
 		
@@ -37,7 +37,7 @@ public class Board extends JPanel {
 		}
 		
 		// Temporary deck for testing. Will be getting cards from dealer later
-		//Deck deck = new Deck();
+		Deck deck = new Deck();
 		
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
@@ -49,9 +49,9 @@ public class Board extends JPanel {
 		
 		// Will move to Dealers deal function
 		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
-			addToColumn(1, cardTrick.theDeck.draw());
-			addToColumn(2, cardTrick.theDeck.draw());
-			addToColumn(3, cardTrick.theDeck.draw());
+			addToColumn(1, deck.draw());
+			addToColumn(2, deck.draw());
+			addToColumn(3, deck.draw());
 		}
 	}
 	
@@ -70,6 +70,9 @@ public class Board extends JPanel {
 		}
 	}
 
+
+	
+	
 	@Override
 	public void paintComponent(Graphics g)
 	{

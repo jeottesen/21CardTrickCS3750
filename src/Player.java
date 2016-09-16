@@ -13,6 +13,9 @@ public class Player {
 	
 	private boolean hasSelectedCard;
 	
+	//setter method to build association relationship
+	public void setDealer(Dealer dealer){this.dealer = dealer;}
+	
 	public void indicateColumn() {
 		
 	}

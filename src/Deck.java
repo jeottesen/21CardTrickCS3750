@@ -5,7 +5,9 @@ import java.util.Stack;
 
 public class Deck {
     private Stack<Card> cards;
-
+    private Dealer dealer;
+    
+    
     public Deck(){
         cards = new Stack<>();
 
@@ -16,6 +18,11 @@ public class Deck {
         shuffle();
     }
 
+    
+	 
+	// setter method to build association relationship
+    public void setDealer(Dealer dealer){this.dealer = dealer;}
+    
     //Function to draw a card from the deck
     public Card draw(){
         //Conditional to handle the deck running out of cards
