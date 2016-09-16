@@ -10,6 +10,7 @@ public class CardTrick extends JFrame
 	protected Dealer theDealer;
 	protected Player thePlayer;
 	protected Deck theDeck;
+	protected Board theBoard;
 	
 	
 	public static void main(String[] args)
@@ -19,14 +20,15 @@ public class CardTrick extends JFrame
 	
 	CardTrick()
 	{
-		theDealer = new Dealer();
+		theDealer = new Dealer(this);
 		thePlayer = new Player();
 		theDeck = new Deck();
+		theBoard = new Board(this);
 		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
-		add(new Board(this));
+		add(theBoard);
 		
 		setVisible(true);
 

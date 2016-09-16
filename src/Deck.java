@@ -10,7 +10,7 @@ public class Deck {
         cards = new Stack<>();
 
         //Minimum of two decks
-        addDeck();
+        //addDeck();
         addDeck();
         
         shuffle();
@@ -26,8 +26,12 @@ public class Deck {
 
     }
     
-    public ArrayList<Card> random21() {
-    	return null;
+    public Stack<Card> random21() {
+    	Stack<Card> random21 = new Stack<>();
+    	for (int i = 0; i < 21; i++){
+    		random21.add(draw());
+    	}    	
+    	return random21;
     }
 
     //Function to shuffle the deck
