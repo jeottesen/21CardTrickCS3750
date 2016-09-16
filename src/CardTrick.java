@@ -7,7 +7,11 @@ import javax.swing.WindowConstants;
 
 public class CardTrick extends JFrame
 {
-
+	protected Dealer theDealer;
+	protected Player thePlayer;
+	protected Deck theDeck;
+	
+	
 	public static void main(String[] args)
 	{
 		new CardTrick();
@@ -15,10 +19,14 @@ public class CardTrick extends JFrame
 	
 	CardTrick()
 	{
+		theDealer = new Dealer();
+		thePlayer = new Player();
+		theDeck = new Deck();
+		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
-		add(new Board());
+		add(new Board(this));
 		
 		setVisible(true);
 
