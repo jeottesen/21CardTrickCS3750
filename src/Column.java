@@ -1,12 +1,15 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 public class Column extends JPanel {
 	private ArrayList<Card> cards;
+	private int id;
 	
 	public Column() {
 		setLayout(null);
@@ -18,10 +21,14 @@ public class Column extends JPanel {
 		cards = new ArrayList<>();
 	}
 	
+	public void setId(int id){
+		this.id = id;
+	}
 	
 	public void addCard(Card card) {
 		cards.add(card);
 		drawCards();
+		setCardListener(card);
 	}
 	
 	private void drawCards() {
@@ -30,5 +37,40 @@ public class Column extends JPanel {
 			c.setLocation(0, i * Globals.CARD_SPACING);
 			add(c);
 		}
+	}
+	
+	private void setCardListener(Card card){
+		card.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(((Column)(((Card)e.getSource()).getParent())).id);
+				
+			}
+		});
 	}
 }
