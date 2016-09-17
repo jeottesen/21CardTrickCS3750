@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -52,14 +54,17 @@ public class Dealer{
 		Card revealCard = board.getColumnTwo().getCards().get(4);
 		JPanel overlay = new JPanel();
 		
-        overlay.setBounds(50, 50, Globals.CARD_WI, Globals.CARD_HI);
+		overlay.setLayout(null);
+		overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
+		overlay.setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
+        overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
         overlay.setBackground(new Color(0,0,0,125));
-        overlay.setPreferredSize(new Dimension(250,150));
         overlay.setVisible(true);
         board.add(overlay);
         overlay.add(revealCard);
         revealCard.setLocation(300,200);
-		JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
+		
+        JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
 		//Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
 		//  For now, until we find a replacement.
