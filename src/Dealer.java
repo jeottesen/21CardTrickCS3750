@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Dealer extends JFrame {
+public class Dealer{
 	// Association with Board class
 	private Board board;
 	
@@ -17,6 +17,7 @@ public class Dealer extends JFrame {
 	private int dealNumber = 1;
 	
 	public Dealer(Board board) {
+		
 		this.board = board;
 		dealNumber = 1;
 		
@@ -40,9 +41,11 @@ public class Dealer extends JFrame {
 		//Card SecretCard;
 		//SecretCard = trickDeck.get(10);
 		
-		setTitle("Transparent Panel");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+       // setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel p1 = new JPanel();
+        //p1.setTitle("Transparent Panel");
+        p1.setBounds(50, 50, Globals.CARD_WI, Globals.CARD_HI);
         
         // Set the background, black with 125 as alpha value
         // This is less transparent
@@ -51,10 +54,10 @@ public class Dealer extends JFrame {
         p1.setPreferredSize(new Dimension(250,150));
         
         // Add the panels to the JFrame
-        add(p1);
+        board.add(p1);
         
-        setSize(600,400);
-        setVisible(true);
+        //setSize(600,400);
+        p1.setVisible(true);
 		board.getColumnTwo().getCards().get(4);
 		
 		//  This should be the last line
