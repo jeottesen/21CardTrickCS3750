@@ -51,10 +51,14 @@ public class Dealer{
 	
 	public void revealCard() 
 	{
-		Card revealCard = board.getColumnTwo().getCards().get(4);
+		Card revealCard = board.getColumnTwo().getCards().get(3);
 		JPanel overlay = new JPanel();
 		
 		overlay.setLayout(null);
+		overlay.setOpaque(true);
+		board.getColumnOne().setVisible(false);
+		board.getColumnTwo().setVisible(false);
+		board.getColumnThree().setVisible(false);
 		overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 		overlay.setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
         overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
