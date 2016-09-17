@@ -1,6 +1,8 @@
 import java.awt.BasicStroke;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,7 +11,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class Player extends JPanel {
 	
@@ -25,11 +31,36 @@ public class Player extends JPanel {
 	
 	private boolean hasSelectedCard;
 	
+	private JPanel columnPanel;
+	private JPanel wordsPanel;
+
+	private JLabel questionLabel;
+	private JLabel columnIdLabel;
+	
 	public Player(Dealer dealer) {
 		this.dealer = dealer;
-		setLayout(null);
+		
+		setLayout(new BorderLayout());
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 		setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
+		
+
+		createMessageJLabels();
+		createWordsPanel();
+		
+		wordsPanel.add(questionLabel);
+		wordsPanel.add(columnIdLabel);
+
+		/*
+		 * Configuring the columnPanel as a horizontally-oriented BoxLayout
+		 * Panel. This may help with resizing columns and cards later.
+		 */
+		columnPanel = new JPanel();
+		columnPanel.setLayout(null);
+		columnPanel.setOpaque(false);// so we can see Board's background color
+		
+		//columnPanel.add(Box.createRigidArea(new Dimension(5, 0)));
+		columnPanel.add(Box.createRigidArea(new Dimension(5, 5)));
 		
 		// add an empty mouse listener so that the events in ColumnBorder can propagate up
 		addMouseListener(new MouseAdapter(){});
@@ -39,18 +70,21 @@ public class Player extends JPanel {
 		ColumnBorder cb1 = new ColumnBorder(1);
 		cb1.setLocation(5, 5);
 		
-		add(cb1);
+		columnPanel.add(cb1);
 		
 		ColumnBorder cb2 = new ColumnBorder(2);
 		cb2.setLocation(Globals.COLUMN_TWO_LOCX - 15, 5);
 		
-		add(cb2);
+		columnPanel.add(cb2);
 		
 
 		ColumnBorder cb3 = new ColumnBorder(3);
 		cb3.setLocation(Globals.COLUMN_THREE_LOCX - 15, 5);
 		
-		add(cb3);
+		columnPanel.add(cb3);
+		
+		this.add(columnPanel, BorderLayout.CENTER);
+		this.add(wordsPanel, BorderLayout.SOUTH);
 		
 	}
 	
@@ -63,7 +97,25 @@ public class Player extends JPanel {
 	}
 	
 
+	private void createWordsPanel() {
+		wordsPanel = new JPanel();
+		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
+		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 100));
+		wordsPanel.setBackground(Globals.BACKGROUND_COLOR);
+	}
 	
+	private void createMessageJLabels() {
+		questionLabel = new JLabel();
+		questionLabel.setForeground(Color.WHITE);
+		questionLabel.setText("Which column is your card in?");
+		questionLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		questionLabel.setAlignmentX(CENTER_ALIGNMENT);
+
+		columnIdLabel = new JLabel();
+		columnIdLabel.setForeground(Color.WHITE);
+		columnIdLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		columnIdLabel.setAlignmentX(CENTER_ALIGNMENT);
+	}
 
 	private class ColumnBorder extends JPanel {
 		
@@ -81,6 +133,7 @@ public class Player extends JPanel {
 				@Override
 				public void mouseExited(MouseEvent e) {
 					System.out.println("ColumnBorder " + columnNumber + " Mouse Exited.");
+					columnIdLabel.setText("");
 					hoveredOver = false;
 					repaint();
 				}
@@ -88,6 +141,8 @@ public class Player extends JPanel {
 				@Override
 				public void mouseEntered(MouseEvent e) {
 					System.out.println("ColumnBorder " + columnNumber + " Mouse Enter.");
+					
+					columnIdLabel.setText("Column " + columnNumber + "?");
 					hoveredOver = true;
 					repaint();
 				}
