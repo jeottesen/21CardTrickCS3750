@@ -14,11 +14,13 @@ public class Player  extends JPanel{
 	
 	private boolean hasSelectedCard;
 	
-	public Player(Dealer dealer) {
+	public Player(Dealer dealer) 
+	{
 		this.dealer = dealer;
 	}
 	
-	public void indicateColumn() {
+	public void indicateColumn() 
+	{
 		
 	}
 	

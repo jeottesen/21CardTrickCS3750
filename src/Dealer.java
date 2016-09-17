@@ -1,5 +1,7 @@
 import java.util.Stack;
 
+import javax.swing.JOptionPane;
+
 public class Dealer {
 	
 	// Association with Board class
@@ -10,11 +12,11 @@ public class Dealer {
 	
 	private Stack<Card> trickDeck;
 	
-	private int dealNumber;
+	private int dealNumber = 1;
 	
 	public Dealer(Board board) {
 		this.board = board;
-		dealNumber = 0;
+		dealNumber = 1;
 		
 		Deck deck = new Deck();
 		trickDeck = new Stack<>();
@@ -34,6 +36,12 @@ public class Dealer {
 	public void revealCard() 
 	{
 		
+		board.getColumnTwo().getCards().get(4);
+		
+		//  This should be the last line
+		JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
+		
+		// Board.newDeal --  This does not exist yet.  But if we choose to implement it, it should be called here.
 	}
 	
 	public void pickupCards(int column) 
@@ -58,6 +66,12 @@ public class Dealer {
 			trickDeck.addAll(board.getColumnThree().getCards());
 			trickDeck.addAll(board.getColumnTwo().getCards());
 		}
+		
+		if (dealNumber == 3)
+		{
+			revealCard();
+		}
+		dealNumber++;
 	}
 
 }
