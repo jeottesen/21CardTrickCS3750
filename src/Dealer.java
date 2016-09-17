@@ -31,56 +31,32 @@ public class Dealer {
 		
 	}
 	
-	public void revealCard() {
+	public void revealCard() 
+	{
 		
 	}
 	
 	public void pickupCards(int column) 
 	{
 		if (column == 1)
-		{
-			for (int i = 0; i < 7; i++)
-			{	
-				trickDeck.add(board.getColumnTwo().getCard(i));
-			}
-			for (int i = 7; i < 14; i++)
-			{	
-				trickDeck.add(board.getColumnOne().getCard(i));
-			}
-			for (int i = 14; i < 21; i++)
-			{	
-				trickDeck.add(board.getColumnThree().getCard(i));
-			}
+		{		
+			trickDeck.addAll(board.getColumnTwo().getCards());
+			trickDeck.addAll(board.getColumnOne().getCards());	
+			trickDeck.addAll(board.getColumnThree().getCards());
+			
 		}
 		else if (column == 2)
 		{
-			for (int i = 0; i < 7; i++)
-			{	
-				trickDeck.add(board.getColumnOne().getCard(i));
-			}
-			for (int i = 7; i < 14; i++)
-			{	
-				trickDeck.add(board.getColumnTwo().getCard(i));
-			}
-			for (int i = 14; i < 21; i++)
-			{	
-				trickDeck.add(board.getColumnThree().getCard(i));
-			}
+			trickDeck.addAll(board.getColumnOne().getCards());	
+			trickDeck.addAll(board.getColumnTwo().getCards());
+			trickDeck.addAll(board.getColumnThree().getCards());
+			
 		}
 		else if (column == 3)
-		{
-			for (int i = 0; i < 7; i++)
-			{	
-				trickDeck.add(board.getColumnOne().getCard(i));
-			}
-			for (int i = 7; i < 14; i++)
-			{	
-				trickDeck.add(board.getColumnThree().getCard(i));
-			}
-			for (int i = 14; i < 21; i++)
-			{	
-				trickDeck.add(board.getColumnTwo().getCard(i));
-			}
+		{	
+			trickDeck.addAll(board.getColumnOne().getCards());	
+			trickDeck.addAll(board.getColumnThree().getCards());
+			trickDeck.addAll(board.getColumnTwo().getCards());
 		}
 	}
 

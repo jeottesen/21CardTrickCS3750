@@ -24,9 +24,9 @@ public class Column extends JPanel {
 		drawCards();
 	}
 	
-	public Card getCard(int getCard)
+	public ArrayList<Card> getCards()
 	{
-		return cards.get(getCard);
+		return cards;
 	}
 	
 	private void drawCards() {
