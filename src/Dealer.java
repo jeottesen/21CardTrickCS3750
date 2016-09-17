@@ -1,6 +1,11 @@
+import java.awt.Color;
+import java.awt.Dimension;
 import java.util.Stack;
 
-public class Dealer {
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Dealer extends JFrame {
 	
 	// Association with Board class
 	private Board board;
@@ -33,7 +38,24 @@ public class Dealer {
 	
 	public void revealCard() 
 	{
+		//Card SecretCard;
+		//SecretCard = trickDeck.get(10);
 		
+		setTitle("Transparent Panel");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        JPanel p1 = new JPanel();
+        
+        // Set the background, black with 125 as alpha value
+        // This is less transparent
+        p1.setBackground(new Color(0,0,0,125));
+        
+        p1.setPreferredSize(new Dimension(250,150));
+        
+        // Add the panels to the JFrame
+        add(p1);
+        
+        setSize(600,400);
+        setVisible(true);
 	}
 	
 	public void pickupCards(int column) 
