@@ -20,6 +20,8 @@ public class Board extends JPanel {
 	private Dealer dealer;
 
 	public Board() {
+		
+		System.out.println("Test commit");
 		setLayout(null);
 		
 		//load background image
