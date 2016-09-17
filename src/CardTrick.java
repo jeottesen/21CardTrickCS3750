@@ -7,6 +7,11 @@ import javax.swing.WindowConstants;
 
 public class CardTrick extends JFrame
 {
+		
+	private Player player;
+	private Dealer dealer;
+	private Board board;
+	
 
 	public static void main(String[] args)
 	{
@@ -18,9 +23,12 @@ public class CardTrick extends JFrame
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
-		add(new Board());
+		add(board = new Board(dealer));
 		
 		setVisible(true);
+		dealer = new Dealer(board);
+		player = new Player(dealer);
+		player.testDealer();
 
 	}
 

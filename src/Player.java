@@ -27,5 +27,13 @@ public class Player  extends JPanel{
 	public void pickCard() {
 		
 	}
+	
+	//  This is only temporary for testing purposes.  This will simply call 3 columns to test the dealer
+	public void testDealer()
+	{
+		dealer.pickupCards(2);
+		dealer.pickupCards(3);
+		dealer.pickupCards(1);
+	}
 
 }

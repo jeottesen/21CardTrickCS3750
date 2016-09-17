@@ -55,6 +55,7 @@ public class Dealer{
 	
 	public void pickupCards(int column) 
 	{
+		
 		if (column == 1)
 		{		
 			trickDeck.addAll(board.getColumnTwo().getCards());
@@ -76,10 +77,16 @@ public class Dealer{
 			trickDeck.addAll(board.getColumnTwo().getCards());
 		}
 		
+		
+		
 		if (dealNumber == 3)
 		{
 			revealCard();
 		}
+		//  For testing
+		JOptionPane.showMessageDialog(null, "Next Deal");
+		//
+		deal();
 		dealNumber++;
 	}
 
