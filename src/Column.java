@@ -4,8 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-
+import java.awt.Color;
 import javax.swing.JPanel;
+import java.awt.*;
 
 public class Column extends JPanel {
 	private ArrayList<Card> cards;
@@ -47,4 +48,17 @@ public class Column extends JPanel {
 			add(c);
 		}
 	}
+	/*@Override
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D)g;
+		g2.setStroke(new BasicStroke(10, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+		g2.setColor(Color.ORANGE);
+		g2.drawRect(15, 15, 240, (cards.size() * Globals.CARD_SPACING) + Globals.CARD_HI);
+		
+		//setBackground(Globals.BACKGROUND_COLOR);
+		//g.drawImage(backgroundImg, 0, 0, this);
+	}*/
+	
 	}

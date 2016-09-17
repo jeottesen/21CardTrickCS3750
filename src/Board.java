@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,6 +10,10 @@ import java.io.IOException;
 import java.awt.BorderLayout;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
@@ -28,19 +33,43 @@ public class Board extends JPanel {
 	private Dealer dealer;	
 	private JPanel columnPanel;
 	private JPanel wordsPanel;
-	private JLabel wordsLabel;
+	private JLabel questionLabel;
+	private JLabel columnIdLabel;
+	private CompoundBorder compoundBorderHover;
+	private CompoundBorder compoundBorder;
+	private LineBorder insideBorderHover;
+	private LineBorder insideBorder;
+	private EmptyBorder emptyBorder;
 
 	public Board() {
 		this.setLayout(new BorderLayout());
 		
-		wordsLabel = new JLabel();
-		wordsLabel.setForeground(Color.WHITE);
-		wordsLabel.setText("<html>Which column is your card in?");
+		emptyBorder = new EmptyBorder(10, 15, 28, 15);  //insets (top, left, bottom, right)  
+		//we might want to change insets based on how many cards there are...
+		
+		insideBorder = new LineBorder(Color.ORANGE, 10, true);
+		insideBorderHover = new LineBorder(Color.GREEN, 10, true);
+		compoundBorder = new CompoundBorder(emptyBorder, insideBorder);
+		compoundBorderHover = new CompoundBorder(emptyBorder, insideBorderHover);
+		
+		
+		questionLabel = new JLabel();
+		questionLabel.setForeground(Color.WHITE);
+		questionLabel.setText("Which column is your card in?");
+		questionLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		questionLabel.setAlignmentX(CENTER_ALIGNMENT);
+		
+		columnIdLabel = new JLabel();
+		columnIdLabel.setForeground(Color.WHITE);
+		columnIdLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		columnIdLabel.setAlignmentX(CENTER_ALIGNMENT);
 		
 		wordsPanel = new JPanel();
+		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
 		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 100));
 		wordsPanel.setBackground(Globals.BACKGROUND_COLOR);
-		wordsPanel.add(wordsLabel);
+		wordsPanel.add(questionLabel);
+		wordsPanel.add(columnIdLabel);
 		
 		/* Configuring the columnPanel as a horizontally-oriented BoxLayout Panel.
 		 * This may help with resizing columns and cards later.
@@ -68,6 +97,10 @@ public class Board extends JPanel {
 		//column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
 		//column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+		
+		/*column1.setBorder(compoundBorder);
+		column2.setBorder(compoundBorder);
+		column3.setBorder(compoundBorder);*/
 		
 		column1.setId(1);
 		column2.setId(2);
@@ -132,11 +165,14 @@ public class Board extends JPanel {
 	}
 
 	//used by MouseListener on Columns
-	public void setSelectedColumn(int id, boolean hoveringOver){
+	public void setSelectedColumn(Column column, int id, boolean hoveringOver){
 		if (hoveringOver){
-			wordsLabel.setText("<html>Which column is your card in?<br>Column " + id + "?</html>");
+			column.setBorder(compoundBorderHover);
+			columnIdLabel.setText("Column " + id + "?");
+			
 		}else{
-			wordsLabel.setText("<html>Which column is your card in?");
+			column.setBorder(null);
+			columnIdLabel.setText("");
 		}
 			
 		
@@ -156,12 +192,12 @@ public class Board extends JPanel {
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				board.setSelectedColumn(id, false);
+				board.setSelectedColumn(column, id, false);
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				board.setSelectedColumn(id, true);
+				board.setSelectedColumn(column, id, true);
 			}
 			
 			@Override
