@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -165,11 +166,19 @@ public class Player extends JPanel {
 			Graphics2D g2d = (Graphics2D)g;
 			super.paintComponent(g2d);
 			
+			RenderingHints qualityHints = new RenderingHints(
+					  RenderingHints.KEY_ANTIALIASING,
+					  RenderingHints.VALUE_ANTIALIAS_ON );
+			qualityHints.put(
+			  RenderingHints.KEY_RENDERING,
+			  RenderingHints.VALUE_RENDER_QUALITY );
+			g2d.setRenderingHints( qualityHints );
+			
 			float thickness = 10;
 			Stroke oldStroke = g2d.getStroke();
 			g2d.setStroke(new BasicStroke(thickness));
 			
-			g2d.setColor(Globals.TRANSPARENT_WHITE);
+			g2d.setColor(Color.WHITE);
 			
 			if (hoveredOver) {
 				g2d.setColor(Globals.HOVERED_COLUMN_BORDER_COLOR);
