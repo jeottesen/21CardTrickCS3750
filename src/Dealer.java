@@ -19,6 +19,10 @@ public class Dealer {
 		Deck deck = new Deck();
 		trickDeck = new Stack<>();
 		trickDeck.addAll(deck.random21());
+		
+		player = new Player(this);
+		
+		board.add(player);
 	}
 	
 	public void deal() {

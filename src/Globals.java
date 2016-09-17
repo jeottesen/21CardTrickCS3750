@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class Globals 
 {
 	public static final int CARD_WI = 200;
@@ -17,7 +19,15 @@ public class Globals
 	
 	public static final int CARDS_PER_COLUMN = 7;
 	
+	public static final int COLUMN_HI = 
+			(Globals.CARD_SPACING * CARDS_PER_COLUMN) + (Globals.CARD_HI - Globals.CARD_SPACING);
+
+	
 	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
 	public static final int FRAME_HI = 768;
+	
+	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136); // teal
+	public static final Color HOVERED_COLUMN_BORDER_COLOR = new Color(255, 194, 60, 221); // amber with transparency
+	public static final Color TRANSPARENT_WHITE = new Color(255, 255, 255, 221); // amber with transparency
 	
 }
