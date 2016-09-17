@@ -28,6 +28,7 @@ public class Globals
 	
 	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136); // teal
 	public static final Color HOVERED_COLUMN_BORDER_COLOR = new Color(255, 194, 60, 221); // amber with transparency
+	public static final Color SELECTED_COLUMN_BORDER_COLOR = new Color(76, 175, 80, 221); // Green 500 with 87% Transparency
 	public static final Color TRANSPARENT_WHITE = new Color(255, 255, 255, 221); // amber with transparency
 	
 }

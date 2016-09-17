@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -20,22 +21,14 @@ public class Board extends JPanel {
 	private Dealer dealer;
 
 	public Board() {
+		
 		setLayout(null);
 		
-		//load background image
-		try
-		{
-			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/TableFelt.png"));
-		}
-		catch(IOException e)
-		{
-			System.out.println("ERROR: " + e.getMessage());
-		}
+		// add an empty mouse listener so that the events in player can propagate up
+		addMouseListener(new MouseAdapter(){});
 		
 		dealer = new Dealer(this);
 		
-		// Temporary deck for testing. Will be getting cards from dealer later
-		Deck deck = new Deck();
 		
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
@@ -68,7 +61,6 @@ public class Board extends JPanel {
 	{
 		super.paintComponent(g);
 		setBackground(Globals.BACKGROUND_COLOR);
-		//g.drawImage(backgroundImg, 0, 0, this);
 	}
 
 }

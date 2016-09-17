@@ -1,3 +1,4 @@
+import java.awt.event.MouseAdapter;
 import java.util.Stack;
 
 public class Dealer {
@@ -21,7 +22,6 @@ public class Dealer {
 		trickDeck.addAll(deck.random21());
 		
 		player = new Player(this);
-		
 		board.add(player);
 	}
 	
