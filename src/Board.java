@@ -44,30 +44,10 @@ public class Board extends JPanel {
 	public Board() {
 		this.setLayout(new BorderLayout());
 		
-		emptyBorder = new EmptyBorder(10, 15, 28, 15);  //insets (top, left, bottom, right)  
-		//we might want to change insets based on how many cards there are...
+		createBorders();		
+		createMessageJLabels();		
+		createWordsPanel();
 		
-		insideBorder = new LineBorder(Color.ORANGE, 10, true);
-		insideBorderHover = new LineBorder(Color.GREEN, 10, true);
-		compoundBorder = new CompoundBorder(emptyBorder, insideBorder);
-		compoundBorderHover = new CompoundBorder(emptyBorder, insideBorderHover);
-		
-		
-		questionLabel = new JLabel();
-		questionLabel.setForeground(Color.WHITE);
-		questionLabel.setText("Which column is your card in?");
-		questionLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
-		questionLabel.setAlignmentX(CENTER_ALIGNMENT);
-		
-		columnIdLabel = new JLabel();
-		columnIdLabel.setForeground(Color.WHITE);
-		columnIdLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
-		columnIdLabel.setAlignmentX(CENTER_ALIGNMENT);
-		
-		wordsPanel = new JPanel();
-		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
-		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 100));
-		wordsPanel.setBackground(Globals.BACKGROUND_COLOR);
 		wordsPanel.add(questionLabel);
 		wordsPanel.add(columnIdLabel);
 		
@@ -94,9 +74,22 @@ public class Board extends JPanel {
 		// Temporary deck for testing. Will be getting cards from dealer later
 		Deck deck = new Deck();
 		
-		//column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-		//column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+		configureColumns();
+			
+		
+		this.add(columnPanel, BorderLayout.CENTER);
+		this.add(wordsPanel, BorderLayout.SOUTH);
+		
+		
+		// Will move to Dealers deal function
+		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
+			addToColumn(1, deck.draw());
+			addToColumn(2, deck.draw());
+			addToColumn(3, deck.draw());
+		}
+	}
+
+	private void configureColumns() {
 		
 		/*column1.setBorder(compoundBorder);
 		column2.setBorder(compoundBorder);
@@ -109,25 +102,40 @@ public class Board extends JPanel {
 		setMouseListener(column1, this);
 		setMouseListener(column2, this);
 		setMouseListener(column3, this);
-	
-		//column2.setOpaque(true);//just to get a look at it while working on layout
-		
+			
 		columnPanel.add(column1);
 		columnPanel.add(column2);
 		columnPanel.add(column3);
+	}
+
+	private void createWordsPanel() {
+		wordsPanel = new JPanel();
+		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
+		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 100));
+		wordsPanel.setBackground(Globals.BACKGROUND_COLOR);
+	}
+
+	private void createMessageJLabels() {
+		questionLabel = new JLabel();
+		questionLabel.setForeground(Color.WHITE);
+		questionLabel.setText("Which column is your card in?");
+		questionLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		questionLabel.setAlignmentX(CENTER_ALIGNMENT);
 		
+		columnIdLabel = new JLabel();
+		columnIdLabel.setForeground(Color.WHITE);
+		columnIdLabel.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		columnIdLabel.setAlignmentX(CENTER_ALIGNMENT);
+	}
+
+	private void createBorders() {
+		emptyBorder = new EmptyBorder(10, 15, 28, 15);  //insets (top, left, bottom, right)  
+		//we might want to change insets based on how many cards there are...
 		
-		
-		this.add(columnPanel, BorderLayout.CENTER);
-		this.add(wordsPanel, BorderLayout.SOUTH);
-		
-		
-		// Will move to Dealers deal function
-		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
-			addToColumn(1, deck.draw());
-			addToColumn(2, deck.draw());
-			addToColumn(3, deck.draw());
-		}
+		insideBorder = new LineBorder(Color.ORANGE, 10, true);
+		insideBorderHover = new LineBorder(Color.GREEN, 10, true);
+		compoundBorder = new CompoundBorder(emptyBorder, insideBorder);
+		compoundBorderHover = new CompoundBorder(emptyBorder, insideBorderHover);
 	}
 	
 	public void addToColumn(int columnId, Card card) {
@@ -145,15 +153,6 @@ public class Board extends JPanel {
 		}
 	}
 
-	/*
-	 * getter method to give access to private Dealer.
-	 * I don't know if this is good form, OOP-wise, because
-	 * I'm returning a reference to an object.  I'll take
-	 * anyone's input about this.  --geese
-	 */
-	//public Dealer getDealer(){
-		//return dealer;
-	//}
 	
 		
 	@Override
