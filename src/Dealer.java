@@ -2,10 +2,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Stack;
 
+<<<<<<< HEAD
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Dealer extends JFrame {
+=======
+import javax.swing.JOptionPane;
+
+public class Dealer {
+>>>>>>> origin/Joshua-Crandall
 	
 	// Association with Board class
 	private Board board;
@@ -15,11 +21,11 @@ public class Dealer extends JFrame {
 	
 	private Stack<Card> trickDeck;
 	
-	private int dealNumber;
+	private int dealNumber = 1;
 	
 	public Dealer(Board board) {
 		this.board = board;
-		dealNumber = 0;
+		dealNumber = 1;
 		
 		Deck deck = new Deck();
 		trickDeck = new Stack<>();
@@ -41,6 +47,7 @@ public class Dealer extends JFrame {
 		//Card SecretCard;
 		//SecretCard = trickDeck.get(10);
 		
+<<<<<<< HEAD
 		setTitle("Transparent Panel");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel p1 = new JPanel();
@@ -56,6 +63,14 @@ public class Dealer extends JFrame {
         
         setSize(600,400);
         setVisible(true);
+=======
+		board.getColumnTwo().getCards().get(4);
+		
+		//  This should be the last line
+		JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
+		
+		// Board.newDeal --  This does not exist yet.  But if we choose to implement it, it should be called here.
+>>>>>>> origin/Joshua-Crandall
 	}
 	
 	public void pickupCards(int column) 
@@ -80,6 +95,12 @@ public class Dealer extends JFrame {
 			trickDeck.addAll(board.getColumnThree().getCards());
 			trickDeck.addAll(board.getColumnTwo().getCards());
 		}
+		
+		if (dealNumber == 3)
+		{
+			revealCard();
+		}
+		dealNumber++;
 	}
 
 }
