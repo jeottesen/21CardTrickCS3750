@@ -24,6 +24,11 @@ public class Column extends JPanel {
 		drawCards();
 	}
 	
+	public Card getCard(int getCard)
+	{
+		return cards.get(getCard);
+	}
+	
 	private void drawCards() {
 		for(int i = cards.size() - 1; i >= 0; i--) {
 			Card c = cards.get(i); 
@@ -31,4 +36,6 @@ public class Column extends JPanel {
 			add(c);
 		}
 	}
+	
+	
 }

@@ -64,6 +64,19 @@ public class Board extends JPanel {
 			break;
 		}
 	}
+	
+	public Column getColumnOne()
+	{
+		return column1;
+	}
+	public Column getColumnTwo()
+	{
+		return column2;
+	}
+	public Column getColumnThree()
+	{
+		return column3;
+	}
 
 	@Override
 	public void paintComponent(Graphics g)
