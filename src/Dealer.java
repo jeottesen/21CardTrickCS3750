@@ -27,12 +27,18 @@ public class Dealer{
 	}
 	
 	public void deal() {
+		
+		board.getColumnOne().clearColumn();
+		board.getColumnTwo().clearColumn();
+		board.getColumnThree().clearColumn();
 
 		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
 			board.addToColumn(1, trickDeck.pop());
 			board.addToColumn(2, trickDeck.pop());
 			board.addToColumn(3, trickDeck.pop());
 		}
+		
+		board.revalidate();
 		
 	}
 	
@@ -51,6 +57,8 @@ public class Dealer{
 		JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
 		//Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
+		//  For now, until we find a replacement.
+		System.exit(0);
 	}
 	
 	public void pickupCards(int column) 

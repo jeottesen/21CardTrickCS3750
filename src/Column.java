@@ -18,6 +18,10 @@ public class Column extends JPanel {
 		cards = new ArrayList<>();
 	}
 	
+	public void clearColumn()
+	{
+		cards.clear();
+	}
 	
 	public void addCard(Card card) {
 		cards.add(card);
