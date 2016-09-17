@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.Stack;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Dealer extends JFrame {
@@ -57,9 +58,9 @@ public class Dealer extends JFrame {
 		board.getColumnTwo().getCards().get(4);
 		
 		//  This should be the last line
-		//JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
+		JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
-		// Board.newDeal --  This does not exist yet.  But if we choose to implement it, it should be called here.
+		// Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
 	}
 	
 	public void pickupCards(int column) 
