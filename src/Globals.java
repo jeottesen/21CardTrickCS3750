@@ -22,6 +22,7 @@ public class Globals
 	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
 	public static final int FRAME_HI = 768;
 	
-	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136);
+	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136);//teal
+	public static final Color CLICKED_COLUMN_BORDER_COLOR = new Color(255, 194, 60);//amber
 	
 }
