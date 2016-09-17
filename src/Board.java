@@ -133,7 +133,7 @@ public class Board extends JPanel {
 		//we might want to change insets based on how many cards there are...
 		
 		insideBorder = new LineBorder(Color.ORANGE, 10, true);
-		insideBorderHover = new LineBorder(Color.GREEN, 10, true);
+		insideBorderHover = new LineBorder(Color.WHITE, 10, true);
 		compoundBorder = new CompoundBorder(emptyBorder, insideBorder);
 		compoundBorderHover = new CompoundBorder(emptyBorder, insideBorderHover);
 	}
