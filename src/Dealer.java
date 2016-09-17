@@ -38,32 +38,19 @@ public class Dealer{
 	
 	public void revealCard() 
 	{
-		//Card SecretCard;
-		//SecretCard = trickDeck.get(10);
+		Card revealCard = board.getColumnTwo().getCards().get(4);
+		JPanel overlay = new JPanel();
 		
-		
-       // setDefaultCloseOperation(EXIT_ON_CLOSE);
-        JPanel p1 = new JPanel();
-        //p1.setTitle("Transparent Panel");
-        p1.setBounds(50, 50, Globals.CARD_WI, Globals.CARD_HI);
-        
-        // Set the background, black with 125 as alpha value
-        // This is less transparent
-        p1.setBackground(new Color(0,0,0,125));
-        
-        p1.setPreferredSize(new Dimension(250,150));
-        
-        // Add the panels to the JFrame
-        board.add(p1);
-        
-        //setSize(600,400);
-        p1.setVisible(true);
-		board.getColumnTwo().getCards().get(4);
-		
-		//  This should be the last line
+        overlay.setBounds(50, 50, Globals.CARD_WI, Globals.CARD_HI);
+        overlay.setBackground(new Color(0,0,0,125));
+        overlay.setPreferredSize(new Dimension(250,150));
+        overlay.setVisible(true);
+        board.add(overlay);
+        overlay.add(revealCard);
+        revealCard.setLocation(300,200);
 		JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
-		// Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
+		//Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
 	}
 	
 	public void pickupCards(int column) 
