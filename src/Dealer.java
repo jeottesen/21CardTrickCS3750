@@ -31,11 +31,16 @@ public class Dealer{
 		board.getColumnOne().clearColumn();
 		board.getColumnTwo().clearColumn();
 		board.getColumnThree().clearColumn();
+		
 
 		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
 			board.addToColumn(1, trickDeck.pop());
 			board.addToColumn(2, trickDeck.pop());
 			board.addToColumn(3, trickDeck.pop());
+			
+			board.getColumnOne().repaint();
+			board.getColumnTwo().repaint();
+			board.getColumnThree().repaint();
 		}
 		
 		board.revalidate();
