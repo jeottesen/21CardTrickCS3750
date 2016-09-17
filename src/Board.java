@@ -21,7 +21,7 @@ public class Board extends JPanel {
 
 	public Board() {
 		
-		System.out.println("Test commit");
+
 		setLayout(null);
 		
 		//load background image
