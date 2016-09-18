@@ -52,33 +52,35 @@ public class Dealer{
 	public void revealCard() 
 	{
 		Card revealCard = board.getColumnTwo().getCards().get(3);
-		JPanel overlay = new JPanel();
+		//JPanel overlay = new JPanel();
 		
-		/*JPanel overlay = new JPanel() {
+		JPanel overlay = new JPanel() {
 		    @Override
 		    public void paintComponent(Graphics g)
 		    {
 		        Graphics2D g2d = (Graphics2D)g;
 		        super.paintComponent(g2d);
-		        g2d.setColor(new Color(0,0,0,125));
+		        g2d.setColor(new Color(0,0,0,200));
 		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
 		    }
-		};*/
+		};
 		
-		overlay.setLayout(null);
-		overlay.setOpaque(true);
+
 		board.getColumnOne().setVisible(false);
 		board.getColumnTwo().setVisible(false);
 		board.getColumnThree().setVisible(false);
 		board.repaint();
-		overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
-		overlay.setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
+		overlay.setLayout(null);
+		overlay.setOpaque(false);
+		//overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
+		//overlay.setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
         overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
-        overlay.setBackground(new Color(0,0,0,125));
+        //overlay.setBackground(new Color(0,0,0,125));
         overlay.setVisible(true);
         board.add(overlay);
         overlay.add(revealCard);
         revealCard.setLocation(320,200);
+        overlay.repaint();
 		
         JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
