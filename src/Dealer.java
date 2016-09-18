@@ -59,6 +59,7 @@ public class Dealer{
 		board.getColumnOne().setVisible(false);
 		board.getColumnTwo().setVisible(false);
 		board.getColumnThree().setVisible(false);
+		board.repaint();
 		overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 		overlay.setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
         overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
@@ -66,7 +67,7 @@ public class Dealer{
         overlay.setVisible(true);
         board.add(overlay);
         overlay.add(revealCard);
-        revealCard.setLocation(300,200);
+        revealCard.setLocation(320,200);
 		
         JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
