@@ -11,7 +11,7 @@ import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -87,14 +87,25 @@ public class Player extends JPanel {
 		this.add(columnPanel, BorderLayout.CENTER);
 		this.add(wordsPanel, BorderLayout.SOUTH);
 		
+		deselectColumns();
+	
+		
 	}
 	
 	public void setDealer(Dealer dealer){
 		this.dealer = dealer;
 	}
 	
+	public void deselectColumns(){
+		for (Component c : columnPanel.getComponents()){
+			if (c.getClass() == ColumnBorder.class){
+				((ColumnBorder)c).selected = false;
+			}
+		}
+	}
+	
 	public void indicateColumn(int id) {
-		
+		dealer.pickupCards(id);
 	}
 	
 	public void pickCard() {
@@ -137,7 +148,7 @@ public class Player extends JPanel {
 			addMouseListener(new MouseAdapter() {				
 				@Override
 				public void mouseExited(MouseEvent e) {
-					System.out.println("ColumnBorder " + columnNumber + " Mouse Exited.");
+					//System.out.println("ColumnBorder " + columnNumber + " Mouse Exited.");
 					columnIdLabel.setText("");
 					hoveredOver = false;
 					repaint();
@@ -145,7 +156,7 @@ public class Player extends JPanel {
 	
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					System.out.println("ColumnBorder " + columnNumber + " Mouse Enter.");
+					//System.out.println("ColumnBorder " + columnNumber + " Mouse Enter.");
 					
 					columnIdLabel.setText("Column " + columnNumber + "?");
 					hoveredOver = true;
@@ -154,10 +165,10 @@ public class Player extends JPanel {
 	
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("ColumnBorder " + columnNumber + " Mouse Clicked.");
+					//System.out.println("ColumnBorder " + columnNumber + " Mouse Clicked.");
 					selected = !selected; //toggle selected
 					repaint();
-					indicateColumn(columnNumber);
+					indicateColumn(columnNumber);					
 				}
 			});
 		}

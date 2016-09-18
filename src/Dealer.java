@@ -25,7 +25,7 @@ public class Dealer{
 		player.setDealer(this);
 		board.add(player);
 		
-		dealNumber = 1;
+		dealNumber = 0;
 		
 		Deck deck = new Deck();
 		trickDeck = new Stack<>();
@@ -35,8 +35,8 @@ public class Dealer{
 	
 	
 		
-	public void deal() {
-		
+	public void deal() {		
+		dealNumber++;  //dealNumber becomes 1 when the cards are first dealt
 		board.getColumnOne().clearColumn();
 		board.getColumnTwo().clearColumn();
 		board.getColumnThree().clearColumn();
@@ -51,8 +51,12 @@ public class Dealer{
 			board.getColumnTwo().repaint();
 			board.getColumnThree().repaint();
 		}
+		if (dealNumber < 4)
+			player.deselectColumns();
 		
 		board.revalidate();
+		if (dealNumber == 4)
+			revealCard();
 		
 	}
 	
@@ -98,11 +102,13 @@ public class Dealer{
         overlay.repaint();
 		board.repaint();
 		
-        JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
+        //JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
 		//Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
 		//  For now, until we find a replacement.
-		System.exit(0);
+		
+		
+		//System.exit(0);  
 	}
 	
 	public void pickupCards(int column) 
@@ -131,15 +137,12 @@ public class Dealer{
 		
 		
 		
-		if (dealNumber == 3)
-		{
-			revealCard();
+		//  For testing		
+		if (dealNumber < 3){
+			JOptionPane.showMessageDialog(null, "Next Deal");
 		}
-		//  For testing
-		JOptionPane.showMessageDialog(null, "Next Deal");
-		//
 		deal();
-		dealNumber++;
+		
 	}
 
 }

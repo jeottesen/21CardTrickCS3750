@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 
 public class Column extends JPanel {
 	private ArrayList<Card> cards;
+	private int id;  //it's in the diagram.
 	
 	public Column() {
 		setLayout(null);
@@ -16,6 +17,14 @@ public class Column extends JPanel {
 		setPreferredSize(new Dimension(Globals.CARD_WI, ColumnHeight));
 		
 		cards = new ArrayList<>();
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public int getId(){
+		return id;
 	}
 	
 	public void clearColumn()

@@ -40,6 +40,10 @@ public class Board extends JPanel {
 		// Temporary deck for testing. Will be getting cards from dealer later
 		Deck deck = new Deck();
 		
+		column1.setId(1);
+		column2.setId(2);
+		column3.setId(3);
+		
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
 		column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
