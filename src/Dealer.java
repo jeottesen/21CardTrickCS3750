@@ -66,10 +66,14 @@ public class Dealer{
 		};
 		
 
-		board.getColumnOne().setVisible(false);
-		board.getColumnTwo().setVisible(false);
-		board.getColumnThree().setVisible(false);
-		board.repaint();
+//		board.getColumnOne().setVisible(false);
+//		board.getColumnTwo().setVisible(false);
+//		board.getColumnThree().setVisible(false);
+		System.out.println(board.getComponentZOrder(board.getColumnOne()));
+		System.out.println(board.getComponentZOrder(board.getColumnTwo()));
+		System.out.println(board.getComponentZOrder(board.getColumnThree()));
+		
+
 		overlay.setLayout(null);
 		overlay.setOpaque(false);
 		//overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
@@ -78,9 +82,14 @@ public class Dealer{
         //overlay.setBackground(new Color(0,0,0,125));
         overlay.setVisible(true);
         board.add(overlay);
+        board.setComponentZOrder(overlay, 0);
+        board.setComponentZOrder(board.getColumnOne(), 1);
+        board.setComponentZOrder(board.getColumnOne(), 2);
+        board.setComponentZOrder(board.getColumnOne(), 3);
         overlay.add(revealCard);
         revealCard.setLocation(320,200);
         overlay.repaint();
+		board.repaint();
 		
         JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
 		
