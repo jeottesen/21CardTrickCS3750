@@ -19,10 +19,20 @@ public class Globals
 	
 	public static final int CARDS_PER_COLUMN = 7;
 	
+	public static final int COLUMN_HI = 
+			(Globals.CARD_SPACING * CARDS_PER_COLUMN) + (Globals.CARD_HI - Globals.CARD_SPACING);
+
+	
 	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
 	public static final int FRAME_HI = 768;
 	
-	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136);//teal
-	public static final Color CLICKED_COLUMN_BORDER_COLOR = new Color(255, 194, 60);//amber
+	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136); // teal
+	
+	//public static final Color HOVERED_COLUMN_BORDER_COLOR = new Color(255, 194, 60, 221); // amber with transparency
+	//public static final Color SELECTED_COLUMN_BORDER_COLOR = new Color(76, 175, 80, 221); // Green 500 with 87% Transparency
+	
+	public static final Color HOVERED_COLUMN_BORDER_COLOR = new Color(255, 194, 60); // amber with transparency
+	public static final Color SELECTED_COLUMN_BORDER_COLOR = new Color(0, 230, 118); // Green 500 with 87% Transparency
+	
 	
 }
