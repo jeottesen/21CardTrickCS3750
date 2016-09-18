@@ -54,6 +54,17 @@ public class Dealer{
 		Card revealCard = board.getColumnTwo().getCards().get(3);
 		JPanel overlay = new JPanel();
 		
+		/*JPanel overlay = new JPanel() {
+		    @Override
+		    public void paintComponent(Graphics g)
+		    {
+		        Graphics2D g2d = (Graphics2D)g;
+		        super.paintComponent(g2d);
+		        g2d.setColor(new Color(0,0,0,125));
+		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
+		    }
+		};*/
+		
 		overlay.setLayout(null);
 		overlay.setOpaque(true);
 		board.getColumnOne().setVisible(false);
