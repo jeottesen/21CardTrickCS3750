@@ -18,9 +18,12 @@ public class Dealer{
 	
 	private int dealNumber = 1;
 	
-	public Dealer() {
+	public Dealer(Board board) {
+		this.board = board;
+		
 		player = new Player();
 		player.setDealer(this);
+		board.add(player);
 		
 		dealNumber = 1;
 		
@@ -29,10 +32,9 @@ public class Dealer{
 		trickDeck.addAll(deck.random21());
 	}
 	
-	public void setBoard(Board board){
-		this.board = board;
-	}
 	
+	
+		
 	public void deal() {
 		
 		board.getColumnOne().clearColumn();

@@ -21,8 +21,7 @@ public class Board extends JPanel {
 
 	public Board() {
 		
-		dealer = new Dealer();
-		dealer.setBoard(this);
+		dealer = new Dealer(this);
 		
 		setLayout(null);
 		
