@@ -86,8 +86,8 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		setBackground(Color.GREEN);
-		g.drawImage(backgroundImg, 0, 0, this);
+		setBackground(Globals.BACKGROUND_COLOR);
+		//g.drawImage(backgroundImg, 0, 0, this);
 	}
 
 }
