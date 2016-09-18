@@ -19,7 +19,9 @@ public class Board extends JPanel {
 	
 	private Dealer dealer;
 
-	public Board() {
+	public Board(Dealer dealer) {
+		
+		this.dealer = dealer;
 		setLayout(null);
 		
 		//load background image
@@ -46,6 +48,8 @@ public class Board extends JPanel {
 		add(column3);
 		
 		dealer.deal();
+
+		
 	}
 	
 	public void addToColumn(int columnId, Card card) {
@@ -61,6 +65,19 @@ public class Board extends JPanel {
 			column3.addCard(card);
 			break;
 		}
+	}
+	
+	public Column getColumnOne()
+	{
+		return column1;
+	}
+	public Column getColumnTwo()
+	{
+		return column2;
+	}
+	public Column getColumnThree()
+	{
+		return column3;
 	}
 
 	@Override

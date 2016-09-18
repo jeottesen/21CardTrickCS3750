@@ -13,7 +13,7 @@ public class Card  extends JPanel
 {
 	private CardValues value;
 	private CardSuits suit;
-	private BufferedImage image;
+	private Image image;
 
 	public CardValues getValue() {
 		return value;
@@ -29,7 +29,15 @@ public class Card  extends JPanel
 
 		setPreferredSize(new Dimension(Globals.CARD_WI, Globals.CARD_HI));
 		setSize(Globals.CARD_WI, Globals.CARD_HI);
-		image = getCardImage();
+		
+		// moved getScaled instance from paint component
+		// this way the program only scales the image down once. 
+		// rather than  every few seconds
+		image = getCardImage().getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_SMOOTH);
+		
+		if(image == null)
+			setVisible(false);
+		
 		setOpaque(false);
 	}
 
@@ -41,16 +49,7 @@ public class Card  extends JPanel
 		Graphics2D g2d = (Graphics2D)g;
 		super.paintComponent(g2d);
 
-		if(image == null)
-		{
-			setVisible(false);
-		}
-		else
-		{				
-			g2d.drawImage(
-					image.getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_SMOOTH)
-					, 0, 0, this);
-		}	
+		g2d.drawImage(image, 0, 0, this);
 	}
 
 	private BufferedImage getCardImage()
@@ -70,11 +69,8 @@ public class Card  extends JPanel
 	public String toString() {
 		String string;
 		switch (value) {
-		/*case BACK:
-                string = "card_back";
-                break;*/
+		
 		case ACE:
-			//case ONE:
 			string = "Ace" + suit.getValue();
 			break;
 		case JACK:

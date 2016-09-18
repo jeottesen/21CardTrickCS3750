@@ -12,16 +12,25 @@ public class Column extends JPanel {
 		setLayout(null);
 		int ColumnHeight = (Globals.CARD_SPACING * 7) + (Globals.CARD_HI - Globals.CARD_SPACING);
 		setSize(Globals.CARD_WI, ColumnHeight);
-		System.out.println("Column Height: " + ((Globals.CARD_SPACING * 7) + (Globals.CARD_HI - Globals.CARD_SPACING)));
+		//System.out.println("Column Height: " + ((Globals.CARD_SPACING * 7) + (Globals.CARD_HI - Globals.CARD_SPACING)));
 		setPreferredSize(new Dimension(Globals.CARD_WI, ColumnHeight));
 		
 		cards = new ArrayList<>();
 	}
 	
+	public void clearColumn()
+	{
+		cards.clear();
+	}
 	
 	public void addCard(Card card) {
 		cards.add(card);
 		drawCards();
+	}
+	
+	public ArrayList<Card> getCards()
+	{
+		return cards;
 	}
 	
 	private void drawCards() {
@@ -31,4 +40,6 @@ public class Column extends JPanel {
 			add(c);
 		}
 	}
+	
+	
 }

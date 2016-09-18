@@ -15,6 +15,9 @@ public class Globals
 	public static final int COLUMN_THREE_LOCX = COLUMN_TWO_LOCX + COLUMN_SPACING;
 	public static final int COLUMN_THREE_LOCY = COLUMN_ONE_LOCY;
 	
+	public static final int REVEAL_LOCX = 100;
+	public static final int REVEAL_LOCY = 100;
+	
 	public static final int CARDS_PER_COLUMN = 7;
 	
 	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
