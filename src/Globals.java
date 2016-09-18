@@ -23,7 +23,7 @@ public class Globals
 			(Globals.CARD_SPACING * CARDS_PER_COLUMN) + (Globals.CARD_HI - Globals.CARD_SPACING);
 
 	
-	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
+	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX + 20; // Keep screen symmetrical
 	public static final int FRAME_HI = 768;
 	
 	public static final Color BACKGROUND_COLOR = new Color(0, 150, 136); // teal
