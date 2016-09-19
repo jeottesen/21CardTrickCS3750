@@ -218,6 +218,17 @@ public class Player extends JPanel {
 		button.setPreferredSize(new Dimension(100, 50));
 		button.setFont(new Font("Helvetica", Font.PLAIN, 22));
 		button.setMargin(new Insets(0, 20, 0, 20));
+		button.addMouseListener(new MouseAdapter() {
+			public void mouseEntered(MouseEvent e) {
+				button.setBackground(Globals.BUTTON_HOVER_COLOR);
+				super.mouseEntered(e);
+			}
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				button.setBackground(Globals.BACKGROUND_COLOR);
+			}
+			
+		});
 	}
 
 	private class ColumnBorder extends JPanel {
