@@ -78,7 +78,14 @@ public class Player extends JPanel {
 		columnPanel.add(Box.createRigidArea(new Dimension(5, 5)));
 		
 		// add an empty mouse listener so that the events in ColumnBorder can propagate up
-		addMouseListener(new MouseAdapter(){});
+		addMouseListener(new MouseAdapter(){
+			public void mouseClicked(MouseEvent e) {
+				deselectColumns();
+				questionLabel.setText("Which column is your card in?");
+				columnIdLabel.setVisible(true);
+				buttonPanel.setVisible(false);
+			}
+		});
 		
 		setOpaque(false);
 		
