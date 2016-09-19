@@ -207,7 +207,7 @@ public class Player extends JPanel {
 		});
 	}
 
-	private void configureButton(JButton button, boolean isVisible) {
+	private void configureButton(final JButton button, boolean isVisible) {
 		button.setFocusPainted(false);// avoids this ugly inner border
 		button.setVisible(isVisible);
 		button.setBackground(new Color(255, 255, 255, 0));  // Transparent background
@@ -236,7 +236,7 @@ public class Player extends JPanel {
 		public boolean hoveredOver;
 		private boolean selected;
 
-		public ColumnBorder(int columnNumber) {
+		public ColumnBorder(final int columnNumber) {
 			this.columnNumber = columnNumber;
 			setSize(Globals.CARD_WI + 30, Globals.COLUMN_HI + 30);
 			setPreferredSize(new Dimension(Globals.CARD_WI + 30, Globals.COLUMN_HI + 30));

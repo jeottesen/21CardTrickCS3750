@@ -25,7 +25,7 @@ public class CardTrick extends JFrame
 	}
 
 
-	private void addButton(JButton button, int locX, int locY, int Wi, int Hi)
+	private void addButton(final JButton button, int locX, int locY, int Wi, int Hi)
 	{
 		button.setBounds(locX, locY, Wi, Hi);
 		//		button.setBackground(Color.CYAN);
