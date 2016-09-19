@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,15 +9,16 @@ import javax.swing.JPanel;
 
 public class SplashPanel extends JPanel
 {
-    private BufferedImage image;
+    private Image image;
     private int w,h;
     public SplashPanel(String fname)
     {
         //reads the image
         try {
-            image = ImageIO.read(new File(fname));
-            w = image.getWidth();
-            h = image.getHeight();
+            image =ImageIO.read(getClass().getResourceAsStream(fname));
+			image = image.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
+            //w = image.getWidth();
+            //h = image.getHeight();
             System.out.println("Successful splash file read.");
 
         } catch (IOException ioe) {
