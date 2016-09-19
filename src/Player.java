@@ -210,7 +210,8 @@ public class Player extends JPanel {
 	private void configureButton(final JButton button, boolean isVisible) {
 		button.setFocusPainted(false);// avoids this ugly inner border
 		button.setVisible(isVisible);
-		button.setBackground(new Color(255, 255, 255, 0));  // Transparent background
+		//button.setBackground(new Color(255, 255, 255, 0));  // Transparent background
+		button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
 		button.setForeground(Color.WHITE);
 		button.setBorder(new LineBorder(Color.WHITE, 2, false));
 		button.setPreferredSize(new Dimension(100, 50));
@@ -219,13 +220,16 @@ public class Player extends JPanel {
 		button.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
 				super.mouseEntered(e);
-				button.setBackground(Globals.BUTTON_HOVER_COLOR);
-				System.out.println("Button entered");
+				button.setBackground(Globals.BUTTON_HOVER_COLOR_PURPLE);
+				buttonPanel.repaint();
+				//button.repaint();
 			}
 			public void mouseExited(MouseEvent e) {
 				super.mouseExited(e);
-				button.setBackground(new Color(255, 255, 255, 0));
-				System.out.println("Button exited");
+				//button.setBackground(new Color(255, 255, 255, 0));   //transparent
+				button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
+				buttonPanel.repaint();
+				//button.repaint();
 			}
 			
 		});
@@ -308,11 +312,11 @@ public class Player extends JPanel {
 			
 			if (hoveredOver)
 			{
-				g2d.setColor(Globals.HOVERED_COLUMN_BORDER_COLOR);
+				g2d.setColor(Globals.HOVERED_COLUMN_BORDER_COLOR_PURPLE_THEME);
 			}
 			if (selected)
 			{
-				g2d.setColor(Globals.SELECTED_COLUMN_BORDER_COLOR);
+				g2d.setColor(Globals.SELECTED_COLUMN_BORDER_COLOR_PURPLE_THEME);
 			}
 
 			g2d.drawRoundRect(5, 5, Globals.CARD_WI + 20, Globals.COLUMN_HI + 20, 5, 5);
