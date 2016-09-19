@@ -138,9 +138,9 @@ public class Dealer{
 		
 		
 		//  For testing		
-		/*if (dealNumber < 3){
+		if (dealNumber < 3){
 			JOptionPane.showMessageDialog(null, "Next Deal");
-		}*/
+		}
 		deal();
 		
 	}

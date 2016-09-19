@@ -17,8 +17,6 @@ public class Deck {
         
         shuffle();
     }
-
-    
 	 
 	// setter method to build association relationship
     public void setDealer(Dealer dealer){this.dealer = dealer;}
