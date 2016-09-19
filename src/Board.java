@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -8,8 +9,10 @@ import javax.swing.JPanel;
 
 public class Board extends JPanel {
 	
+
 	public BufferedImage splashImg;
-	public BufferedImage backgroundImg;
+	public Image backgroundImg;
+	
 	// Since the UML Diagram shows these are a composition
 	// relationship they need to be final. They would be
 	// an Aggregation relationship without it.
@@ -23,25 +26,32 @@ public class Board extends JPanel {
 	{
 	}
 
-	public Board(Dealer dealer) {
+	public Board() {
 		
-		this.dealer = dealer;
+		dealer = new Dealer(this);
+		
 		setLayout(null);
 		
 		//load background image
 		try
 		{
 			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/background.jpg"));
+			backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
+
 		}
 		catch(IOException e)
 		{
 			System.out.println("ERROR: " + e.getMessage());
 		}
 		
-		dealer = new Dealer(this);
+
 		
 		// Temporary deck for testing. Will be getting cards from dealer later
 		Deck deck = new Deck();
+		
+		column1.setId(1);
+		column2.setId(2);
+		column3.setId(3);
 		
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
@@ -86,6 +96,7 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+
 		setBackground(Color.GRAY);
 		g.drawImage(backgroundImg, 0, 0, this);
 	}

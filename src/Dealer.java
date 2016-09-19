@@ -2,10 +2,13 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Dealer{
 	// Association with Board class
@@ -19,17 +22,23 @@ public class Dealer{
 	private int dealNumber = 1;
 	
 	public Dealer(Board board) {
-		
 		this.board = board;
-		dealNumber = 1;
+		
+		player = new Player(this);
+		board.add(player);
+		
+		dealNumber = 0;
 		
 		Deck deck = new Deck();
 		trickDeck = new Stack<>();
 		trickDeck.addAll(deck.random21());
 	}
 	
-	public void deal() {
+	
+	
 		
+	public void deal() {		
+		dealNumber++;  //dealNumber becomes 1 when the cards are first dealt
 		board.getColumnOne().clearColumn();
 		board.getColumnTwo().clearColumn();
 		board.getColumnThree().clearColumn();
@@ -44,15 +53,22 @@ public class Dealer{
 			board.getColumnTwo().repaint();
 			board.getColumnThree().repaint();
 		}
+		if (dealNumber < 4)
+			player.deselectColumns();
 		
 		board.revalidate();
+		if (dealNumber == 4)
+			revealCard();
 		
 	}
 	
 	public void revealCard() 
 	{
+		// stop player from being able to interact with field
+		player.setVisible(false);
+		
 		Card revealCard = board.getColumnTwo().getCards().get(3);
-		//JPanel overlay = new JPanel();
+		
 		
 		JPanel overlay = new JPanel() {
 		    @Override
@@ -60,42 +76,36 @@ public class Dealer{
 		    {
 		        Graphics2D g2d = (Graphics2D)g;
 		        super.paintComponent(g2d);
+		        
+		        RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+						RenderingHints.VALUE_ANTIALIAS_ON);
+				qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+				
+				g2d.setRenderingHints(qualityHints);
 		        g2d.setColor(new Color(0,0,0,200));
 		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
+		        g2d.setColor(Color.WHITE);
+		        g2d.setFont(new Font("Helvetica", Font.PLAIN, 30));
+		        g2d.drawString("This is the card you picked!", 250, 635);
 		    }
 		};
-		
-
-//		board.getColumnOne().setVisible(false);
-//		board.getColumnTwo().setVisible(false);
-//		board.getColumnThree().setVisible(false);
-		System.out.println(board.getComponentZOrder(board.getColumnOne()));
-		System.out.println(board.getComponentZOrder(board.getColumnTwo()));
-		System.out.println(board.getComponentZOrder(board.getColumnThree()));
-		
 
 		overlay.setLayout(null);
 		overlay.setOpaque(false);
-		//overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
-		//overlay.setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
         overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
-        //overlay.setBackground(new Color(0,0,0,125));
         overlay.setVisible(true);
+        
         board.add(overlay);
         board.setComponentZOrder(overlay, 0);
         board.setComponentZOrder(board.getColumnOne(), 1);
         board.setComponentZOrder(board.getColumnOne(), 2);
         board.setComponentZOrder(board.getColumnOne(), 3);
+        
         overlay.add(revealCard);
         revealCard.setLocation(Globals.REVEAL_LOCX,Globals.REVEAL_LOCY);
         overlay.repaint();
+        
 		board.repaint();
-		
-        JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
-		
-		//Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
-		//  For now, until we find a replacement.
-		System.exit(0);
 	}
 	
 	public void pickupCards(int column) 
@@ -124,15 +134,13 @@ public class Dealer{
 		
 		
 		
-		if (dealNumber == 3)
-		{
-			revealCard();
-		}
-		//  For testing
-		JOptionPane.showMessageDialog(null, "Next Deal");
-		//
+		//  For testing	
+		/*
+		if (dealNumber < 3){
+			JOptionPane.showMessageDialog(null, "Next Deal");
+		}*/
 		deal();
-		dealNumber++;
+		
 	}
 
 }

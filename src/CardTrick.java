@@ -8,11 +8,6 @@ import javax.swing.WindowConstants;
 public class CardTrick extends JFrame
 {
 		
-	private Player player;
-	private Dealer dealer;
-	private Board board;
-	
-
 	public static void main(String[] args)
 	{
 		new CardTrick();
@@ -20,15 +15,12 @@ public class CardTrick extends JFrame
 	
 	CardTrick()
 	{
+		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
-		add(board = new Board(dealer));
-		
+		add(new Board());
 		setVisible(true);
-		dealer = new Dealer(board);
-		player = new Player(dealer);
-		player.testDealer();
 
 	}
 
@@ -63,5 +55,6 @@ public class CardTrick extends JFrame
 }
 
 //geese:  testing a commit to git
-//Zach: test commit
-//Test Commit (Ashley)
+//geese:  testing a commit to geese_branch
+//geese:  testing Windows style line endings
+//geese:  well, this is fun...trying another fix for line endings
