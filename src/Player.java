@@ -219,7 +219,7 @@ public class Player extends JPanel {
 		button.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
 				super.mouseEntered(e);
-				button.setBackground(Globals.BUTTON_HOVER_COLOR);
+				button.setBackground(Globals.BUTTON_HOVER_COLOR_PURPLE);
 				buttonPanel.repaint();
 				//button.repaint();
 			}
