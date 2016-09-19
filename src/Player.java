@@ -10,6 +10,10 @@ import java.awt.RenderingHints;
 import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -29,6 +33,7 @@ public class Player extends JPanel {
 
 	// Association between Player and Dealer
 	private Dealer dealer;
+	private Player thisPlayer;
 
 	// Aggregation relationship between Card and player
 	// I don't think we actually need this I thought
@@ -49,6 +54,7 @@ public class Player extends JPanel {
 
 	public Player(Dealer dealer) {
 		this.dealer = dealer;
+		thisPlayer = this;
 		hasSelectedCard = false;
 
 		setLayout(new BorderLayout());
@@ -72,11 +78,12 @@ public class Player extends JPanel {
 		 * Panel. This may help with resizing columns and cards later.
 		 */
 		columnPanel = new JPanel();
-		columnPanel.setLayout(null);
+		columnPanel.setLayout(new BoxLayout(columnPanel, BoxLayout.X_AXIS));		
 		columnPanel.setOpaque(false);// so we can see Board's background color
+		
 
 		// columnPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-		columnPanel.add(Box.createRigidArea(new Dimension(5, 5)));
+		// columnPanel.add(Box.createRigidArea(new Dimension(5, 5)));  //might not be needed???
 
 		/*
 		 * add an empty mouse listener so that the events in ColumnBorder can
@@ -115,6 +122,8 @@ public class Player extends JPanel {
 		this.add(wordsPanel, BorderLayout.SOUTH);
 
 		deselectColumns();
+		
+		
 
 	}
 

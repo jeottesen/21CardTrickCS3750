@@ -15,7 +15,7 @@ public class Column extends JPanel {
 		setSize(Globals.CARD_WI, ColumnHeight);
 		//System.out.println("Column Height: " + ((Globals.CARD_SPACING * 7) + (Globals.CARD_HI - Globals.CARD_SPACING)));
 		setPreferredSize(new Dimension(Globals.CARD_WI, ColumnHeight));
-		
+		//setOpaque(false);
 		cards = new ArrayList<>();
 	}
 	

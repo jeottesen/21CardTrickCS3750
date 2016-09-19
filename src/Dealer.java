@@ -25,6 +25,7 @@ public class Dealer{
 		this.board = board;
 		
 		player = new Player(this);
+		
 		board.add(player);
 		
 		dealNumber = 0;

@@ -3,15 +3,20 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
 import javax.imageio.ImageIO;
+import javax.swing.Box;
 import javax.swing.JPanel;
+import java.awt.Dimension;
+
 
 public class Board extends JPanel {
 	
 
 	public BufferedImage splashImg;
 	public Image backgroundImg;
+	
 	
 	// Since the UML Diagram shows these are a composition
 	// relationship they need to be final. They would be
@@ -29,8 +34,11 @@ public class Board extends JPanel {
 	public Board() {
 		
 		dealer = new Dealer(this);
+		//BoxLayout boxLayout = new BoxLayout(columnPanel,BoxLayout.X_AXIS);
+		//setLayout(null);
+		//setLayout(new GridLayout(1, 3, 50, 0));
 		
-		setLayout(null);
+		setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
 		
 		//load background image
 		try
@@ -53,13 +61,19 @@ public class Board extends JPanel {
 		column2.setId(2);
 		column3.setId(3);
 		
-		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-		column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+		//column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
+		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
+		//column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+		
 		
 		add(column1);
+		//add(Box.createRigidArea(new Dimension(100, 0)));
+		//add(Box.createHorizontalGlue());
 		add(column2);
+		//add(Box.createRigidArea(new Dimension(100, 0)));
+		//add(Box.createHorizontalGlue());
 		add(column3);
+		
 		
 		dealer.deal();
 	}
