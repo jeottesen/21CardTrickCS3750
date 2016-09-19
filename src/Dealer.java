@@ -61,8 +61,10 @@ public class Dealer{
 	
 	public void revealCard() 
 	{
+		// stop player from being able to interact with field
+		player.setVisible(false);
+		
 		Card revealCard = board.getColumnTwo().getCards().get(3);
-		//JPanel overlay = new JPanel();
 		
 		JPanel overlay = new JPanel() {
 		    @Override
@@ -74,40 +76,23 @@ public class Dealer{
 		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
 		    }
 		};
-		
-
-//		board.getColumnOne().setVisible(false);
-//		board.getColumnTwo().setVisible(false);
-//		board.getColumnThree().setVisible(false);
-		System.out.println(board.getComponentZOrder(board.getColumnOne()));
-		System.out.println(board.getComponentZOrder(board.getColumnTwo()));
-		System.out.println(board.getComponentZOrder(board.getColumnThree()));
-		
 
 		overlay.setLayout(null);
 		overlay.setOpaque(false);
-		//overlay.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
-		//overlay.setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
         overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
-        //overlay.setBackground(new Color(0,0,0,125));
         overlay.setVisible(true);
+        
         board.add(overlay);
         board.setComponentZOrder(overlay, 0);
         board.setComponentZOrder(board.getColumnOne(), 1);
         board.setComponentZOrder(board.getColumnOne(), 2);
         board.setComponentZOrder(board.getColumnOne(), 3);
+        
         overlay.add(revealCard);
         revealCard.setLocation(320,200);
         overlay.repaint();
+        
 		board.repaint();
-		
-        //JOptionPane.showMessageDialog(null, "Tell the truth, this is your card!");
-		
-		//Board.newDeal() --  This does not exist yet.  But if we choose to implement it, it should be called here.
-		//  For now, until we find a replacement.
-		
-		
-		//System.exit(0);  
 	}
 	
 	public void pickupCards(int column) 
