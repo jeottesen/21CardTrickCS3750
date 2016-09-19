@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class Board extends JPanel {
 	
-	public BufferedImage backgroundImg;
+	public BufferedImage backgroundImg, purpleBackgroundImg;
 	
 	// Since the UML Diagram shows these are a composition
 	// relationship they need to be final. They would be
@@ -29,6 +29,7 @@ public class Board extends JPanel {
 		try
 		{
 			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/TableFelt.png"));
+			purpleBackgroundImg = ImageIO.read(getClass().getResourceAsStream("images/purple_background.png"));
 		}
 		catch(IOException e)
 		{
@@ -90,7 +91,7 @@ public class Board extends JPanel {
 	{
 		super.paintComponent(g);
 		setBackground(Globals.BACKGROUND_COLOR);
-		//g.drawImage(backgroundImg, 0, 0, this);
+		//g.drawImage(purpleBackgroundImg, 0, 0, this);
 	}
 
 }

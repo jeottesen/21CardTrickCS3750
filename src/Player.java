@@ -191,6 +191,7 @@ public class Player extends JPanel {
 				buttonPanel.setVisible(false);
 				startInstructionsLabel.setVisible(false);
 				questionLabel.setVisible(true);
+				columnIdLabel.setVisible(true);
 				for (Component c : columnPanel.getComponents()){
 					if (c.getClass() == ColumnBorder.class){
 						c.repaint();
