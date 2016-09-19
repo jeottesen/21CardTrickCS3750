@@ -11,12 +11,17 @@ import java.awt.Stroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.Insets;
 
 public class Player extends JPanel {
 	
@@ -32,13 +37,14 @@ public class Player extends JPanel {
 	
 	private boolean hasSelectedCard;
 	
-	private JPanel columnPanel;
-	private JPanel wordsPanel;
+	private JPanel columnPanel, wordsPanel, buttonPanel;
 
 	private JLabel questionLabel;
 	private JLabel columnIdLabel;
 	
-	public Player(Dealer dealer) {
+	private JButton btnYes, btnNo;
+	
+	public Player() {
 		this.dealer = dealer;
 		
 		setLayout(new BorderLayout());
@@ -48,9 +54,13 @@ public class Player extends JPanel {
 
 		createMessageJLabels();
 		createWordsPanel();
+		createButtonPanel();
 		
 		wordsPanel.add(questionLabel);
 		wordsPanel.add(columnIdLabel);
+		wordsPanel.add(buttonPanel);
+		
+		buttonPanel.setVisible(false);  //will be set visible when user clicks on a column
 
 		/*
 		 * Configuring the columnPanel as a horizontally-oriented BoxLayout
@@ -87,10 +97,25 @@ public class Player extends JPanel {
 		this.add(columnPanel, BorderLayout.CENTER);
 		this.add(wordsPanel, BorderLayout.SOUTH);
 		
+		deselectColumns();
+	
+		
+	}
+	
+	public void setDealer(Dealer dealer){
+		this.dealer = dealer;
+	}
+	
+	public void deselectColumns(){
+		for (Component c : columnPanel.getComponents()){
+			if (c.getClass() == ColumnBorder.class){
+				((ColumnBorder)c).selected = false;
+			}
+		}
 	}
 	
 	public void indicateColumn(int id) {
-		
+		dealer.pickupCards(id);
 	}
 	
 	public void pickCard() {
@@ -100,8 +125,9 @@ public class Player extends JPanel {
 
 	private void createWordsPanel() {
 		wordsPanel = new JPanel();
+		wordsPanel.setBackground(Color.PINK);
 		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
-		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 100));
+		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 170));
 		wordsPanel.setBackground(Globals.BACKGROUND_COLOR);
 	}
 	
@@ -118,6 +144,33 @@ public class Player extends JPanel {
 		columnIdLabel.setAlignmentX(CENTER_ALIGNMENT);
 	}
 
+	private void createButtonPanel(){
+		buttonPanel = new JPanel();
+		buttonPanel.setOpaque(false);
+		//buttonPanel.setPreferredSize(new Dimension(100, 50));
+		//buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
+		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
+		createButtons();
+		buttonPanel.add(btnYes);
+		buttonPanel.add(btnNo);
+	}
+	
+	private void createButtons(){
+		btnYes = new JButton("Yes!");
+		btnNo = new JButton("No!");
+		configureButton(btnYes);
+		configureButton(btnNo);
+	}
+
+	private void configureButton(JButton button) {
+		button.setBackground(Globals.BACKGROUND_COLOR);
+		button.setForeground(Color.WHITE);
+		button.setBorder(new LineBorder(Color.WHITE, 2, false));
+		button.setPreferredSize(new Dimension(100, 50));
+		button.setFont(new Font("Helvetica", Font.PLAIN, 22));
+		button.setMargin(new Insets(0, 20, 0, 20));
+	}
+	
 	private class ColumnBorder extends JPanel {
 		
 		public int columnNumber;
@@ -133,7 +186,7 @@ public class Player extends JPanel {
 			addMouseListener(new MouseAdapter() {				
 				@Override
 				public void mouseExited(MouseEvent e) {
-					System.out.println("ColumnBorder " + columnNumber + " Mouse Exited.");
+					//System.out.println("ColumnBorder " + columnNumber + " Mouse Exited.");
 					columnIdLabel.setText("");
 					hoveredOver = false;
 					repaint();
@@ -141,7 +194,7 @@ public class Player extends JPanel {
 	
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					System.out.println("ColumnBorder " + columnNumber + " Mouse Enter.");
+					//System.out.println("ColumnBorder " + columnNumber + " Mouse Enter.");
 					
 					columnIdLabel.setText("Column " + columnNumber + "?");
 					hoveredOver = true;
@@ -150,10 +203,13 @@ public class Player extends JPanel {
 	
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					System.out.println("ColumnBorder " + columnNumber + " Mouse Clicked.");
+					//System.out.println("ColumnBorder " + columnNumber + " Mouse Clicked.");
 					selected = !selected; //toggle selected
+					columnIdLabel.setVisible(false);
+					buttonPanel.setVisible(true);
+					questionLabel.setText("Your card is in column " + columnNumber + "?");
 					repaint();
-					indicateColumn(columnNumber);
+					indicateColumn(columnNumber);					
 				}
 			});
 		}

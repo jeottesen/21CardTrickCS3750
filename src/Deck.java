@@ -5,15 +5,24 @@ import java.util.Stack;
 
 public class Deck {
     private Stack<Card> cards;
-
+    private Dealer dealer;
+    
+    
     public Deck(){
         cards = new Stack<>();
 
+        //Minimum of two decks
+        //addDeck();
         addDeck();
         
         shuffle();
     }
 
+    
+	 
+	// setter method to build association relationship
+    public void setDealer(Dealer dealer){this.dealer = dealer;}
+    
     //Function to draw a card from the deck
     public Card draw(){
         //Conditional to handle the deck running out of cards
@@ -21,16 +30,15 @@ public class Deck {
             reset();
         }
         return cards.pop();
+
     }
     
-    public ArrayList<Card> random21() {
-    	ArrayList<Card> trickDeck = new ArrayList<Card>();
-    	
-    	// Draw 21 cards to make up the smaller deck needed for the trick
-    	for (int i = 0; i < 21; i++) {
-    	    trickDeck.add(this.draw());
-    	}
-        return trickDeck;
+    public Stack<Card> random21() {
+    	Stack<Card> random21 = new Stack<>();
+    	for (int i = 0; i < 21; i++){
+    		random21.add(draw());
+    	}    	
+    	return random21;
     }
 
     //Function to shuffle the deck
@@ -50,6 +58,7 @@ public class Deck {
     }
 
     //This function adds a full deck of cards to the dealer deck.
+    //If there are multiple players, it will be easy to add more cards
     private void addDeck(){
         //Create and load in the deck
 

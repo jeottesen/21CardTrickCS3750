@@ -7,7 +7,7 @@ import javax.swing.WindowConstants;
 
 public class CardTrick extends JFrame
 {
-
+		
 	public static void main(String[] args)
 	{
 		new CardTrick();
@@ -15,11 +15,11 @@ public class CardTrick extends JFrame
 	
 	CardTrick()
 	{
+		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
 		add(new Board());
-		
 		setVisible(true);
 
 	}
@@ -54,6 +54,4 @@ public class CardTrick extends JFrame
 
 }
 
-//geese:  testing a commit to git
-//Zach: test commit
-//Test Commit (Ashley)
+
