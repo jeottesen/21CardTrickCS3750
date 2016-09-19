@@ -87,7 +87,7 @@ public class Dealer{
         board.setComponentZOrder(board.getColumnOne(), 2);
         board.setComponentZOrder(board.getColumnOne(), 3);
         overlay.add(revealCard);
-        revealCard.setLocation(320,200);
+        revealCard.setLocation(Globals.REVEAL_LOCX,Globals.REVEAL_LOCY);
         overlay.repaint();
 		board.repaint();
 		

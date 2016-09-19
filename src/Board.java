@@ -8,8 +8,8 @@ import javax.swing.JPanel;
 
 public class Board extends JPanel {
 	
+	public BufferedImage splashImg;
 	public BufferedImage backgroundImg;
-	
 	// Since the UML Diagram shows these are a composition
 	// relationship they need to be final. They would be
 	// an Aggregation relationship without it.
@@ -18,6 +18,10 @@ public class Board extends JPanel {
 	private final Column column3 = new Column();
 	
 	private Dealer dealer;
+	
+	public void Splash()
+	{
+	}
 
 	public Board(Dealer dealer) {
 		
@@ -27,7 +31,7 @@ public class Board extends JPanel {
 		//load background image
 		try
 		{
-			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/TableFelt.png"));
+			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/background.jpg"));
 		}
 		catch(IOException e)
 		{
@@ -48,8 +52,6 @@ public class Board extends JPanel {
 		add(column3);
 		
 		dealer.deal();
-
-		
 	}
 	
 	public void addToColumn(int columnId, Card card) {
@@ -84,8 +86,7 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		setBackground(Color.GREEN);
+		setBackground(Color.GRAY);
 		g.drawImage(backgroundImg, 0, 0, this);
 	}
-
 }
