@@ -133,12 +133,7 @@ public class Player extends JPanel {
 	}
 
 	public void pickCard() {
-		// TODO We should have the JLabel say something like
-		// Please pick a card from what you see here.
-		// Have you picked the card?
-		// then a button to confirm and then we can add the column borders
-		// and start the game
-
+		hasSelectedCard = true;
 	}
 
 	private void createWordsPanel() {
@@ -197,6 +192,7 @@ public class Player extends JPanel {
 						c.repaint();
 					}
 				}
+				pickCard();
 				
 			}
 		});
