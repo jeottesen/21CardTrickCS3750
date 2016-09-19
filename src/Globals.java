@@ -44,4 +44,7 @@ public class Globals
 	public static final Color HOVERED_COLUMN_BORDER_COLOR = new Color(255, 194, 60); // amber 
 	public static final Color SELECTED_COLUMN_BORDER_COLOR = new Color(0, 230, 118); // Green 500 
 	
+	public static final Color HOVERED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(240, 168, 35); // amber 
+	public static final Color SELECTED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(19, 194, 101); // Green 500 
+	
 }
