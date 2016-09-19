@@ -220,12 +220,14 @@ public class Player extends JPanel {
 			public void mouseEntered(MouseEvent e) {
 				super.mouseEntered(e);
 				button.setBackground(Globals.BUTTON_HOVER_COLOR);
-				System.out.println("Button entered");
+				buttonPanel.repaint();
+				//button.repaint();
 			}
 			public void mouseExited(MouseEvent e) {
 				super.mouseExited(e);
 				button.setBackground(new Color(255, 255, 255, 0));
-				System.out.println("Button exited");
+				buttonPanel.repaint();
+				//button.repaint();
 			}
 			
 		});
