@@ -2,13 +2,13 @@ import java.awt.Color;
 
 public class Globals 
 {
+
 	public static float factor = 1;
 	public static int buffer_right_edge = (int) (20 * factor);
-	
-	
-	public static int CARD_WI = 150;
-	public static int CARD_HI = (int) (CARD_WI * 1.25); // Keep aspect ratio of card
-	
+
+	public static final int CARD_WI = 150;
+	public static final int CARD_HI = (int) (CARD_WI * 1.452); // Keep aspect ratio of card
+
 	public static final int COLUMN_SPACING = (int) (393 * factor);
 	public static final int CARD_SPACING = (int) (50 * factor);
 	

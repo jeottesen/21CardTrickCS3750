@@ -17,6 +17,8 @@ public class Column extends JPanel {
 		setPreferredSize(new Dimension(Globals.CARD_WI, ColumnHeight));
 		//setOpaque(false);
 		cards = new ArrayList<>();
+		
+		setOpaque(false);
 	}
 	
 	public void setId(int id){
