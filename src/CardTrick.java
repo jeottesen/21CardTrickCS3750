@@ -1,13 +1,13 @@
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.WindowConstants;
+import java.awt.geom.Rectangle2D;
+import javax.swing.*;
 
 
 public class CardTrick extends JFrame
 {
-		
+    
 	public static void main(String[] args)
 	{
 		new CardTrick();
@@ -15,17 +15,21 @@ public class CardTrick extends JFrame
 	
 	CardTrick()
 	{
-		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
-		add(new Board());
+		//Before adding board, display splash screen
+		add(new SplashPanel("src/images/splash.jpg"));
+		//Add play button
+		
+		
 		setVisible(true);
-
+		
+//		add(new Board());
+//		setVisible(true);
 	}
 
-
-	private void addButton(final JButton button, int locX, int locY, int Wi, int Hi)
+    private void addButton(final JButton button, int locX, int locY, int Wi, int Hi)
 	{
 		button.setBounds(locX, locY, Wi, Hi);
 		//		button.setBackground(Color.CYAN);
