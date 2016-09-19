@@ -89,7 +89,8 @@ public class Player extends JPanel {
 				deselectColumns();
 				questionLabel.setText("Which column is your card in?");
 				columnIdLabel.setVisible(true);
-				buttonPanel.setVisible(false);
+				btnYes.setVisible(false);
+				//buttonPanel.setVisible(false);
 			}
 		});
 
@@ -217,12 +218,14 @@ public class Player extends JPanel {
 		button.setMargin(new Insets(0, 20, 0, 20));
 		button.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
-				button.setBackground(Globals.BUTTON_HOVER_COLOR);
 				super.mouseEntered(e);
+				button.setBackground(Globals.BUTTON_HOVER_COLOR);
+				System.out.println("Button entered");
 			}
 			public void mouseExited(MouseEvent e) {
 				super.mouseExited(e);
 				button.setBackground(new Color(255, 255, 255, 0));
+				System.out.println("Button exited");
 			}
 			
 		});
