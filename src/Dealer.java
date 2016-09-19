@@ -90,6 +90,7 @@ public class Dealer{
 		    }
 		};
 
+
 		overlay.setLayout(null);
 		overlay.setOpaque(false);
         overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
