@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -75,11 +76,17 @@ public class Dealer{
 		    {
 		        Graphics2D g2d = (Graphics2D)g;
 		        super.paintComponent(g2d);
+		        
+		        RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+						RenderingHints.VALUE_ANTIALIAS_ON);
+				qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+				
+				g2d.setRenderingHints(qualityHints);
 		        g2d.setColor(new Color(0,0,0,200));
 		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
 		        g2d.setColor(Color.WHITE);
 		        g2d.setFont(new Font("Helvetica", Font.PLAIN, 30));
-		        g2d.drawString("This is the card you picked!", 250, 650);
+		        g2d.drawString("This is the card you picked!", 250, 635);
 		    }
 		};
 
