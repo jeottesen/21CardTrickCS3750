@@ -21,8 +21,7 @@ public class Dealer{
 	public Dealer(Board board) {
 		this.board = board;
 		
-		player = new Player();
-		player.setDealer(this);
+		player = new Player(this);
 		board.add(player);
 		
 		dealNumber = 0;
@@ -137,10 +136,11 @@ public class Dealer{
 		
 		
 		
-		//  For testing		
+		//  For testing	
+		/*
 		if (dealNumber < 3){
 			JOptionPane.showMessageDialog(null, "Next Deal");
-		}
+		}*/
 		deal();
 		
 	}

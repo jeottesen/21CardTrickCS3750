@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,14 +39,16 @@ public class Player extends JPanel {
 	
 	private boolean hasSelectedCard;
 	
+	private int selectedColumnID;
+	
 	private JPanel columnPanel, wordsPanel, buttonPanel;
 
 	private JLabel questionLabel;
 	private JLabel columnIdLabel;
 	
-	private JButton btnYes, btnNo;
+	private JButton btnYes;
 	
-	public Player() {
+	public Player(Dealer dealer) {
 		this.dealer = dealer;
 		
 		setLayout(new BorderLayout());
@@ -102,14 +106,11 @@ public class Player extends JPanel {
 		
 	}
 	
-	public void setDealer(Dealer dealer){
-		this.dealer = dealer;
-	}
-	
 	public void deselectColumns(){
 		for (Component c : columnPanel.getComponents()){
 			if (c.getClass() == ColumnBorder.class){
 				((ColumnBorder)c).selected = false;
+				((ColumnBorder)c).repaint();
 			}
 		}
 	}
@@ -119,6 +120,11 @@ public class Player extends JPanel {
 	}
 	
 	public void pickCard() {
+		// TODO We should have the JLabel say something like
+		// Please pick a card from what you see here. 
+		// Have you picked the card?
+		// then a button to confirm and then we can add the column borders
+		// and start the game
 		
 	}
 	
@@ -144,7 +150,7 @@ public class Player extends JPanel {
 		columnIdLabel.setAlignmentX(CENTER_ALIGNMENT);
 	}
 
-	private void createButtonPanel(){
+	private void createButtonPanel() {
 		buttonPanel = new JPanel();
 		buttonPanel.setOpaque(false);
 		//buttonPanel.setPreferredSize(new Dimension(100, 50));
@@ -152,14 +158,19 @@ public class Player extends JPanel {
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		createButtons();
 		buttonPanel.add(btnYes);
-		buttonPanel.add(btnNo);
 	}
 	
 	private void createButtons(){
 		btnYes = new JButton("Yes!");
-		btnNo = new JButton("No!");
 		configureButton(btnYes);
-		configureButton(btnNo);
+		btnYes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				columnIdLabel.setVisible(true);
+				buttonPanel.setVisible(false);
+				questionLabel.setText("");
+				indicateColumn(selectedColumnID);
+			}
+		});
 	}
 
 	private void configureButton(JButton button) {
@@ -204,12 +215,13 @@ public class Player extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					//System.out.println("ColumnBorder " + columnNumber + " Mouse Clicked.");
-					selected = !selected; //toggle selected
+					deselectColumns(); // deselect all other columns
+					selected = !selected; //toggle this column
 					columnIdLabel.setVisible(false);
+					selectedColumnID = columnNumber;
 					buttonPanel.setVisible(true);
 					questionLabel.setText("Your card is in column " + columnNumber + "?");
-					repaint();
-					indicateColumn(columnNumber);					
+					repaint();					
 				}
 			});
 		}
