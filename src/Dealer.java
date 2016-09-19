@@ -6,6 +6,8 @@ import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Dealer{
 	// Association with Board class
@@ -66,6 +68,7 @@ public class Dealer{
 		
 		Card revealCard = board.getColumnTwo().getCards().get(3);
 		
+		
 		JPanel overlay = new JPanel() {
 		    @Override
 		    public void paintComponent(Graphics g)
@@ -74,6 +77,9 @@ public class Dealer{
 		        super.paintComponent(g2d);
 		        g2d.setColor(new Color(0,0,0,200));
 		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
+		        g2d.setColor(Color.WHITE);
+		        g2d.setFont(new Font("Helvetica", Font.PLAIN, 30));
+		        g2d.drawString("This is the card you picked!", 250, 650);
 		    }
 		};
 
