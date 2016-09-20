@@ -85,8 +85,8 @@ public class Dealer{
 		        g2d.setColor(new Color(0,0,0,200));
 		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
 		        g2d.setColor(Color.WHITE);
-		        g2d.setFont(new Font("Helvetica", Font.PLAIN, 30));
-		        g2d.drawString("This is the card you picked!", 250, 635);
+		        g2d.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		        g2d.drawString("This is the card you picked!", 495, 600);
 		    }
 		};
 
@@ -102,7 +102,7 @@ public class Dealer{
         board.setComponentZOrder(board.getColumnOne(), 3);
         
         overlay.add(revealCard);
-        revealCard.setLocation(Globals.REVEAL_LOCX,Globals.REVEAL_LOCY);
+        revealCard.setLocation(Globals.REVEAL_LOCX, Globals.REVEAL_LOCY);
         overlay.repaint();
         
 		board.repaint();

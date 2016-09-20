@@ -282,7 +282,7 @@ public class Player extends JPanel {
 						columnIdLabel.setVisible(false);
 						selectedColumnID = columnNumber;
 						buttonPanel.setVisible(true);
-						questionLabel.setText("Your card is in column " + columnNumber + "?");
+						questionLabel.setText("Your card is in Column " + columnNumber + "?");
 						repaint();
 					}
 				}

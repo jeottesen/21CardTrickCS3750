@@ -25,8 +25,8 @@ public class CardTrick extends JFrame
 		
 		setVisible(true);
 		
-//		add(new Board());
-//		setVisible(true);
+		//add(new Board());
+		//setVisible(true);
 	}
 
     private void addButton(final JButton button, int locX, int locY, int Wi, int Hi)
