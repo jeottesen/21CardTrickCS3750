@@ -3,7 +3,7 @@ import java.awt.Color;
 public class Globals 
 {
 	public static final int CARD_WI = 150;
-	public static final int CARD_HI = (int) (CARD_WI * 1.25); // Keep aspect ratio of card
+	public static final int CARD_HI = (int) (CARD_WI * 1.452); // Keep aspect ratio of card
 	
 	public static final int COLUMN_SPACING = 393;
 	public static final int CARD_SPACING = 50;
@@ -44,7 +44,9 @@ public class Globals
 	public static final Color HOVERED_COLUMN_BORDER_COLOR = new Color(255, 194, 60); // amber 
 	public static final Color SELECTED_COLUMN_BORDER_COLOR = new Color(0, 230, 118); // Green 500 
 	
-	public static final Color HOVERED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(240, 168, 35); // amber 
-	public static final Color SELECTED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(19, 194, 101); // Green 500 
+	//public static final Color HOVERED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(240, 168, 35); // amber 
+	//public static final Color SELECTED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(19, 194, 101); // Green 500 
 	
+	public static final Color SELECTED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(82, 210, 143); // Green 500
+	public static final Color HOVERED_COLUMN_BORDER_COLOR_PURPLE_THEME = new Color(191, 156, 210); 
 }
