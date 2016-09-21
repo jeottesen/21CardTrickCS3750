@@ -61,11 +61,7 @@ public class Board extends JPanel {
 		setColumnLocations(1);
 
 		add(column1);
-		// add(Box.createRigidArea(new Dimension(100, 0)));
-		// add(Box.createHorizontalGlue());
 		add(column2);
-		// add(Box.createRigidArea(new Dimension(100, 0)));
-		// add(Box.createHorizontalGlue());
 		add(column3);
 
 		dealer.deal();
@@ -75,11 +71,9 @@ public class Board extends JPanel {
 			public void componentResized(ComponentEvent e) {
 				Board board = ((Board) e.getSource());
 				pixelsLost = 990 - board.getWidth();
-				//float factor = ((float)(board.getWidth()/990f));
 				setColumnLocations(pixelsLost);
 				
 				System.out.println("board.getWidth(): " + board.getWidth());
-				//System.out.println("factor: " + factor);
 				System.out.println("columnGap:" + columnGap);
 			}
 			
@@ -100,10 +94,6 @@ public class Board extends JPanel {
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
 		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2), Globals.COLUMN_ONE_LOCY);
-		
-		//column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-		//column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
 	}
 	
 
