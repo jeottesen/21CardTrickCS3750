@@ -13,28 +13,32 @@ import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Bounce;
 
 public class Animations {
+	
+	// How many milliseconds we need to wait between frame updates
+	private static int FRAME_RATE = 1000 / 60;
+	
 
 	public static void movePanel(JPanel panel, int newX, int newY) {
 		
 		final TweenManager tweenManager = new TweenManager();
-		// start the thread that plays the animation
-		Timer timer = new Timer(25, new ActionListener() {
-			private long time = System.currentTimeMillis();
+		
+		// The thread that plays the animation
+		Timer timer = new Timer(FRAME_RATE, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println((System.currentTimeMillis() - time));
-				// Passes the change in time to the tweenManager
-				// to correctly calculate the new location
-				tweenManager.update((System.currentTimeMillis() - time) / 1000.0f);
+				
+				// pass it how many milliseconds it has been since the
+				// last frame update. This should always be about the same
+				tweenManager.update(FRAME_RATE);
 			}
-			
 		});
 
 		Tween.registerAccessor(JPanel.class, new PanelAccessor());
-
+		
 		// Pass it the object to animate the direction to animate it and the
-		// duration of the animation in milliseconds
-		Tween.to(panel, PanelAccessor.POS_XY, 50f)
+		// duration of the animation in milliseconds. when the time value is
+		// 5000 it should take about 5 seconds to play the animation.
+		Tween.to(panel, PanelAccessor.POS_XY, 5000)
 				// Start from the exact middle of the screen
 				.target(newX, newY).ease(Bounce.OUT).start(tweenManager)
 				// Stop the timer when the animation is complete
@@ -45,7 +49,6 @@ public class Animations {
 						timer.stop();
 					}
 				});
-
 		
 		timer.start();
 
