@@ -149,18 +149,11 @@ public class Player extends JPanel {
 		startInstructionsLabel = new JLabel();
 		questionLabel = new JLabel();
 		columnIdLabel = new JLabel();
-		configureMessageLabels(startInstructionsLabel, true);
-		configureMessageLabels(questionLabel, false);
-		configureMessageLabels(columnIdLabel, false);
+		Styles.configureJLabel(startInstructionsLabel, true);
+		Styles.configureJLabel(questionLabel, false);
+		Styles.configureJLabel(columnIdLabel, false);
 		startInstructionsLabel.setText("Please pick your secret card. Shh!");
 		questionLabel.setText("Which column is your card in?");
-	}
-
-	private void configureMessageLabels(JLabel label, boolean isVisible) {
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Helvetica", Font.PLAIN, 24));
-		label.setAlignmentX(CENTER_ALIGNMENT);
-		label.setVisible(isVisible);
 	}
 
 	private void createButtonPanel() {
@@ -177,8 +170,8 @@ public class Player extends JPanel {
 	private void createButtons() {
 		btnReady = new JButton("Done");
 		btnYes = new JButton("Yes!");
-		configureButton(btnReady, true);
-		configureButton(btnYes, false);
+		Styles.configureJButton(btnReady, true);
+		Styles.configureJButton(btnYes, false);
 		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				hasSelectedCard = true;
@@ -204,34 +197,6 @@ public class Player extends JPanel {
 				questionLabel.setText("Which column is your card in?");
 				indicateColumn(selectedColumnID);
 			}
-		});
-	}
-
-	private void configureButton(final JButton button, boolean isVisible) {
-		button.setFocusPainted(false);// avoids this ugly inner border
-		button.setVisible(isVisible);
-		//button.setBackground(new Color(255, 255, 255, 0));  // Transparent background
-		button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
-		button.setForeground(Color.WHITE);
-		button.setBorder(new LineBorder(Color.WHITE, 2, false));
-		button.setPreferredSize(new Dimension(100, 50));
-		button.setFont(new Font("Helvetica", Font.PLAIN, 22));
-		button.setMargin(new Insets(0, 20, 0, 20));
-		button.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e) {
-				super.mouseEntered(e);
-				button.setBackground(Globals.BUTTON_HOVER_COLOR_PURPLE);
-				buttonPanel.repaint();
-				//button.repaint();
-			}
-			public void mouseExited(MouseEvent e) {
-				super.mouseExited(e);
-				//button.setBackground(new Color(255, 255, 255, 0));   //transparent
-				button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
-				buttonPanel.repaint();
-				//button.repaint();
-			}
-			
 		});
 	}
 
