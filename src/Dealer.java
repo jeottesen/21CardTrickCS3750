@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -23,10 +25,24 @@ public class Dealer{
 	
 	public Dealer(Board board) {
 		this.board = board;
-		
 		player = new Player(this);
 		
 		board.add(player);
+		
+		board.addComponentListener(new ComponentListener() {
+
+			public void componentResized(ComponentEvent e) {
+				Board board = ((Board) e.getSource());
+				int pixelsLost = Globals.FRAME_WI - board.getWidth();
+				board.setColumnLocations(pixelsLost);
+				player.setColumnLocations(pixelsLost);
+			}
+			
+			public void componentShown(ComponentEvent e) {}
+			public void componentMoved(ComponentEvent e) {}
+			public void componentHidden(ComponentEvent e) {}
+		});
+		
 		
 		dealNumber = 0;
 		

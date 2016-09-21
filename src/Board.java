@@ -24,9 +24,7 @@ public class Board extends JPanel {
 	private final Column column2 = new Column();
 	private final Column column3 = new Column();
 	
-	private final int COLUMN_GAP;
 	private int columnGap;
-	private int pixelsLost = 0;
 
 	private Dealer dealer;
 
@@ -52,7 +50,7 @@ public class Board extends JPanel {
 		// Temporary deck for testing. Will be getting cards from dealer later
 		Deck deck = new Deck();
 
-		COLUMN_GAP = Globals.COLUMN_TWO_LOCX - (Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + 30);
+		
 		
 		column1.setId(1);
 		column2.setId(2);
@@ -66,30 +64,16 @@ public class Board extends JPanel {
 
 		dealer.deal();
 
-		this.addComponentListener(new ComponentListener() {
-
-			public void componentResized(ComponentEvent e) {
-				Board board = ((Board) e.getSource());
-				pixelsLost = 990 - board.getWidth();
-				setColumnLocations(pixelsLost);
-				
-				System.out.println("board.getWidth(): " + board.getWidth());
-				System.out.println("columnGap:" + columnGap);
-			}
-			
-			public void componentShown(ComponentEvent e) {}
-			public void componentMoved(ComponentEvent e) {}
-			public void componentHidden(ComponentEvent e) {}
-		});
+		
 	}
 	
 	public void setColumnLocations(int pixelsLost){
 		
 		System.out.println("::" + pixelsLost);
-		if (pixelsLost / 2 <= COLUMN_GAP)
+		if (pixelsLost / 2 <= Globals.COLUMN_GAP)
 		{	
 			System.out.println("If called");
-			columnGap = COLUMN_GAP - (int) pixelsLost / 2;
+			columnGap = Globals.COLUMN_GAP - (int) pixelsLost / 2;
 		}
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);

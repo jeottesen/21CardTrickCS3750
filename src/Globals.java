@@ -21,6 +21,7 @@ public class Globals
 	public static final int COLUMN_THREE_LOCX = COLUMN_TWO_LOCX + COLUMN_SPACING;
 	public static final int COLUMN_THREE_LOCY = COLUMN_ONE_LOCY;
 	
+	public static final int COLUMN_GAP = COLUMN_TWO_LOCX - (COLUMN_ONE_LOCX + CARD_WI + 30);
 	
 	public static final int REVEAL_LOCX = (int) (418 * factor);
 	public static final int REVEAL_LOCY = (int) (200 * factor);
