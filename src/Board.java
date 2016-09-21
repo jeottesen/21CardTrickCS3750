@@ -26,6 +26,7 @@ public class Board extends JPanel {
 	
 	private final int COLUMN_GAP;
 	private int columnGap;
+	private int pixelsLost = 0;
 
 	private Dealer dealer;
 
@@ -52,17 +53,12 @@ public class Board extends JPanel {
 		Deck deck = new Deck();
 
 		COLUMN_GAP = Globals.COLUMN_TWO_LOCX - (Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + 30);
-		System.out.println("columnGap: " + columnGap);
 		
 		column1.setId(1);
 		column2.setId(2);
 		column3.setId(3);
-
-		/*column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
 		
-		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-		column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);*/
+		setColumnLocations(1);
 
 		add(column1);
 		// add(Box.createRigidArea(new Dimension(100, 0)));
@@ -76,38 +72,40 @@ public class Board extends JPanel {
 
 		this.addComponentListener(new ComponentListener() {
 
-			@Override
-			public void componentShown(ComponentEvent e) {
-
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
 			public void componentResized(ComponentEvent e) {
 				Board board = ((Board) e.getSource());
+				pixelsLost = 990 - board.getWidth();
+				//float factor = ((float)(board.getWidth()/990f));
+				setColumnLocations(pixelsLost);
+				
 				System.out.println("board.getWidth(): " + board.getWidth());
-				float factor = ((float)(board.getWidth()/990f));
-				System.out.println("factor: " + factor);
-				columnGap = (int)(factor * COLUMN_GAP);
-				board.revalidate();
-				board.repaint();
+				//System.out.println("factor: " + factor);
 				System.out.println("columnGap:" + columnGap);
 			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-
-			}
+			
+			public void componentShown(ComponentEvent e) {}
+			public void componentMoved(ComponentEvent e) {}
+			public void componentHidden(ComponentEvent e) {}
 		});
 	}
+	
+	public void setColumnLocations(int pixelsLost){
+		
+		System.out.println("::" + pixelsLost);
+		if (pixelsLost / 2 <= COLUMN_GAP)
+		{	
+			System.out.println("If called");
+			columnGap = COLUMN_GAP - (int) pixelsLost / 2;
+		}
+		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
+		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
+		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2), Globals.COLUMN_ONE_LOCY);
+		
+		//column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
+		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
+		//column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+	}
+	
 
 	public void addToColumn(int columnId, Card card) {
 
@@ -143,17 +141,14 @@ public class Board extends JPanel {
 		/*   trying out setting column locations here 
 		 *   so it can use new columnGap numbers from the Component listener 
 		 */
-		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
-		column3.setLocation(Globals.COLUMN_TWO_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
-		
-		//column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-		//column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+	
 		
 		
 		setBackground(Color.GRAY);
 		g.drawImage(backgroundImg, 0, 0, this);
 
 	}
+	
+	
+	
 }
