@@ -97,6 +97,7 @@ public class Dealer{
 		    @Override
 		    public void paintComponent(Graphics g)
 		    {
+		    	String revealMessage = "This is your secret card!";
 		        Graphics2D g2d = (Graphics2D)g;
 		        super.paintComponent(g2d);
 		        
@@ -106,16 +107,20 @@ public class Dealer{
 				
 				g2d.setRenderingHints(qualityHints);
 		        g2d.setColor(new Color(0,0,0,200));
-		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
+		        System.out.println("Board width from reveal: " + board.getWidth());
+		        g2d.fillRect(0, 0, board.getWidth(), board.getHeight());
 		        g2d.setColor(Color.WHITE);
 		        g2d.setFont(new Font("Helvetica", Font.PLAIN, 30));
-		        g2d.drawString("This is the card you picked!", 300, 635);
+		        int stringWidth = g2d.getFontMetrics().stringWidth(revealMessage);
+		        int stringLocX = (board.getWidth() - stringWidth)/2;
+		        g2d.drawString(revealMessage, stringLocX, 635);
 		    }
 		};
-
+		int reveal_LocX = (board.getWidth() - Globals.CARD_WI) / 2;  //centers it horizontally
+		
 		overlay.setLayout(null);
 		overlay.setOpaque(false);
-        overlay.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
+        overlay.setBounds(0, 0, board.getWidth(), board.getHeight());
         overlay.setVisible(true);
         
         board.add(overlay);
@@ -125,7 +130,7 @@ public class Dealer{
         board.setComponentZOrder(board.getColumnOne(), 3);
         
         overlay.add(revealCard);
-        revealCard.setLocation(Globals.REVEAL_LOCX,Globals.REVEAL_LOCY);
+        revealCard.setLocation(reveal_LocX,Globals.REVEAL_LOCY);
         overlay.repaint();
         
 		board.repaint();

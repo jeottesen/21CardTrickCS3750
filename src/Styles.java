@@ -26,7 +26,7 @@ public class Styles {
 		button.setForeground(Color.WHITE);
 		button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
 		button.setPreferredSize(new Dimension(100, 50));
-		button.setFont(new Font("Helvetica", Font.PLAIN, 22));
+		button.setFont(new Font("Helvetica", Font.BOLD, 22));
 		button.setMargin(new Insets(0, 20, 0, 20));
 		button.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
