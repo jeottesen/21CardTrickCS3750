@@ -87,7 +87,7 @@ public class Dealer{
 		        g2d.fillRect(0, 0, Globals.FRAME_WI, Globals.FRAME_WI);
 		        g2d.setColor(Color.WHITE);
 		        g2d.setFont(new Font("Helvetica", Font.PLAIN, 30));
-		        g2d.drawString("This is the card you picked!", 250, 635);
+		        g2d.drawString("This is the card you picked!", 300, 635);
 		    }
 		};
 

@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -33,7 +34,7 @@ public class Card  extends JPanel
 		// moved getScaled instance from paint component
 		// this way the program only scales the image down once. 
 		// rather than  every few seconds
-		image = getCardImage().getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_SMOOTH);
+		image = getCardImage().getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_AREA_AVERAGING);
 		
 		if(image == null)
 			setVisible(false);
@@ -48,6 +49,11 @@ public class Card  extends JPanel
 		//setVisible(true);
 		Graphics2D g2d = (Graphics2D)g;
 		super.paintComponent(g2d);
+		
+		RenderingHints qualityHints = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+		qualityHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.setRenderingHints(qualityHints);
 
 		g2d.drawImage(image, 0, 0, this);
 	}
