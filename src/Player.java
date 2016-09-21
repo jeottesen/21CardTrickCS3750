@@ -54,8 +54,8 @@ public class Player extends JPanel {
 		hasSelectedCard = false;
 
 		setLayout(new BorderLayout());
-		setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), Globals.FRAME_HI);
-		//setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
+		//setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), Globals.FRAME_HI);
+		setSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
 
 		createMessageJLabels();
 		createWordsPanel();
@@ -155,7 +155,7 @@ public class Player extends JPanel {
 		wordsPanel.setOpaque(false);
 		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
 		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 170));
-
+		
 	}
 
 	private void createMessageJLabels() {
