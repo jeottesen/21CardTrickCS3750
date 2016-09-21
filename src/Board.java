@@ -21,10 +21,6 @@ public class Board extends JPanel {
 	private final Column column3 = new Column();
 	
 	private Dealer dealer;
-	
-	public void Splash()
-	{
-	}
 
 	public Board() {
 		
