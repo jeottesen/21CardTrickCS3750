@@ -23,7 +23,7 @@ public class CardTrick extends JFrame
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
 		//Before adding board, display splash screen
-		splash = new SplashPanel("/images/splash.jpg");
+		splash = new SplashPanel("/images/splash_alt.png");
 		splash.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
 		splash.setLayout(null);
 		add(splash);
