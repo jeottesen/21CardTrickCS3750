@@ -68,13 +68,8 @@ public class Board extends JPanel {
 	}
 	
 	public void setColumnLocations(int pixelsLost){
+		columnGap = Globals.COLUMN_GAP - (int) pixelsLost / 2;
 		
-		System.out.println("::" + pixelsLost);
-		if (pixelsLost / 2 <= Globals.COLUMN_GAP)
-		{	
-			System.out.println("If called");
-			columnGap = Globals.COLUMN_GAP - (int) pixelsLost / 2;
-		}
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
 		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2), Globals.COLUMN_ONE_LOCY);
