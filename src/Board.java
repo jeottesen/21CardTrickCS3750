@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,8 @@ public class Board extends JPanel {
 	}
 
 	public Board() {
+		int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
 		dealer = new Dealer(this);
 		setLayout(null);
@@ -39,9 +42,10 @@ public class Board extends JPanel {
 		// load background image
 		try
 		{
-			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/background.jpg"));
-			backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
-
+			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/alt_purple_background_darker.png"));
+			//backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
+			backgroundImg = backgroundImg.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+			
 		} catch (IOException e)
 		{
 			System.out.println("ERROR: " + e.getMessage());

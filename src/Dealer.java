@@ -34,7 +34,6 @@ public class Dealer{
 			public void componentResized(ComponentEvent e) {
 				Board board = ((Board) e.getSource());
 				int pixelsLost = Globals.FRAME_WI - board.getWidth();
-				System.out.println("Pixels Lost: " + pixelsLost);
 				if (pixelsLost <= 407){
 					board.setColumnLocations(pixelsLost);
 					player.setColumnLocations(pixelsLost);

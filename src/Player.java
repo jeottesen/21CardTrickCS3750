@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -53,8 +54,8 @@ public class Player extends JPanel {
 		hasSelectedCard = false;
 
 		setLayout(new BorderLayout());
-		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
-		setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
+		setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), Globals.FRAME_HI);
+		//setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
 
 		createMessageJLabels();
 		createWordsPanel();
@@ -76,8 +77,6 @@ public class Player extends JPanel {
 		columnPanel.setLayout(null);
 		columnPanel.setOpaque(false);// so we can see Board's background color
 
-		// columnPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-		columnPanel.add(Box.createRigidArea(new Dimension(5, 5)));
 
 		/*
 		 * add an empty mouse listener so that the events in ColumnBorder can
