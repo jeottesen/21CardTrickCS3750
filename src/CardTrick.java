@@ -7,6 +7,7 @@ import javax.swing.*;
 
 public class CardTrick extends JFrame
 {
+    SplashPanel splash;
     
 	public static void main(String[] args)
 	{
@@ -19,14 +20,15 @@ public class CardTrick extends JFrame
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 
 		//Before adding board, display splash screen
-		add(new SplashPanel("images/splash.jpg"));
+		splash = new SplashPanel("/images/splash.jpg");
+		splash.setBounds(0, 0, Globals.FRAME_WI, Globals.FRAME_HI);
+		splash.setLayout(null);
+		add(splash);
+
 		//Add play button
-		
+		addButton(new JButton("Play!"), Globals.FRAME_WI/2, Globals.FRAME_HI/2, 80, 40);
 		
 		setVisible(true);
-		
-		//add(new Board());
-		//setVisible(true);
 	}
 
     private void addButton(final JButton button, int locX, int locY, int Wi, int Hi)
@@ -45,14 +47,20 @@ public class CardTrick extends JFrame
 				buttonPressed(button, e);
 			}
 		});
-
-		add(button);
+		button.setVisible(true);
+		splash.add(button);
 	}
 
 	public void buttonPressed(JButton button, ActionEvent e)
 	{
-
-
+	    splash.setVisible(false);
+	    button.setVisible(false);
+	    
+	    remove(splash);
+	    remove(button);
+	    
+	    //Add board and start trick on button press
+	    add(new Board());
 	}
 
 
