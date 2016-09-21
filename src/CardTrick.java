@@ -38,6 +38,7 @@ public class CardTrick extends JFrame
 	{
 		button.setBounds(locX, locY, Wi, Hi);
 		Styles.configureJButton(button, true);
+		button.setFont(new Font("Helvetica", Font.PLAIN, 36));
 
 		button.addActionListener(new ActionListener() 
 		{
