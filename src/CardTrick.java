@@ -37,32 +37,7 @@ public class CardTrick extends JFrame
     private void addButton(final JButton button, int locX, int locY, int Wi, int Hi)
 	{
 		button.setBounds(locX, locY, Wi, Hi);
-		//		button.setBackground(Color.CYAN);
-		//		button.setForeground(Color.BLUE);
-		button.setBorderPainted(true);
-		button.setFocusPainted(false);
-		button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
-		button.setForeground(Color.WHITE);
-		button.setBorder(new LineBorder(Color.WHITE, 2, false));
-		button.setPreferredSize(new Dimension(100, 50));
-		button.setFont(new Font("Helvetica", Font.PLAIN, 36));
-		button.setMargin(new Insets(0, 20, 0, 20));
-		button.addMouseListener(new MouseAdapter() {
-			public void mouseEntered(MouseEvent e) {
-				super.mouseEntered(e);
-				button.setBackground(Globals.BUTTON_HOVER_COLOR_PURPLE);
-				//button.repaint();
-			}
-			public void mouseExited(MouseEvent e) {
-				super.mouseExited(e);
-				//button.setBackground(new Color(255, 255, 255, 0));   //transparent
-				button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
-				//button.repaint();
-			}
-			
-		});
-
-		//button.addActionListener(l);
+		Styles.configureJButton(button, true);
 
 		button.addActionListener(new ActionListener() 
 		{
