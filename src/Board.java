@@ -34,11 +34,8 @@ public class Board extends JPanel {
 	public Board() {
 		
 		dealer = new Dealer(this);
-		//BoxLayout boxLayout = new BoxLayout(columnPanel,BoxLayout.X_AXIS);
-		//setLayout(null);
-		//setLayout(new GridLayout(1, 3, 50, 0));
+		setLayout(null);
 		
-		setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
 		
 		//load background image
 		try
@@ -61,9 +58,9 @@ public class Board extends JPanel {
 		column2.setId(2);
 		column3.setId(3);
 		
-		//column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		//column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-		//column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
+		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
+		column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
 		
 		
 		add(column1);
