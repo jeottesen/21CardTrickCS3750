@@ -13,7 +13,7 @@ import javax.swing.border.LineBorder;
 public class Styles {
 	public static void configureJLabel(JLabel label, boolean isVisible) {
 		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Helvetica", Font.PLAIN, 24));
+		label.setFont(new Font("Helvetica", Font.BOLD, 24));
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
 		label.setVisible(isVisible);
 	}
