@@ -3,8 +3,7 @@ import java.awt.Color;
 public class Globals 
 {
 
-	public static final int buffer_right_edge = 20;
-
+	public static int buffer_right_edge = 20;
 
 	public static final int CARD_WI = 150;
 	public static final int CARD_HI = (int) (CARD_WI * 1.452); // Keep aspect ratio of card
@@ -12,7 +11,6 @@ public class Globals
 	public static final int COLUMN_SPACING = 393;
 	public static final int CARD_SPACING = 50;
 	
-
 	public static final int COLUMN_ONE_LOCX = 40;
 	public static final int COLUMN_ONE_LOCY = 40;
 	
@@ -24,9 +22,7 @@ public class Globals
 	
 	public static final int COLUMN_GAP = COLUMN_TWO_LOCX - (COLUMN_ONE_LOCX + CARD_WI + 30);
 	
-
 	//public static final int REVEAL_LOCX = 418;
-
 	public static final int REVEAL_LOCY = 200;
 	
 	public static final int CARDS_PER_COLUMN = 7;

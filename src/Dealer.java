@@ -35,13 +35,13 @@ public class Dealer{
 				Board board = ((Board) e.getSource());
 				System.out.println("board width: " + board.getWidth());
 				int pixelsLost = Globals.FRAME_WI - board.getWidth();
-				if (pixelsLost <= 407){
+				
 					board.setColumnLocations(pixelsLost);
 					player.setColumnLocations(pixelsLost);
 					player.setSize(new Dimension(board.getWidth(), Globals.FRAME_HI));
 					player.revalidate();
 					player.repaint();
-				}
+				
 			}
 			
 			public void componentShown(ComponentEvent e) {}
