@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -18,10 +19,11 @@ public class CardTrick extends JFrame
 		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
-
+		//setPreferredSize(new Dimension(Globals.FRAME_WI + 1, Globals.FRAME_HI + 1));
+		//setMaximumSize(new Dimension(Globals.FRAME_WI + 1, Globals.FRAME_HI + 1));
+		setMinimumSize(new Dimension(Globals.FRAME_WI - 400, Globals.FRAME_HI - 10));
 		add(new Board());
 		setVisible(true);
-
 	}
 
 

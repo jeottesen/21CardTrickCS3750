@@ -70,11 +70,24 @@ public class Board extends JPanel {
 
 			public void componentResized(ComponentEvent e) {
 				Board board = ((Board) e.getSource());
+//				if (board.getWidth() > Globals.FRAME_WI)
+//				{
+//					
+//					//board.setVisible(false);
+//					board.setSize(Globals.FRAME_WI, board.getHeight());
+//				}
+//				if (board.getHeight() > Globals.FRAME_HI)
+//				{
+//					//board.setVisible(false);
+//					board.setSize(board.getWidth(), Globals.FRAME_HI);
+//				}
+//				board.setVisible(true);
+				
 				pixelsLost = 990 - board.getWidth();
 				setColumnLocations(pixelsLost);
 				
-				System.out.println("board.getWidth(): " + board.getWidth());
-				System.out.println("columnGap:" + columnGap);
+				//System.out.println("board.getWidth(): " + board.getWidth());
+				//System.out.println("columnGap:" + columnGap);
 			}
 			
 			public void componentShown(ComponentEvent e) {}
@@ -83,14 +96,11 @@ public class Board extends JPanel {
 		});
 	}
 	
-	public void setColumnLocations(int pixelsLost){
+	public void setColumnLocations(int pixelsLost)
+	{
 		
-		System.out.println("::" + pixelsLost);
-		if (pixelsLost / 2 <= COLUMN_GAP)
-		{	
-			System.out.println("If called");
-			columnGap = COLUMN_GAP - (int) pixelsLost / 2;
-		}
+		columnGap = COLUMN_GAP - (int) pixelsLost / 2;
+		
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
 		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2), Globals.COLUMN_ONE_LOCY);
