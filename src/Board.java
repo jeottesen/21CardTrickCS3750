@@ -120,7 +120,7 @@ public class Board extends JPanel {
 		Point2D gradient_CenterPoint = new Point2D.Float(this.getWidth()/2, 400-100);
 		 float radius = 400f;
 		 float[] dist = {0.2f, 1f};
-		 Color[] colors_upperSide = {new Color(255,255,255,80), new Color(255,255,255,0)};
+		 Color[] colors_upperSide = {new Color(255,255,255,60), new Color(255,255,255,0)};
 		 
 		 RadialGradientPaint radialGradientPaint = new RadialGradientPaint(gradient_CenterPoint, radius, dist, colors_upperSide);
 		
