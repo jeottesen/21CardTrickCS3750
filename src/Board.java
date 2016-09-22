@@ -31,7 +31,7 @@ public class Board extends JPanel {
 		//load background image
 		try
 		{
-			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/background.jpg"));
+			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/alt_background.png"));
 			backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
 
 		}
