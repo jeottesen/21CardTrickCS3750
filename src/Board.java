@@ -27,7 +27,7 @@ public class Board extends JPanel {
 	private final Column column1 = new Column();
 	private final Column column2 = new Column();
 	private final Column column3 = new Column();
-	
+
 	private int columnGap;
 
 	private Dealer dealer;
@@ -46,24 +46,19 @@ public class Board extends JPanel {
 		try
 		{
 			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/alt_purple_backgroundBIG.png"));
-			//backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
 			backgroundImg = backgroundImg.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
-			
+
 		} catch (IOException e)
 		{
 			System.out.println("ERROR: " + e.getMessage());
 		}
 
-		// Temporary deck for testing. Will be getting cards from dealer later
-		Deck deck = new Deck();
-
-		
-		
 		column1.setId(1);
 		column2.setId(2);
 		column3.setId(3);
-		
-		setColumnLocations(1);
+
+		setColumnLocations(0); // 0 because zero change in window width at this
+								// point
 
 		add(column1);
 		add(column2);
@@ -71,17 +66,23 @@ public class Board extends JPanel {
 
 		dealer.deal();
 
-		
 	}
-	
-	public void setColumnLocations(int pixelsLost){
-		columnGap = Globals.COLUMN_GAP - (int) pixelsLost / 2;
-		
+
+	/* this method will be called from the Dealer object when the board is resized.
+	 * Dealer has a reference to the board, and adds a Component listener to board.
+	 * This method is called from the Component listener.
+	 * The listener sends the difference between the original board width and the new board width,
+	 * as the argument deltaWindowWidthPixels, and here the column locations are altered accordingly.
+	 */
+	public void setColumnLocations(int deltaBoardWidthPixels) {
+		// the only thing changing on window resize is the space BETWEEN columns
+		columnGap = Globals.COLUMN_GAP - (int) deltaBoardWidthPixels / 2;
+
 		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
 		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
-		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2), Globals.COLUMN_ONE_LOCY);
+		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2),
+				Globals.COLUMN_ONE_LOCY);
 	}
-	
 
 	public void addToColumn(int columnId, Card card) {
 
@@ -113,23 +114,22 @@ public class Board extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		setBackground(Color.GRAY);
 		g.drawImage(backgroundImg, 0, 0, this);
 
-		Point2D gradient_CenterPoint = new Point2D.Float(this.getWidth()/2, 400-100);
-		 float radius = 400f;
-		 float[] dist = {0.2f, 1f};
-		 Color[] colors_upperSide = {new Color(255,255,255,60), new Color(255,255,255,0)};
-		 
-		 RadialGradientPaint radialGradientPaint = new RadialGradientPaint(gradient_CenterPoint, radius, dist, colors_upperSide);
-		
-		Graphics2D g2d = (Graphics2D)g;
+		Point2D gradient_CenterPoint = new Point2D.Float(this.getWidth() / 2, 400 - 100);
+		float radius = 400f;
+		float[] dist = { 0.2f, .8f };  //first cloat is where first color begins, and then gradually reaches second color at second float
+		Color[] colors = { new Color(255, 255, 255, 40), new Color(255, 255, 255, 0) };
+
+		RadialGradientPaint radialGradientPaint = new RadialGradientPaint(gradient_CenterPoint, radius, dist,
+				colors);
+
+		Graphics2D g2d = (Graphics2D) g;
 		g2d.setPaint(radialGradientPaint);
-		g2d.fillArc((this.getWidth()/2 - 400), -100, 800, 800, 0, 360);
-		
+		g2d.fillArc((this.getWidth() / 2 - 400), -100, 800, 800, 0, 360);//upper left-hand corner, width, height, startArc, endArc
+
 	}
-	
-	
-	
+
 }

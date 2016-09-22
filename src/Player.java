@@ -54,7 +54,6 @@ public class Player extends JPanel {
 		hasSelectedCard = false;
 
 		setLayout(new BorderLayout());
-		//setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), Globals.FRAME_HI);
 		setSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
 
 		createMessageJLabels();
@@ -129,17 +128,17 @@ public class Player extends JPanel {
 		}
 	}
 
-	public void setColumnLocations(int pixelsLost) {
-
-		System.out.println("::" + pixelsLost);
-		
+	
+	/* this method will be called from the Dealer object when the board is resized.
+	 * the Dealer adds a Component listener to the board -- the listener calls this method.
+	 * The listener sends the difference between the original board width and the new board width,
+	 * as the argument deltaWindowWidthPixels, and here the ColumnBorder locations are altered accordingly.
+	 */
+	public void setColumnLocations(int deltaBoardWidthPixels) {
 		cb1.setLocation(Globals.COLUMN_ONE_LOCX - 15, Globals.COLUMN_ONE_LOCY - 15);
-		cb2.setLocation((Globals.COLUMN_TWO_LOCX - 15) - pixelsLost / 2, Globals.COLUMN_TWO_LOCY - 15);
-		
-		//cb2.setLocation((Globals.COLUMN_TWO_LOCX - 15) - 
-			//	((pixelsLost / 2 <= Globals.COLUMN_GAP) ? pixelsLost : 0), Globals.COLUMN_TWO_LOCY - 15);
+		cb2.setLocation((Globals.COLUMN_TWO_LOCX - 15) - deltaBoardWidthPixels / 2, Globals.COLUMN_TWO_LOCY - 15);
 		cb3.setLocation((Globals.COLUMN_THREE_LOCX - 15) - 
-				((pixelsLost / 2 <= Globals.COLUMN_GAP) ? pixelsLost : 0), Globals.COLUMN_THREE_LOCY - 15);
+				((deltaBoardWidthPixels / 2 <= Globals.COLUMN_GAP) ? deltaBoardWidthPixels : 0), Globals.COLUMN_THREE_LOCY - 15);
 	}
 
 	public void indicateColumn(int id) {
@@ -229,8 +228,6 @@ public class Player extends JPanel {
 			addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseExited(MouseEvent e) {
-					// System.out.println("ColumnBorder " + columnNumber + "
-					// Mouse Exited.");
 					if (hasSelectedCard)
 					{
 						columnIdLabel.setText("");
@@ -241,8 +238,6 @@ public class Player extends JPanel {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					// System.out.println("ColumnBorder " + columnNumber + "
-					// Mouse Enter.");
 					if (hasSelectedCard)
 					{
 						columnIdLabel.setText("Column " + columnNumber + "?");
@@ -255,8 +250,6 @@ public class Player extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					if (hasSelectedCard)
 					{
-						// System.out.println("ColumnBorder " + columnNumber + "
-						// Mouse Clicked.");
 						deselectColumns(); // deselect all other columns
 						selected = !selected; // toggle this column
 						columnIdLabel.setVisible(false);

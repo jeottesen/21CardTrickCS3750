@@ -22,7 +22,7 @@ public class Globals
 	
 	public static final int COLUMN_GAP = COLUMN_TWO_LOCX - (COLUMN_ONE_LOCX + CARD_WI + 30);
 	
-	//public static final int REVEAL_LOCX = 418;
+	//public static final int REVEAL_LOCX = 418;  //this needs to be dynamic
 	public static final int REVEAL_LOCY = 200;
 	
 	public static final int CARDS_PER_COLUMN = 7;
