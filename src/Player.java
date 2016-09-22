@@ -62,6 +62,7 @@ public class Player extends JPanel {
 
 		wordsPanel.add(startInstructionsLabel);
 		wordsPanel.add(questionLabel);
+		wordsPanel.add(Box.createRigidArea(new Dimension(1, 10)));
 		wordsPanel.add(columnIdLabel);
 		wordsPanel.add(buttonPanel);
 
@@ -154,7 +155,6 @@ public class Player extends JPanel {
 		wordsPanel.setOpaque(false);
 		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
 		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 170));
-		
 	}
 
 	private void createMessageJLabels() {

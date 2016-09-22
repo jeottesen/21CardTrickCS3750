@@ -16,7 +16,6 @@ public class CardTrick extends JFrame
 	
 	CardTrick()
 	{
-		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 		//setPreferredSize(new Dimension(Globals.FRAME_WI + 1, Globals.FRAME_HI + 1));

@@ -13,7 +13,7 @@ import javax.swing.border.LineBorder;
 public class Styles {
 	public static void configureJLabel(JLabel label, boolean isVisible) {
 		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Helvetica", Font.BOLD, 24));
+		label.setFont(new Font("Verdana", Font.BOLD, 26));
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
 		label.setVisible(isVisible);
 	}
@@ -22,11 +22,11 @@ public class Styles {
 		button.setFocusPainted(false);// avoids this ugly inner border
 		button.setOpaque(true);
 		button.setVisible(isVisible);
-		button.setBorder(new LineBorder(Color.WHITE, 2, false));
+		button.setBorder(new LineBorder(Color.WHITE, 3, false));
 		button.setForeground(Color.WHITE);
 		button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
 		button.setPreferredSize(new Dimension(100, 50));
-		button.setFont(new Font("Helvetica", Font.BOLD, 22));
+		button.setFont(new Font("Verdana", Font.BOLD, 24));
 		button.setMargin(new Insets(0, 20, 0, 20));
 		button.addMouseListener(new MouseAdapter() {
 			public void mouseEntered(MouseEvent e) {
@@ -37,7 +37,6 @@ public class Styles {
 				super.mouseExited(e);
 				button.setBackground(Globals.BACKGROUND_COLOR_PURPLE);
 			}
-			
 		});
 	}
 }
