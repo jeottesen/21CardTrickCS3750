@@ -12,6 +12,9 @@ import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RadialGradientPaint;
+import java.awt.geom.Point2D;
 
 public class Board extends JPanel {
 
@@ -110,16 +113,21 @@ public class Board extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		/*   trying out setting column locations here 
-		 *   so it can use new columnGap numbers from the Component listener 
-		 */
-	
-		
 		
 		setBackground(Color.GRAY);
 		g.drawImage(backgroundImg, 0, 0, this);
 
+		Point2D gradient_CenterPoint = new Point2D.Float(this.getWidth()/2, 400-100);
+		 float radius = 400f;
+		 float[] dist = {0.2f, 1f};
+		 Color[] colors_upperSide = {new Color(255,255,255,80), new Color(255,255,255,0)};
+		 
+		 RadialGradientPaint radialGradientPaint = new RadialGradientPaint(gradient_CenterPoint, radius, dist, colors_upperSide);
+		
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setPaint(radialGradientPaint);
+		g2d.fillArc((this.getWidth()/2 - 400), -100, 800, 800, 0, 360);
+		
 	}
 	
 	
