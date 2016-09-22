@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -41,10 +42,11 @@ public class Player extends JPanel {
 
 	private int selectedColumnID;
 
+	private ColumnBorder cb1, cb2, cb3;
 	private JPanel columnPanel, wordsPanel, buttonPanel;
 
 	private JLabel questionLabel, columnIdLabel, startInstructionsLabel;
-
+	
 	private JButton btnReady, btnYes;
 
 	public Player(Dealer dealer) {
@@ -52,8 +54,8 @@ public class Player extends JPanel {
 		hasSelectedCard = false;
 
 		setLayout(new BorderLayout());
-		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
-		setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
+		//setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), Globals.FRAME_HI);
+		setSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
 
 		createMessageJLabels();
 		createWordsPanel();
@@ -75,8 +77,6 @@ public class Player extends JPanel {
 		columnPanel.setLayout(null);
 		columnPanel.setOpaque(false);// so we can see Board's background color
 
-		// columnPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-		columnPanel.add(Box.createRigidArea(new Dimension(5, 5)));
 
 		/*
 		 * add an empty mouse listener so that the events in ColumnBorder can
@@ -90,23 +90,23 @@ public class Player extends JPanel {
 				questionLabel.setText("Which column is your card in?");
 				columnIdLabel.setVisible(true);
 				btnYes.setVisible(false);
-				//buttonPanel.setVisible(false);
+				// buttonPanel.setVisible(false);
 			}
 		});
 
 		setOpaque(false);
 
-		ColumnBorder cb1 = new ColumnBorder(1);
+		cb1 = new ColumnBorder(1);
 		cb1.setLocation(Globals.COLUMN_ONE_LOCX - 15, Globals.COLUMN_ONE_LOCY - 15);
 
 		columnPanel.add(cb1);
 
-		ColumnBorder cb2 = new ColumnBorder(2);
+		cb2 = new ColumnBorder(2);
 		cb2.setLocation(Globals.COLUMN_TWO_LOCX - 15, Globals.COLUMN_TWO_LOCY - 15);
 
 		columnPanel.add(cb2);
 
-		ColumnBorder cb3 = new ColumnBorder(3);
+		cb3 = new ColumnBorder(3);
 		cb3.setLocation(Globals.COLUMN_THREE_LOCX - 15, Globals.COLUMN_THREE_LOCY - 15);
 
 		columnPanel.add(cb3);
@@ -127,6 +127,19 @@ public class Player extends JPanel {
 				((ColumnBorder) c).repaint();
 			}
 		}
+	}
+
+	public void setColumnLocations(int pixelsLost) {
+
+		System.out.println("::" + pixelsLost);
+		
+		cb1.setLocation(Globals.COLUMN_ONE_LOCX - 15, Globals.COLUMN_ONE_LOCY - 15);
+		cb2.setLocation((Globals.COLUMN_TWO_LOCX - 15) - pixelsLost / 2, Globals.COLUMN_TWO_LOCY - 15);
+		
+		//cb2.setLocation((Globals.COLUMN_TWO_LOCX - 15) - 
+			//	((pixelsLost / 2 <= Globals.COLUMN_GAP) ? pixelsLost : 0), Globals.COLUMN_TWO_LOCY - 15);
+		cb3.setLocation((Globals.COLUMN_THREE_LOCX - 15) - 
+				((pixelsLost / 2 <= Globals.COLUMN_GAP) ? pixelsLost : 0), Globals.COLUMN_THREE_LOCY - 15);
 	}
 
 	public void indicateColumn(int id) {
@@ -181,13 +194,15 @@ public class Player extends JPanel {
 				startInstructionsLabel.setVisible(false);
 				questionLabel.setVisible(true);
 				columnIdLabel.setVisible(true);
-				for (Component c : columnPanel.getComponents()){
-					if (c.getClass() == ColumnBorder.class){
+				for (Component c : columnPanel.getComponents())
+				{
+					if (c.getClass() == ColumnBorder.class)
+					{
 						c.repaint();
 					}
 				}
 				pickCard();
-				
+
 			}
 		});
 		btnYes.addActionListener(new ActionListener() {
@@ -274,7 +289,7 @@ public class Player extends JPanel {
 				g2d.setColor(Color.WHITE);
 			else
 				g2d.setColor(new Color(255, 255, 255, 0));
-			
+
 			if (hoveredOver)
 			{
 				g2d.setColor(Globals.HOVERED_COLUMN_BORDER_COLOR_PURPLE_THEME);
@@ -286,10 +301,8 @@ public class Player extends JPanel {
 
 			g2d.drawRoundRect(5, 5, Globals.CARD_WI + 20, Globals.COLUMN_HI + 20, 5, 5);
 			g2d.setStroke(oldStroke);
-				
+
 		}
-		
-		
 
 	}
 

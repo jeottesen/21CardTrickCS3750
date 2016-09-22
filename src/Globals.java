@@ -5,14 +5,16 @@ public class Globals
 
 	public static final int buffer_right_edge = 20;
 
+
 	public static final int CARD_WI = 150;
 	public static final int CARD_HI = (int) (CARD_WI * 1.452); // Keep aspect ratio of card
 
 	public static final int COLUMN_SPACING = 393;
 	public static final int CARD_SPACING = 50;
 	
-	public static final int COLUMN_ONE_LOCX = 25;
-	public static final int COLUMN_ONE_LOCY = 50;
+
+	public static final int COLUMN_ONE_LOCX = 40;
+	public static final int COLUMN_ONE_LOCY = 40;
 	
 	public static final int COLUMN_TWO_LOCX = COLUMN_ONE_LOCX + COLUMN_SPACING;
 	public static final int COLUMN_TWO_LOCY = COLUMN_ONE_LOCY;
@@ -20,8 +22,11 @@ public class Globals
 	public static final int COLUMN_THREE_LOCX = COLUMN_TWO_LOCX + COLUMN_SPACING;
 	public static final int COLUMN_THREE_LOCY = COLUMN_ONE_LOCY;
 	
+	public static final int COLUMN_GAP = COLUMN_TWO_LOCX - (COLUMN_ONE_LOCX + CARD_WI + 30);
 	
-	public static final int REVEAL_LOCX = 418;
+
+	//public static final int REVEAL_LOCX = 418;
+
 	public static final int REVEAL_LOCY = 200;
 	
 	public static final int CARDS_PER_COLUMN = 7;
@@ -30,7 +35,7 @@ public class Globals
 			(CARD_SPACING * CARDS_PER_COLUMN) + (CARD_HI - CARD_SPACING);
 
 	
-	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX + buffer_right_edge; // Keep screen symmetrical
+	public static final int FRAME_WI = COLUMN_ONE_LOCX + COLUMN_SPACING * 2 + CARD_WI + COLUMN_ONE_LOCX; // Keep screen symmetrical
 	public static final int FRAME_HI = 768;
 	
 	//public static final int FRAME_WI = 1000; // Keep screen symmetrical

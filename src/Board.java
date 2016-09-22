@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
@@ -24,9 +25,7 @@ public class Board extends JPanel {
 	private final Column column2 = new Column();
 	private final Column column3 = new Column();
 	
-	private final int COLUMN_GAP;
 	private int columnGap;
-	private int pixelsLost = 0;
 
 	private Dealer dealer;
 
@@ -34,6 +33,8 @@ public class Board extends JPanel {
 	}
 
 	public Board() {
+		int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
+		int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
 		dealer = new Dealer(this);
 		setLayout(null);
@@ -41,9 +42,10 @@ public class Board extends JPanel {
 		// load background image
 		try
 		{
-			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/background.jpg"));
-			backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
-
+			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/alt_purple_backgroundBIG.png"));
+			//backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
+			backgroundImg = backgroundImg.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+			
 		} catch (IOException e)
 		{
 			System.out.println("ERROR: " + e.getMessage());
@@ -52,7 +54,7 @@ public class Board extends JPanel {
 		// Temporary deck for testing. Will be getting cards from dealer later
 		Deck deck = new Deck();
 
-		COLUMN_GAP = Globals.COLUMN_TWO_LOCX - (Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + 30);
+		
 		
 		column1.setId(1);
 		column2.setId(2);
@@ -70,24 +72,10 @@ public class Board extends JPanel {
 
 			public void componentResized(ComponentEvent e) {
 				Board board = ((Board) e.getSource());
-//				if (board.getWidth() > Globals.FRAME_WI)
-//				{
-//					
-//					//board.setVisible(false);
-//					board.setSize(Globals.FRAME_WI, board.getHeight());
-//				}
-//				if (board.getHeight() > Globals.FRAME_HI)
-//				{
-//					//board.setVisible(false);
-//					board.setSize(board.getWidth(), Globals.FRAME_HI);
-//				}
-//				board.setVisible(true);
 				
 				pixelsLost = 990 - board.getWidth();
 				setColumnLocations(pixelsLost);
 				
-				//System.out.println("board.getWidth(): " + board.getWidth());
-				//System.out.println("columnGap:" + columnGap);
 			}
 			
 			public void componentShown(ComponentEvent e) {}
