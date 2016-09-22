@@ -1,9 +1,13 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.RadialGradientPaint;
 import java.awt.Toolkit;
+import java.awt.MultipleGradientPaint.CycleMethod;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.geom.Point2D;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.swing.BoxLayout;
@@ -33,6 +37,9 @@ public class Board extends JPanel {
 	}
 
 	public Board() {
+		
+		
+		
 		int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
@@ -126,17 +133,23 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		/*   trying out setting column locations here 
-		 *   so it can use new columnGap numbers from the Component listener 
-		 */
-	
-		
-		
 		setBackground(Color.GRAY);
 		g.drawImage(backgroundImg, 0, 0, this);
 
+		/*Point2D gradient_CenterPoint = new Point2D.Float(this.getWidth()/2, 50);
+		 float radius = 100f;
+		 float[] dist = {0.0f, 0.9f};
+		 Color[] colors_upperSide = {Color.WHITE, Color.BLUE};
+		 
+		 RadialGradientPaint radialGradientPaint = new RadialGradientPaint(gradient_CenterPoint, radius, dist, colors_upperSide);
+		
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setPaint(radialGradientPaint);
+		g2d.fillArc(this.getWidth()/2, 44, 200, 200, 0, 360);*/
+		
 	}
 	
 	
+	 
 	
 }
