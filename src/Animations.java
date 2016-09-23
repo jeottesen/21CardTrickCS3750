@@ -10,7 +10,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
-import aurelienribon.tweenengine.equations.Bounce;
+import aurelienribon.tweenengine.equations.Cubic;
 
 public class Animations {
 	
@@ -38,9 +38,9 @@ public class Animations {
 		// Pass it the object to animate the direction to animate it and the
 		// duration of the animation in milliseconds. when the time value is
 		// 5000 it should take about 5 seconds to play the animation.
-		Tween.to(panel, PanelAccessor.POS_XY, 5000)
+		Tween.to(panel, PanelAccessor.POS_XY, 150)
 				// Start from the exact middle of the screen
-				.target(newX, newY).ease(Bounce.OUT).start(tweenManager)
+				.target(newX, newY).ease(Cubic.OUT)
 				// Stop the timer when the animation is complete
 				.setCallbackTriggers(TweenCallback.COMPLETE)
 				.setCallback(new TweenCallback() {
@@ -48,7 +48,8 @@ public class Animations {
 					public void onEvent(int type, BaseTween<?> source) {
 						timer.stop();
 					}
-				});
+				})
+				.start(tweenManager);
 		
 		timer.start();
 
@@ -62,6 +63,9 @@ public class Animations {
 		JFrame frame = new JFrame();
 		frame.setLayout(null);
 		Card card = new Card(CardValues.ACE, CardSuits.SPADES);
+		Card card2 = new Card(CardValues.TWO, CardSuits.SPADES);
+		card.loadImage();
+		card2.loadImage();
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(Globals.FRAME_WI, Globals.FRAME_HI);
@@ -70,6 +74,11 @@ public class Animations {
 		frame.setVisible(true);
 
 		Animations.movePanel(card, Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
+		
+		card2.setLocation((Globals.FRAME_WI / 2) - (Globals.CARD_WI / 2), -1 * Globals.CARD_HI);
+		frame.add(card2);
+		
+		Animations.movePanel(card2, Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY+ Globals.CARD_SPACING);
 
 	}
 }

@@ -7,13 +7,18 @@ import javax.swing.JPanel;
 
 public class Column extends JPanel {
 	private ArrayList<Card> cards;
-	private int id;  //it's in the diagram.
+	private int id; 
+	
+	public ArrayList<Card> getCards()
+	{
+		return cards;
+	}
 	
 	public Column() {
 		setLayout(null);
 		int ColumnHeight = (Globals.CARD_SPACING * 7) + (Globals.CARD_HI - Globals.CARD_SPACING);
+		
 		setSize(Globals.CARD_WI, ColumnHeight);
-		//System.out.println("Column Height: " + ((Globals.CARD_SPACING * 7) + (Globals.CARD_HI - Globals.CARD_SPACING)));
 		setPreferredSize(new Dimension(Globals.CARD_WI, ColumnHeight));
 		
 		cards = new ArrayList<>();
@@ -32,25 +37,17 @@ public class Column extends JPanel {
 	public void clearColumn()
 	{
 		cards.clear();
+		repaint();
+	}
+	
+	public int nextCardY() {
+		return ((Globals.CARDS_PER_COLUMN - 1) - cards.size()) * Globals.CARD_SPACING;
 	}
 	
 	public void addCard(Card card) {
+		card.setLocation(0, nextCardY());
 		cards.add(card);
-		drawCards();
+		add(card);
 	}
-	
-	public ArrayList<Card> getCards()
-	{
-		return cards;
-	}
-	
-	private void drawCards() {
-		for(int i = cards.size() - 1; i >= 0; i--) {
-			Card c = cards.get(i); 
-			c.setLocation(0, i * Globals.CARD_SPACING);
-			add(c);
-		}
-	}
-	
 	
 }

@@ -34,7 +34,9 @@ public class Deck {
     public Stack<Card> random21() {
     	Stack<Card> random21 = new Stack<>();
     	for (int i = 0; i < 21; i++){
-    		random21.add(draw());
+    		Card card = draw();
+    		card.loadImage();
+    		random21.add(card);
     	}    	
     	return random21;
     }

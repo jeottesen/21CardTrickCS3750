@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -8,64 +9,63 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Board extends JPanel {
-	
 
 	public BufferedImage splashImg;
 	public Image backgroundImg;
-	
+
 	// Since the UML Diagram shows these are a composition
 	// relationship they need to be final. They would be
 	// an Aggregation relationship without it.
 	private final Column column1 = new Column();
 	private final Column column2 = new Column();
 	private final Column column3 = new Column();
-	
+
 	private Dealer dealer;
-	
-	public void Splash()
-	{
+
+	public void Splash() {
 	}
 
 	public Board() {
-		
 		dealer = new Dealer(this);
-		
-		setLayout(null);
-		
-		//load background image
-		try
-		{
-			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/background.jpg"));
-			backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
+		// Run this in a different thread to decrease loading speed
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				
+				setLayout(null);
 
-		}
-		catch(IOException e)
-		{
-			System.out.println("ERROR: " + e.getMessage());
-		}
-		
+				// load background image
+				try {
+					backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/background.jpg"));
+					backgroundImg = backgroundImg.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI,
+							Image.SCALE_SMOOTH);
 
-		
-		// Temporary deck for testing. Will be getting cards from dealer later
-		Deck deck = new Deck();
-		
-		column1.setId(1);
-		column2.setId(2);
-		column3.setId(3);
-		
-		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-		column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
-		
-		add(column1);
-		add(column2);
-		add(column3);
-		
-		dealer.deal();
+				} catch (IOException e) {
+					System.out.println("ERROR: " + e.getMessage());
+				}
+
+				column1.setId(1);
+				column2.setId(2);
+				column3.setId(3);
+
+				column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
+				column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
+				column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+
+				add(column1);
+				add(column2);
+				add(column3);
+
+			}
+		});
 	}
 	
+	public void startGame() {
+		dealer.deal();
+	}
+
+
 	public void addToColumn(int columnId, Card card) {
-		
 		switch (columnId) {
 		case 1:
 			column1.addCard(card);
@@ -78,23 +78,21 @@ public class Board extends JPanel {
 			break;
 		}
 	}
-	
-	public Column getColumnOne()
-	{
+
+	public Column getColumnOne() {
 		return column1;
 	}
-	public Column getColumnTwo()
-	{
+
+	public Column getColumnTwo() {
 		return column2;
 	}
-	public Column getColumnThree()
-	{
+
+	public Column getColumnThree() {
 		return column3;
 	}
 
 	@Override
-	public void paintComponent(Graphics g)
-	{
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		setBackground(Color.GRAY);

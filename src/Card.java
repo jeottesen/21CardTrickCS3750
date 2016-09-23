@@ -34,12 +34,16 @@ public class Card  extends JPanel
 		// moved getScaled instance from paint component
 		// this way the program only scales the image down once. 
 		// rather than  every few seconds
+		
+		
+		setOpaque(false);
+	}
+	
+	public void loadImage() {
 		image = getCardImage().getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_AREA_AVERAGING);
 		
 		if(image == null)
 			setVisible(false);
-		
-		setOpaque(false);
 	}
 
 	@Override
