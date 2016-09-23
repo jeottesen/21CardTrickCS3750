@@ -48,9 +48,9 @@ public class Board extends JPanel {
 				column2.setId(2);
 				column3.setId(3);
 
-				column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-				column2.setLocation(Globals.COLUMN_TWO_LOCX, Globals.COLUMN_TWO_LOCY);
-				column3.setLocation(Globals.COLUMN_THREE_LOCX, Globals.COLUMN_THREE_LOCY);
+				column1.setLocation(Globals.COLUMN_ONE_LOCX, 0);
+				column2.setLocation(Globals.COLUMN_TWO_LOCX, 0);
+				column3.setLocation(Globals.COLUMN_THREE_LOCX, 0);
 
 				add(column1);
 				add(column2);

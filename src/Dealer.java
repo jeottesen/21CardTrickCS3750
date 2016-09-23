@@ -3,10 +3,21 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Stack;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
+import aurelienribon.tweenengine.BaseTween;
+import aurelienribon.tweenengine.Timeline;
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
+import aurelienribon.tweenengine.TweenManager;
+import aurelienribon.tweenengine.equations.Cubic;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
@@ -44,15 +55,53 @@ public class Dealer{
 		board.getColumnThree().clearColumn();
 		
 
+		final TweenManager tweenManager = new TweenManager();
+		
+		
+		// The thread that plays the animation
+		Timer timer = new Timer(Animations.FRAME_RATE, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				// pass it how many milliseconds it has been since the
+				// last frame update. This should always be about the same
+				tweenManager.update(Animations.FRAME_RATE);
+			}
+		});
+		
+		Tween.registerAccessor(JPanel.class, new PanelAccessor());
+		Timeline timeline = Timeline.createSequence();
+		
 		for (int i = 0; i < Globals.CARDS_PER_COLUMN; i++) {
-			board.addToColumn(1, trickDeck.pop());
-			board.addToColumn(2, trickDeck.pop());
-			board.addToColumn(3, trickDeck.pop());
+			Card c1 = trickDeck.pop();
+			Card c2 = trickDeck.pop();
+			Card c3 = trickDeck.pop();
 			
-			board.getColumnOne().repaint();
-			board.getColumnTwo().repaint();
-			board.getColumnThree().repaint();
+			c1.setLocation(0, -1 * Globals.CARD_HI);
+			c2.setLocation(0, -1 * Globals.CARD_HI);
+			c3.setLocation(0, -1 * Globals.CARD_HI);
+			
+			board.addToColumn(1, c1);
+			board.addToColumn(2, c2);
+			board.addToColumn(3, c3);
+			
+			
+			timeline.push(Tween.to(c1, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
+			timeline.push(Tween.to(c2, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
+			timeline.push(Tween.to(c3, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
 		}
+		
+		timeline.setCallbackTriggers(TweenCallback.COMPLETE);
+		timeline.setCallback(new TweenCallback() {
+			@Override
+			public void onEvent(int type, BaseTween<?> source) {
+				timer.stop();
+			}
+		});
+		timeline.start(tweenManager);
+		
+		timer.start();
+		
 		if (dealNumber < 4)
 			player.deselectColumns();
 		

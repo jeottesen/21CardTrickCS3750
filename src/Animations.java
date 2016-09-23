@@ -1,11 +1,14 @@
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import aurelienribon.tweenengine.BaseTween;
+import aurelienribon.tweenengine.Timeline;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenCallback;
@@ -15,45 +18,46 @@ import aurelienribon.tweenengine.equations.Cubic;
 public class Animations {
 	
 	// How many milliseconds we need to wait between frame updates
-	private static int FRAME_RATE = 1000 / 60;
-	
+	public static int FRAME_RATE = 1000 / 60;
 
 	public static void movePanel(JPanel panel, int newX, int newY) {
-		
-		final TweenManager tweenManager = new TweenManager();
-		
-		// The thread that plays the animation
-		Timer timer = new Timer(FRAME_RATE, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				// pass it how many milliseconds it has been since the
-				// last frame update. This should always be about the same
-				tweenManager.update(FRAME_RATE);
-			}
-		});
+			
+			final TweenManager tweenManager = new TweenManager();
+			
+			// The thread that plays the animation
+			Timer timer = new Timer(FRAME_RATE, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+					// pass it how many milliseconds it has been since the
+					// last frame update. This should always be about the same
+					tweenManager.update(FRAME_RATE);
+				}
+			});
+	
+			Tween.registerAccessor(JPanel.class, new PanelAccessor());
+			
+			// Pass it the object to animate the direction to animate it and the
+			// duration of the animation in milliseconds. when the time value is
+			// 5000 it should take about 5 seconds to play the animation.
+			Tween.to(panel, PanelAccessor.POS_XY, 150)
+					// Start from the exact middle of the screen
+					.target(newX, newY).ease(Cubic.OUT)
+					// Stop the timer when the animation is complete
+					.setCallbackTriggers(TweenCallback.COMPLETE)
+					.setCallback(new TweenCallback() {
+						@Override
+						public void onEvent(int type, BaseTween<?> source) {
+							timer.stop();
+						}
+					})
+					.start(tweenManager);
+			
+			timer.start();
+			
+	
+		}
 
-		Tween.registerAccessor(JPanel.class, new PanelAccessor());
-		
-		// Pass it the object to animate the direction to animate it and the
-		// duration of the animation in milliseconds. when the time value is
-		// 5000 it should take about 5 seconds to play the animation.
-		Tween.to(panel, PanelAccessor.POS_XY, 150)
-				// Start from the exact middle of the screen
-				.target(newX, newY).ease(Cubic.OUT)
-				// Stop the timer when the animation is complete
-				.setCallbackTriggers(TweenCallback.COMPLETE)
-				.setCallback(new TweenCallback() {
-					@Override
-					public void onEvent(int type, BaseTween<?> source) {
-						timer.stop();
-					}
-				})
-				.start(tweenManager);
-		
-		timer.start();
-
-	}
 
 	/**
 	 * Test and demonstration.
