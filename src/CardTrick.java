@@ -40,7 +40,7 @@ public class CardTrick extends JFrame {
 				Animations.movePanel(
 						addButton(new JButton("Play!"), 
 								Globals.FRAME_WI + 175, 250, 175, 75),
-						Globals.FRAME_WI/2, 250);
+						Globals.FRAME_WI/2, 275);
 				
 			}
 		}).start();

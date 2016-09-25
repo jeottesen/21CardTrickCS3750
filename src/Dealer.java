@@ -189,7 +189,7 @@ public class Dealer {
 				g2d.setColor(new Color(0, 0, 0, 200));
 				g2d.fillRect(0, 0, board.getWidth(), board.getHeight());
 				g2d.setColor(Color.WHITE);
-				g2d.setFont(new Font("Verdana", Font.BOLD, 30));
+				g2d.setFont(new Font("Helvetica", Font.BOLD, 30));
 				int stringWidth = g2d.getFontMetrics().stringWidth(revealMessage); 
 				// centering the message string
 				int stringLocX = (board.getWidth() - stringWidth) / 2;
