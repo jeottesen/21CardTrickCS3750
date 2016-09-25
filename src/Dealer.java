@@ -95,7 +95,9 @@ public class Dealer{
 			
 			// add the tweens to the timeline for each card
 			timeline.push(Tween.to(c1, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
-			timeline.push(Tween.to(c2, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
+			// make sure not to add the reveal card to the timeline
+			if (dealNumber != 4 || board.getColumnTwo().getCards().size() != 4)
+				timeline.push(Tween.to(c2, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
 			timeline.push(Tween.to(c3, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
 		}
 		
