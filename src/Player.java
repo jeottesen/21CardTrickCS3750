@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -41,10 +42,11 @@ public class Player extends JPanel {
 
 	private int selectedColumnID;
 
+	private ColumnBorder cb1, cb2, cb3;
 	private JPanel columnPanel, wordsPanel, buttonPanel;
 
 	private JLabel questionLabel, columnIdLabel, startInstructionsLabel;
-
+	
 	private JButton btnReady, btnYes;
 
 	public Player(Dealer dealer) {
@@ -52,8 +54,7 @@ public class Player extends JPanel {
 		hasSelectedCard = false;
 
 		setLayout(new BorderLayout());
-		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
-		setPreferredSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
+		setSize(new Dimension(Globals.FRAME_WI, Globals.FRAME_HI));
 
 		createMessageJLabels();
 		createWordsPanel();
@@ -61,6 +62,7 @@ public class Player extends JPanel {
 
 		wordsPanel.add(startInstructionsLabel);
 		wordsPanel.add(questionLabel);
+		wordsPanel.add(Box.createRigidArea(new Dimension(1, 10)));
 		wordsPanel.add(columnIdLabel);
 		wordsPanel.add(buttonPanel);
 
@@ -75,8 +77,6 @@ public class Player extends JPanel {
 		columnPanel.setLayout(null);
 		columnPanel.setOpaque(false);// so we can see Board's background color
 
-		// columnPanel.add(Box.createRigidArea(new Dimension(5, 0)));
-		columnPanel.add(Box.createRigidArea(new Dimension(5, 5)));
 
 		/*
 		 * add an empty mouse listener so that the events in ColumnBorder can
@@ -91,23 +91,23 @@ public class Player extends JPanel {
 				questionLabel.setText("Which column is your card in?");
 				columnIdLabel.setVisible(true);
 				btnYes.setVisible(false);
-				//buttonPanel.setVisible(false);
+				// buttonPanel.setVisible(false);
 			}
 		});
 
 		setOpaque(false);
 
-		ColumnBorder cb1 = new ColumnBorder(1);
+		cb1 = new ColumnBorder(1);
 		cb1.setLocation(Globals.COLUMN_ONE_LOCX - 15, Globals.COLUMN_ONE_LOCY - 15);
 
 		columnPanel.add(cb1);
 
-		ColumnBorder cb2 = new ColumnBorder(2);
+		cb2 = new ColumnBorder(2);
 		cb2.setLocation(Globals.COLUMN_TWO_LOCX - 15, Globals.COLUMN_TWO_LOCY - 15);
 
 		columnPanel.add(cb2);
 
-		ColumnBorder cb3 = new ColumnBorder(3);
+		cb3 = new ColumnBorder(3);
 		cb3.setLocation(Globals.COLUMN_THREE_LOCX - 15, Globals.COLUMN_THREE_LOCY - 15);
 
 		columnPanel.add(cb3);
@@ -130,6 +130,19 @@ public class Player extends JPanel {
 		}
 	}
 
+	
+	/* this method will be called from the Dealer object when the board is resized.
+	 * the Dealer adds a Component listener to the board -- the listener calls this method.
+	 * The listener sends the difference between the original board width and the new board width,
+	 * as the argument deltaWindowWidthPixels, and here the ColumnBorder locations are altered accordingly.
+	 */
+	public void setColumnLocations(int deltaBoardWidthPixels) {
+		cb1.setLocation(Globals.COLUMN_ONE_LOCX - 15, Globals.COLUMN_ONE_LOCY - 15);
+		cb2.setLocation((Globals.COLUMN_TWO_LOCX - 15) - deltaBoardWidthPixels / 2, Globals.COLUMN_TWO_LOCY - 15);
+		cb3.setLocation((Globals.COLUMN_THREE_LOCX - 15) - 
+				((deltaBoardWidthPixels / 2 <= Globals.COLUMN_GAP) ? deltaBoardWidthPixels : 0), Globals.COLUMN_THREE_LOCY - 15);
+	}
+
 	public void indicateColumn(int id) {
 		dealer.pickupCards(id);
 	}
@@ -143,7 +156,6 @@ public class Player extends JPanel {
 		wordsPanel.setOpaque(false);
 		wordsPanel.setLayout(new BoxLayout(wordsPanel, BoxLayout.Y_AXIS));
 		wordsPanel.setPreferredSize(new Dimension(Globals.FRAME_WI, 170));
-		
 	}
 
 	private void createMessageJLabels() {
@@ -183,13 +195,15 @@ public class Player extends JPanel {
 				startInstructionsLabel.setVisible(false);
 				questionLabel.setVisible(true);
 				columnIdLabel.setVisible(true);
-				for (Component c : columnPanel.getComponents()){
-					if (c.getClass() == ColumnBorder.class){
+				for (Component c : columnPanel.getComponents())
+				{
+					if (c.getClass() == ColumnBorder.class)
+					{
 						c.repaint();
 					}
 				}
 				pickCard();
-				
+
 			}
 		});
 		btnYes.addActionListener(new ActionListener() {
@@ -208,7 +222,7 @@ public class Player extends JPanel {
 		public boolean hoveredOver;
 		private boolean selected;
 
-		public ColumnBorder(int columnNumber) {
+		public ColumnBorder(final int columnNumber) {
 			this.columnNumber = columnNumber;
 			setSize(Globals.CARD_WI + 30, Globals.COLUMN_HI + 30);
 			setPreferredSize(new Dimension(Globals.CARD_WI + 30, Globals.COLUMN_HI + 30));
@@ -217,8 +231,6 @@ public class Player extends JPanel {
 			addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseExited(MouseEvent e) {
-					// System.out.println("ColumnBorder " + columnNumber + "
-					// Mouse Exited.");
 					if (hasSelectedCard)
 					{
 						columnIdLabel.setText("");
@@ -229,8 +241,6 @@ public class Player extends JPanel {
 
 				@Override
 				public void mouseEntered(MouseEvent e) {
-					// System.out.println("ColumnBorder " + columnNumber + "
-					// Mouse Enter.");
 					if (hasSelectedCard)
 					{
 						columnIdLabel.setText("Column " + columnNumber + "?");
@@ -243,8 +253,6 @@ public class Player extends JPanel {
 				public void mouseClicked(MouseEvent e) {
 					if (hasSelectedCard)
 					{
-						// System.out.println("ColumnBorder " + columnNumber + "
-						// Mouse Clicked.");
 						dealer.cancelAnimation();
 						deselectColumns(); // deselect all other columns
 						selected = !selected; // toggle this column
@@ -252,7 +260,7 @@ public class Player extends JPanel {
 						selectedColumnID = columnNumber;
 						btnYes.setVisible(true);
 						buttonPanel.setVisible(true);
-						questionLabel.setText("Your card is in column " + columnNumber + "?");
+						questionLabel.setText("Your card is in Column " + columnNumber + "?");
 						repaint();
 					}
 				}
@@ -279,7 +287,7 @@ public class Player extends JPanel {
 				g2d.setColor(Color.WHITE);
 			else
 				g2d.setColor(new Color(255, 255, 255, 0));
-			
+
 			if (hoveredOver)
 			{
 				g2d.setColor(Globals.HOVERED_COLUMN_BORDER_COLOR_PURPLE_THEME);
@@ -291,10 +299,8 @@ public class Player extends JPanel {
 
 			g2d.drawRoundRect(5, 5, Globals.CARD_WI + 20, Globals.COLUMN_HI + 20, 5, 5);
 			g2d.setStroke(oldStroke);
-				
+
 		}
-		
-		
 
 	}
 

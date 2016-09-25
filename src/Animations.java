@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -18,29 +19,29 @@ import aurelienribon.tweenengine.equations.Cubic;
 public class Animations {
 	
 	// How many milliseconds we need to wait between frame updates
-	public static int FRAME_RATE = 1000 / 60;
+	
 
-	public static void movePanel(JPanel panel, int newX, int newY) {
+	public static void movePanel(JComponent component, int newX, int newY) {
 			
 			final TweenManager tweenManager = new TweenManager();
 			
 			// The thread that plays the animation
-			Timer timer = new Timer(FRAME_RATE, new ActionListener() {
+			Timer timer = new Timer(Globals.FRAME_RATE, new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
 					// pass it how many milliseconds it has been since the
 					// last frame update. This should always be about the same
-					tweenManager.update(FRAME_RATE);
+					tweenManager.update(Globals.FRAME_RATE);
 				}
 			});
 	
-			Tween.registerAccessor(JPanel.class, new PanelAccessor());
+			Tween.registerAccessor(JComponent.class, new PanelAccessor());
 			
 			// Pass it the object to animate the direction to animate it and the
 			// duration of the animation in milliseconds. when the time value is
 			// 5000 it should take about 5 seconds to play the animation.
-			Tween.to(panel, PanelAccessor.POS_XY, 150)
+			Tween.to(component, PanelAccessor.POS_XY, 1050)
 					// Start from the exact middle of the screen
 					.target(newX, newY).ease(Cubic.OUT)
 					// Stop the timer when the animation is complete
@@ -89,7 +90,7 @@ public class Animations {
 
 // Used to tell Universal Tween Engine how to get and set the values of a JPanel
 // Copied from the demo on the projects website and modified to work for JPanels
-class PanelAccessor implements TweenAccessor<JPanel> {
+class PanelAccessor implements TweenAccessor<JComponent> {
 	
 	public static final int POS_XY = 1; // Position based on upper left corner of panel
 	public static final int CPOS_XY = 2; // Position based on center of panel
@@ -99,7 +100,7 @@ class PanelAccessor implements TweenAccessor<JPanel> {
 	public static final int TINT = 6;
 
 	@Override
-	public int getValues(JPanel target, int tweenType, float[] returnValues) {
+	public int getValues(JComponent target, int tweenType, float[] returnValues) {
 		switch (tweenType) {
 			case POS_XY:
 				returnValues[0] = target.getX();
@@ -131,7 +132,7 @@ class PanelAccessor implements TweenAccessor<JPanel> {
 	}
 
 	@Override
-	public void setValues(JPanel target, int tweenType, float[] newValues) {
+	public void setValues(JComponent target, int tweenType, float[] newValues) {
 		switch (tweenType) {
 			case POS_XY: target.setLocation((int) newValues[0], (int) newValues[1]); break;
 			case CPOS_XY: target.setLocation((int) newValues[0] - target.getWidth()/2, (int) newValues[1] - target.getHeight()/2); break;
@@ -155,7 +156,6 @@ class PanelAccessor implements TweenAccessor<JPanel> {
 
 			default: assert false;
 		}
-
 	}
 
 }
