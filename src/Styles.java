@@ -18,7 +18,7 @@ public class Styles {
 		label.setVisible(isVisible);
 	}
 	
-	public static void configureJButton(JButton button, boolean isVisible) {
+	public static void configureJButton(final JButton button, boolean isVisible) {
 		button.setFocusPainted(false);// avoids this ugly inner border
 		button.setOpaque(true);
 		button.setVisible(isVisible);

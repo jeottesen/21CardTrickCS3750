@@ -124,20 +124,21 @@ public class Dealer {
 				g2d.fillRect(0, 0, board.getWidth(), board.getHeight());
 				g2d.setColor(Color.WHITE);
 				g2d.setFont(new Font("Verdana", Font.BOLD, 30));
-				int stringWidth = g2d.getFontMetrics().stringWidth(revealMessage);
-				int stringLocX = (board.getWidth() - stringWidth) / 2; // centering
-																		// the
-																		// message
-																		// string
+				int stringWidth = g2d.getFontMetrics().stringWidth(revealMessage); 
+				// centering the message string
+				int stringLocX = (board.getWidth() - stringWidth) / 2;
 				g2d.drawString(revealMessage, stringLocX, 635);
 			}
+
 		};
-		int reveal_LocX = (board.getWidth() - Globals.CARD_WI) / 2; // centers
-																	// it
-																	// horizontally
+		
+		
+		// centers it horizontally
+		int reveal_LocX = (board.getWidth() - Globals.CARD_WI) / 2; 
 
 		overlay.setLayout(null);
 		overlay.setOpaque(false);
+
 		overlay.setBounds(0, 0, board.getWidth(), board.getHeight());
 		overlay.setVisible(true);
 

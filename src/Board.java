@@ -35,6 +35,7 @@ public class Board extends JPanel {
 	public void Splash() {
 	}
 
+
 	public Board() {
 		int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -47,7 +48,6 @@ public class Board extends JPanel {
 		{
 			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/alt_purple_backgroundBIG.png"));
 			backgroundImg = backgroundImg.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
-
 		} catch (IOException e)
 		{
 			System.out.println("ERROR: " + e.getMessage());

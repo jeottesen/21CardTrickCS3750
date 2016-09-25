@@ -219,7 +219,7 @@ public class Player extends JPanel {
 		public boolean hoveredOver;
 		private boolean selected;
 
-		public ColumnBorder(int columnNumber) {
+		public ColumnBorder(final int columnNumber) {
 			this.columnNumber = columnNumber;
 			setSize(Globals.CARD_WI + 30, Globals.COLUMN_HI + 30);
 			setPreferredSize(new Dimension(Globals.CARD_WI + 30, Globals.COLUMN_HI + 30));
@@ -255,7 +255,7 @@ public class Player extends JPanel {
 						columnIdLabel.setVisible(false);
 						selectedColumnID = columnNumber;
 						buttonPanel.setVisible(true);
-						questionLabel.setText("Your card is in column " + columnNumber + "?");
+						questionLabel.setText("Your card is in Column " + columnNumber + "?");
 						repaint();
 					}
 				}
