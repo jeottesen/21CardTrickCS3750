@@ -26,7 +26,7 @@ public class SplashPanel extends JPanel
         //reads the image
         try {
             image =ImageIO.read(getClass().getResourceAsStream(fname));
-			image = image.getScaledInstance(Globals.FRAME_WI, Globals.FRAME_HI, Image.SCALE_SMOOTH);
+			image = image.getScaledInstance(-1, Globals.FRAME_HI, Image.SCALE_SMOOTH);
 
         } catch (IOException ioe) {
             System.out.println("Could not read file");
@@ -36,6 +36,6 @@ public class SplashPanel extends JPanel
     //this will draw the image
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(image,0,0,this);
+        g.drawImage(image,-180,0,this);
     }
 }
