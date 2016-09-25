@@ -89,10 +89,9 @@ public class Board extends JPanel {
 		// the only thing changing on window resize is the space BETWEEN columns
 		columnGap = Globals.COLUMN_GAP - (int) deltaBoardWidthPixels / 2;
 
-		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
-		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2),
-				Globals.COLUMN_ONE_LOCY);
+		column1.setLocation(Globals.COLUMN_ONE_LOCX, 0);
+		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, 0);
+		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2), 0);
 	}
 
 	public void addToColumn(int columnId, Card card) {

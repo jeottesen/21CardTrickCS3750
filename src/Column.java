@@ -18,7 +18,7 @@ public class Column extends JPanel {
 		
 		setSize(Globals.CARD_WI, ColumnHeight);
 		setPreferredSize(new Dimension(Globals.CARD_WI, ColumnHeight));
-		//setOpaque(false);
+
 		cards = new ArrayList<>();
 		
 		setOpaque(false);
@@ -39,7 +39,7 @@ public class Column extends JPanel {
 	}
 	
 	public int nextCardY() {
-		return Globals.COLUMN_ONE_LOCY + ((Globals.CARDS_PER_COLUMN - 1) - cards.size()) * Globals.CARD_SPACING;
+		return Globals.COLUMN_ONE_LOCY + ((Globals.CARDS_PER_COLUMN) - cards.size()) * Globals.CARD_SPACING;
 	}
 	
 	public void addCard(Card card) {

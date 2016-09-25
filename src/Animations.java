@@ -41,7 +41,7 @@ public class Animations {
 			// Pass it the object to animate the direction to animate it and the
 			// duration of the animation in milliseconds. when the time value is
 			// 5000 it should take about 5 seconds to play the animation.
-			Tween.to(component, PanelAccessor.POS_XY, 1050)
+			Tween.to(component, PanelAccessor.POS_XY, 150)
 					// Start from the exact middle of the screen
 					.target(newX, newY).ease(Cubic.OUT)
 					// Stop the timer when the animation is complete
