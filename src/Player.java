@@ -86,6 +86,7 @@ public class Player extends JPanel {
 		 */
 		addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				dealer.cancelAnimation();
 				deselectColumns();
 				questionLabel.setText("Which column is your card in?");
 				columnIdLabel.setVisible(true);
@@ -174,6 +175,7 @@ public class Player extends JPanel {
 		Styles.configureJButton(btnYes, false);
 		btnReady.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dealer.cancelAnimation();
 				hasSelectedCard = true;
 				btnReady.setVisible(false);
 				btnYes.setVisible(true);
@@ -192,6 +194,7 @@ public class Player extends JPanel {
 		});
 		btnYes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				dealer.cancelAnimation();
 				columnIdLabel.setVisible(true);
 				buttonPanel.setVisible(false);
 				questionLabel.setText("Which column is your card in?");
@@ -242,10 +245,12 @@ public class Player extends JPanel {
 					{
 						// System.out.println("ColumnBorder " + columnNumber + "
 						// Mouse Clicked.");
+						dealer.cancelAnimation();
 						deselectColumns(); // deselect all other columns
 						selected = !selected; // toggle this column
 						columnIdLabel.setVisible(false);
 						selectedColumnID = columnNumber;
+						btnYes.setVisible(true);
 						buttonPanel.setVisible(true);
 						questionLabel.setText("Your card is in column " + columnNumber + "?");
 						repaint();

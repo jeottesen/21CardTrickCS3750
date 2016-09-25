@@ -32,6 +32,8 @@ public class Dealer{
 	
 	private int dealNumber = 1;
 	
+	final TweenManager tweenManager = new TweenManager();
+	
 	public Dealer(Board board) {
 		this.board = board;
 		
@@ -45,7 +47,12 @@ public class Dealer{
 		trickDeck.addAll(deck.random21());
 	}
 	
-	
+	public void cancelAnimation() {
+		// tell the tweenManager an insane amount of time has passed so
+		// that the animation will end early. this is necessary so that
+		// the cards get placed appropriately
+		tweenManager.update(1000000);
+	}
 	
 		
 	public void deal() {		
@@ -55,7 +62,7 @@ public class Dealer{
 		board.getColumnThree().clearColumn();
 		
 
-		final TweenManager tweenManager = new TweenManager();
+		
 		
 		
 		// The thread that plays the animation
@@ -77,6 +84,7 @@ public class Dealer{
 			Card c2 = trickDeck.pop();
 			Card c3 = trickDeck.pop();
 			
+			// set the location of the cards so they start from the top
 			c1.setLocation(0, -1 * Globals.CARD_HI);
 			c2.setLocation(0, -1 * Globals.CARD_HI);
 			c3.setLocation(0, -1 * Globals.CARD_HI);
@@ -85,12 +93,13 @@ public class Dealer{
 			board.addToColumn(2, c2);
 			board.addToColumn(3, c3);
 			
-			
+			// add the tweens to the timeline for each card
 			timeline.push(Tween.to(c1, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
 			timeline.push(Tween.to(c2, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
 			timeline.push(Tween.to(c3, PanelAccessor.POS_XY, 100).target(0, board.getColumnOne().nextCardY()).ease(Cubic.OUT));
 		}
 		
+		// stop the timer when it is done
 		timeline.setCallbackTriggers(TweenCallback.COMPLETE);
 		timeline.setCallback(new TweenCallback() {
 			@Override
