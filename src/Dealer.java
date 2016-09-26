@@ -166,12 +166,14 @@ public class Dealer {
 		if (dealNumber == 4)
 		{
 			revealCard();
+			
 			JOptionPane.showMessageDialog(overlay, "New Game?");
 			
-			trickDeck.empty();
+			/*trickDeck.empty();
 			
 			
 			dealNumber = 1;
+			//board.remove(overlay);
 			overlay.setVisible(false);
 			board.remove(player);
 			board.getColumnOne().clearColumn();
@@ -180,8 +182,15 @@ public class Dealer {
 			
 			board.revalidate();
 			board.add(new Player(this));
-			board.revalidate();
-			
+			board.revalidate();*/
+			CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
+			theFrame = new CardTrick();
+			//theFrame.removeAll();
+			//theFrame.add(new Board());
+/*			((CardTrick)(board.getParent().getParent().getParent().getParent())).removeAll();
+			((CardTrick)(board.getParent().getParent().getParent().getParent())).add(new Board());
+*/			
+		
 		}
 
 	}
