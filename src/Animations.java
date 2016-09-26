@@ -14,7 +14,9 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
+import aurelienribon.tweenengine.equations.Bounce;
 import aurelienribon.tweenengine.equations.Cubic;
+import aurelienribon.tweenengine.equations.Elastic;
 
 public class Animations {
 	
@@ -41,9 +43,9 @@ public class Animations {
 			// Pass it the object to animate the direction to animate it and the
 			// duration of the animation in milliseconds. when the time value is
 			// 5000 it should take about 5 seconds to play the animation.
-			Tween.to(component, PanelAccessor.POS_XY, 150)
+			Tween.to(component, PanelAccessor.POS_XY, 600)
 					// Start from the exact middle of the screen
-					.target(newX, newY).ease(Cubic.OUT)
+					.target(newX, newY).ease(Bounce.OUT)
 					// Stop the timer when the animation is complete
 					.setCallbackTriggers(TweenCallback.COMPLETE)
 					.setCallback(new TweenCallback() {

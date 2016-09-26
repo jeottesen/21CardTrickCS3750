@@ -43,6 +43,7 @@ public class Dealer {
 
 	private JPanel overlay;
 	private Card revealCard;
+	JButton playAgain;
 
 	public Dealer(Board board) {
 		this.board = board;
@@ -75,6 +76,10 @@ public class Dealer {
 					revealCard.setLocation(reveal_LocX, Globals.REVEAL_LOCY);
 					revealCard.revalidate();
 					revealCard.repaint();
+					
+					playAgain.setLocation((board.getWidth() - 150)/2, 600);
+					playAgain.revalidate();
+					playAgain.repaint();
 				}
 			}
 
@@ -171,53 +176,21 @@ public class Dealer {
 		{
 			revealCard();
 			
-
-			/*
-			 *  a "Play Again" confirm dialog pops up.  It's in a new thread
-			 *  that waits a couple seconds so that the reveal card shows first,
-			 *  and then "play again?" pops up a couple of seconds later.
-			 */
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					try
-					{
-						Thread.sleep(2000);
-					} catch (InterruptedException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					int jop = JOptionPane.showConfirmDialog
-							(board.dummyPanelForJDialogPane, "Play Again?", "New Card Trick", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-					
-					if (jop == JOptionPane.YES_OPTION){
-						board.resetGame();
-					}else{
-						System.exit(0);
-					}
-					
-				}
-			}).start();
-		
 		}
 
 	}
 
 	public void revealCard() {
 		// stop player from being able to interact with field
+		
+
+		
 		player.setVisible(false);
 
 		revealCard = board.getColumnTwo().getCards().get(3);
 		
-
 		overlay = new JPanel() 
 		{
-			JButton playAgain = new JButton("Play Again");
-
-			
-			
 			@Override
 			public void paintComponent(Graphics g) 
 			{
@@ -237,10 +210,11 @@ public class Dealer {
 				int stringWidth = g2d.getFontMetrics().stringWidth(revealMessage); 
 				// centering the message string
 				int stringLocX = (board.getWidth() - stringWidth) / 2;
-				g2d.drawString(revealMessage, stringLocX, 635);
+				g2d.drawString(revealMessage, stringLocX, 150);
 			}
 
 		};
+		
 		
 		
 		// centers it horizontally
@@ -261,6 +235,20 @@ public class Dealer {
 
 		overlay.add(revealCard);
 		revealCard.setLocation(reveal_LocX, Globals.REVEAL_LOCY);
+		
+		playAgain = new JButton("Play Again");
+		Styles.configureJButton(playAgain, true);
+		playAgain.setBounds((board.getWidth() - 150)/2, 600, 150, 60);
+		playAgain.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				board.resetGame();
+			}
+		});
+		
+		overlay.add(playAgain);
+		
 		overlay.repaint();
 
 		board.repaint();		
