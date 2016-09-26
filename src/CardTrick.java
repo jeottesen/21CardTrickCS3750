@@ -1,18 +1,16 @@
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
-import javax.swing.*;
-import javax.swing.border.LineBorder;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 
-public class CardTrick extends JFrame
-{
+public class CardTrick extends JFrame {
+
     SplashPanel splash;
+    Board board;
     
 	public static void main(String[] args)
 	{
@@ -24,7 +22,7 @@ public class CardTrick extends JFrame
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(Globals.FRAME_WI, Globals.FRAME_HI);
 		setMinimumSize(new Dimension(Globals.FRAME_WI - 400, Globals.FRAME_HI - 10));
-
+		
 
 		//Before adding board, display splash screen
 		splash = new SplashPanel("/images/splash_alt.png");
@@ -32,17 +30,32 @@ public class CardTrick extends JFrame
 		splash.setLayout(null);
 		add(splash);
 
-		//Add play button
-		addButton(new JButton("Play!"), Globals.FRAME_WI/2, 250, 175, 75);
+		// Run this in a different thread to decrease loading speed
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+		
+				board = new Board();
+				add(board);
+				board.setVisible(false);
+				// animate the button moving in from the left
+				Animations.movePanel(
+						addButton(new JButton("Play!"), 
+								Globals.FRAME_WI + 175, 250, 175, 75),
+						Globals.FRAME_WI/2, 275);
+				
+			}
+		}).start();
 
 		setVisible(true);
+		
 	}
 
-    private void addButton(final JButton button, int locX, int locY, int Wi, int Hi)
+    private JButton addButton(final JButton button, int locX, int locY, int Wi, int Hi)
 	{
 		button.setBounds(locX, locY, Wi, Hi);
 		Styles.configureJButton(button, true);
-		button.setFont(new Font("Helvetica", Font.PLAIN, 36));
+		button.setFont(new Font("Helvetica", Font.BOLD, 36));
 
 		button.addActionListener(new ActionListener() 
 		{
@@ -53,6 +66,8 @@ public class CardTrick extends JFrame
 		});
 		button.setVisible(true);
 		splash.add(button);
+		
+		return button;
 	}
 
 	public void buttonPressed(JButton button, ActionEvent e)
@@ -64,8 +79,8 @@ public class CardTrick extends JFrame
 	    remove(button);
 	    
 	    //Add board and start trick on button press
-	    add(new Board());
+	    board.setVisible(true);
+		board.startGame();
 	}
-
 
 }

@@ -1,17 +1,12 @@
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
 import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.JPanel;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Point2D;
@@ -37,35 +32,60 @@ public class Board extends JPanel {
 
 
 	public Board() {
+
 		int screenWidth = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 		int screenHeight = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 
 		dealer = new Dealer(this);
-		setLayout(null);
+		// Run this in a different thread to decrease loading speed
+		EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				
+				setLayout(null);
 
-		// load background image
-		try
-		{
-			backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/alt_purple_backgroundBIG.png"));
-			backgroundImg = backgroundImg.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
-		} catch (IOException e)
-		{
-			System.out.println("ERROR: " + e.getMessage());
-		}
+				// load background image
+				try
+				{
+					backgroundImg = ImageIO.read(getClass().getResourceAsStream("images/alt_purple_backgroundBIG.png"));
+					backgroundImg = backgroundImg.getScaledInstance(screenWidth, screenHeight, Image.SCALE_SMOOTH);
+				} catch (IOException e)
+				{
+					System.out.println("ERROR: " + e.getMessage());
+				}
 
-		column1.setId(1);
-		column2.setId(2);
-		column3.setId(3);
+				column1.setId(1);
+				column2.setId(2);
+				column3.setId(3);
+				
+				// 0 because zero change in window width at this point
+				setColumnLocations(0); 
 
-		setColumnLocations(0); // 0 because zero change in window width at this
-								// point
-
+				add(column1);
+				add(column2);
+				add(column3);
+			}
+		});
+		
+	}
+	
+	public void startGame() {
+		dealer.deal();
+	}
+	
+	public void resetGame() {
+		removeAll();
+		dealer = new Dealer(this);
+		column1.clearColumn();
+		column2.clearColumn();
+		column3.clearColumn();
+		
 		add(column1);
 		add(column2);
 		add(column3);
-
+		repaint();
+		
 		dealer.deal();
-
 	}
 
 	/* this method will be called from the Dealer object when the board is resized.
@@ -78,10 +98,9 @@ public class Board extends JPanel {
 		// the only thing changing on window resize is the space BETWEEN columns
 		columnGap = Globals.COLUMN_GAP - (int) deltaBoardWidthPixels / 2;
 
-		column1.setLocation(Globals.COLUMN_ONE_LOCX, Globals.COLUMN_ONE_LOCY);
-		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, Globals.COLUMN_ONE_LOCY);
-		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2),
-				Globals.COLUMN_ONE_LOCY);
+		column1.setLocation(Globals.COLUMN_ONE_LOCX, 0);
+		column2.setLocation(Globals.COLUMN_ONE_LOCX + Globals.CARD_WI + columnGap + 30, 0);
+		column3.setLocation(Globals.COLUMN_ONE_LOCX + (Globals.CARD_WI * 2) + (columnGap * 2) + (30 * 2), 0);
 	}
 
 	public void addToColumn(int columnId, Card card) {

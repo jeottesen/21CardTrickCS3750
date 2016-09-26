@@ -1,12 +1,9 @@
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
 
 public class Deck {
     private Stack<Card> cards;
-    private Dealer dealer;
-    
     
     public Deck(){
         cards = new Stack<>();
@@ -17,9 +14,7 @@ public class Deck {
         
         shuffle();
     }
-	 
-	// setter method to build association relationship
-    public void setDealer(Dealer dealer){this.dealer = dealer;}
+	
     
     //Function to draw a card from the deck
     public Card draw(){
@@ -34,7 +29,9 @@ public class Deck {
     public Stack<Card> random21() {
     	Stack<Card> random21 = new Stack<>();
     	for (int i = 0; i < 21; i++){
-    		random21.add(draw());
+    		Card card = draw();
+    		card.loadImage();
+    		random21.add(card);
     	}    	
     	return random21;
     }
