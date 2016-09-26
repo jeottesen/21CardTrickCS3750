@@ -238,7 +238,9 @@ public class Dealer {
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
-				board.resetGame();
+				CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
+				theFrame.dispose();
+				theFrame = new CardTrick();
 			}
 		});
 		
