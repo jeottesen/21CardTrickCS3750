@@ -84,8 +84,10 @@ public class Board extends JPanel {
 		add(column2);
 		add(column3);
 		repaint();
-		
+
+		setColumnLocations(0);
 		dealer.deal();
+		
 	}
 
 	/* this method will be called from the Dealer object when the board is resized.
