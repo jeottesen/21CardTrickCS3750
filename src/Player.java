@@ -255,6 +255,7 @@ public class Player extends JPanel {
 						columnIdLabel.setVisible(false);
 						selectedColumnID = columnNumber;
 						buttonPanel.setVisible(true);
+						btnYes.setVisible(true);
 						questionLabel.setText("Your card is in Column " + columnNumber + "?");
 						repaint();
 					}
