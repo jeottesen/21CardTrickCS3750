@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.WindowEvent;
 import java.util.Stack;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -167,7 +170,9 @@ public class Dealer {
 		{
 			revealCard();
 			
-			JOptionPane.showMessageDialog(overlay, "New Game?");
+			//JOptionPane.showMessageDialog(overlay, "New Game?");
+			
+			
 			
 			/*trickDeck.empty();
 			
@@ -183,8 +188,12 @@ public class Dealer {
 			board.revalidate();
 			board.add(new Player(this));
 			board.revalidate();*/
+			
 			CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
+			theFrame.dispose();
 			theFrame = new CardTrick();
+			
+			
 			//theFrame.removeAll();
 			//theFrame.add(new Board());
 /*			((CardTrick)(board.getParent().getParent().getParent().getParent())).removeAll();
@@ -201,9 +210,15 @@ public class Dealer {
 
 		revealCard = board.getColumnTwo().getCards().get(3);
 
-		overlay = new JPanel() {
+		overlay = new JPanel() 
+		{
+			JButton playAgain = new JButton("Play Again");
+
+			
+			
 			@Override
-			public void paintComponent(Graphics g) {
+			public void paintComponent(Graphics g) 
+			{
 				String revealMessage = "This is your secret card!";
 				Graphics2D g2d = (Graphics2D) g;
 				super.paintComponent(g2d);
