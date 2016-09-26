@@ -28,6 +28,7 @@ public class Board extends JPanel {
 	private final Column column1 = new Column();
 	private final Column column2 = new Column();
 	private final Column column3 = new Column();
+	protected JPanel dummyPanelForJDialogPane;
 
 	private int columnGap;
 
@@ -72,6 +73,16 @@ public class Board extends JPanel {
 				add(column3);
 			}
 		});
+		
+		/*
+		 * invisible panel to act as parent for JDialogPane that pops up
+		 * in Dealer's reveal() to ask user if they want to play again.
+		 */
+		dummyPanelForJDialogPane = new JPanel();
+		dummyPanelForJDialogPane.setSize(100, 100);
+		dummyPanelForJDialogPane.setLocation(200, 50);
+		dummyPanelForJDialogPane.setOpaque(false);
+		this.add(dummyPanelForJDialogPane);
 	}
 	
 	public void startGame() {

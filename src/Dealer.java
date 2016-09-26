@@ -9,6 +9,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -170,46 +171,38 @@ public class Dealer {
 		{
 			revealCard();
 			
-			//JOptionPane.showMessageDialog(overlay, "New Game?");
-			
-			int jop = JOptionPane.showConfirmDialog
-					(overlay, "Play Again?", "New Card Trick", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-			
-			if (jop == JOptionPane.YES_OPTION){
-				CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
-				theFrame.dispose();
-				theFrame = new CardTrick();
-			}else{
-				System.exit(0);
-			}
-			
-			
-			
-			/*trickDeck.empty();
-			
-			
-			dealNumber = 1;
-			//board.remove(overlay);
-			overlay.setVisible(false);
-			board.remove(player);
-			board.getColumnOne().clearColumn();
-			board.getColumnTwo().clearColumn();
-			board.getColumnThree().clearColumn();
-			
-			board.revalidate();
-			board.add(new Player(this));
-			board.revalidate();*/
-			
-			CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
-			theFrame.dispose();
-			theFrame = new CardTrick();
+			/*
+			 *  a "Play Again" confirm dialog pops up.  It's in a new thread
+			 *  that waits a couple seconds so that the reveal card shows first,
+			 *  and then "play again?" pops up a couple of seconds later.
+			 */
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					try
+					{
+						Thread.sleep(2000);
+					} catch (InterruptedException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					int jop = JOptionPane.showConfirmDialog
+							(board.dummyPanelForJDialogPane, "Play Again?", "New Card Trick", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					
+					if (jop == JOptionPane.YES_OPTION){
+						CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
+						theFrame.dispose();
+						theFrame = new CardTrick();
+					}else{
+						System.exit(0);
+					}
+					
+				}
+			}).start();
 			
 			
-			//theFrame.removeAll();
-			//theFrame.add(new Board());
-/*			((CardTrick)(board.getParent().getParent().getParent().getParent())).removeAll();
-			((CardTrick)(board.getParent().getParent().getParent().getParent())).add(new Board());
-*/			
 		
 		}
 
@@ -220,6 +213,7 @@ public class Dealer {
 		player.setVisible(false);
 
 		revealCard = board.getColumnTwo().getCards().get(3);
+		
 
 		overlay = new JPanel() 
 		{
@@ -255,7 +249,7 @@ public class Dealer {
 		// centers it horizontally
 		int reveal_LocX = (board.getWidth() - Globals.CARD_WI) / 2; 
 
-
+		
 		overlay.setLayout(null);
 		overlay.setOpaque(false);
 
@@ -272,7 +266,8 @@ public class Dealer {
 		revealCard.setLocation(reveal_LocX, Globals.REVEAL_LOCY);
 		overlay.repaint();
 
-		board.repaint();
+		board.repaint();		
+		
 	}
 
 	public void pickupCards(int column) {
