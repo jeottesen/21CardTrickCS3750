@@ -164,7 +164,25 @@ public class Dealer {
 
 		board.revalidate();
 		if (dealNumber == 4)
+		{
 			revealCard();
+			JOptionPane.showMessageDialog(overlay, "New Game?");
+			
+			trickDeck.empty();
+			
+			
+			dealNumber = 1;
+			overlay.setVisible(false);
+			board.remove(player);
+			board.getColumnOne().clearColumn();
+			board.getColumnTwo().clearColumn();
+			board.getColumnThree().clearColumn();
+			
+			board.revalidate();
+			board.add(new Player(this));
+			board.revalidate();
+			
+		}
 
 	}
 
