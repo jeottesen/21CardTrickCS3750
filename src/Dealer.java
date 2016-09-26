@@ -170,8 +170,8 @@ public class Dealer {
 		{
 			revealCard();
 			
-			//JOptionPane.showMessageDialog(overlay, "New Game?");
-			
+			JOptionPane.showMessageDialog(board.getColumnOne(), "New Game?");
+			//JOptionPane.showM
 			
 			
 			/*trickDeck.empty();
