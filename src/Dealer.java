@@ -173,7 +173,7 @@ public class Dealer {
 
 			
 			int jop = JOptionPane.showConfirmDialog
-					(board.getColumnOne, "Play Again?", "New Card Trick", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					(board.getColumnOne(), "Play Again?", "New Card Trick", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			
 			if (jop == JOptionPane.YES_OPTION){
 				CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
@@ -199,10 +199,6 @@ public class Dealer {
 			board.revalidate();
 			board.add(new Player(this));
 			board.revalidate();*/
-			
-			CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
-			theFrame.dispose();
-			theFrame = new CardTrick();
 			
 			
 			//theFrame.removeAll();
