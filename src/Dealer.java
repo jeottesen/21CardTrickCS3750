@@ -171,6 +171,7 @@ public class Dealer {
 		{
 			revealCard();
 			
+<<<<<<< HEAD
 			/*
 			 *  a "Play Again" confirm dialog pops up.  It's in a new thread
 			 *  that waits a couple seconds so that the reveal card shows first,
@@ -201,6 +202,37 @@ public class Dealer {
 					
 				}
 			}).start();
+=======
+
+			
+			int jop = JOptionPane.showConfirmDialog
+					(board.getColumnOne(), "Play Again?", "New Card Trick", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			
+			if (jop == JOptionPane.YES_OPTION){
+				CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
+				theFrame.dispose();
+				theFrame = new CardTrick();
+			}else{
+				System.exit(0);
+			}
+			
+			
+			
+			/*trickDeck.empty();
+			
+			
+			dealNumber = 1;
+			//board.remove(overlay);
+			overlay.setVisible(false);
+			board.remove(player);
+			board.getColumnOne().clearColumn();
+			board.getColumnTwo().clearColumn();
+			board.getColumnThree().clearColumn();
+			
+			board.revalidate();
+			board.add(new Player(this));
+			board.revalidate();*/
+>>>>>>> origin/animation
 			
 			
 		
