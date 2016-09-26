@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -31,15 +30,13 @@ public class Card  extends JPanel
 		setPreferredSize(new Dimension(Globals.CARD_WI, Globals.CARD_HI));
 		setSize(Globals.CARD_WI, Globals.CARD_HI);
 		
-		// moved getScaled instance from paint component
-		// this way the program only scales the image down once. 
-		// rather than  every few seconds
-		
-		
 		setOpaque(false);
 	}
 	
 	public void loadImage() {
+		// moved getScaled instance from paint component
+		// this way the program only scales the image down once.
+		// rather than  every few seconds
 		image = getCardImage().getScaledInstance(Globals.CARD_WI, Globals.CARD_HI, Image.SCALE_AREA_AVERAGING);
 		
 		if(image == null)

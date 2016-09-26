@@ -2,41 +2,26 @@ import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Stroke;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Insets;
 
 public class Player extends JPanel {
 
 	// Association between Player and Dealer
 	private Dealer dealer;
-
-	// Aggregation relationship between Card and player
-	// I don't think we actually need this I thought
-	// the program wasn't supposed to know the card
-	// This is how you implement the UML though so
-	// we should ask him about it in class
-	private Card card;
 
 	private boolean hasSelectedCard;
 
@@ -172,8 +157,6 @@ public class Player extends JPanel {
 	private void createButtonPanel() {
 		buttonPanel = new JPanel();
 		buttonPanel.setOpaque(false);
-		// buttonPanel.setPreferredSize(new Dimension(100, 50));
-		// buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
 		buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		createButtons();
 		buttonPanel.add(btnReady);

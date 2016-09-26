@@ -7,13 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.WindowEvent;
 import java.util.Stack;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -24,7 +20,6 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Cubic;
 
-import javax.swing.JLabel;
 import java.awt.Font;
 
 public class Dealer {
@@ -276,11 +271,6 @@ public class Dealer {
 			trickDeck.addAll(board.getColumnTwo().getCards());
 		}
 
-		// For testing
-		/*
-		 * if (dealNumber < 3){ JOptionPane.showMessageDialog(null, "Next Deal"
-		 * ); }
-		 */
 		deal();
 
 	}
