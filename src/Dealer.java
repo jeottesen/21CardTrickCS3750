@@ -172,6 +172,17 @@ public class Dealer {
 			
 			//JOptionPane.showMessageDialog(overlay, "New Game?");
 			
+			int jop = JOptionPane.showConfirmDialog
+					(overlay, "Play Again?", "New Card Trick", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			
+			if (jop == JOptionPane.YES_OPTION){
+				CardTrick theFrame = (CardTrick)(board.getParent().getParent().getParent().getParent());
+				theFrame.dispose();
+				theFrame = new CardTrick();
+			}else{
+				System.exit(0);
+			}
+			
 			
 			
 			/*trickDeck.empty();
