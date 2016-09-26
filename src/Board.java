@@ -88,7 +88,21 @@ public class Board extends JPanel {
 	public void startGame() {
 		dealer.deal();
 	}
-
+	
+	public void resetGame() {
+		removeAll();
+		dealer = new Dealer(this);
+		column1.clearColumn();
+		column2.clearColumn();
+		column3.clearColumn();
+		
+		add(column1);
+		add(column2);
+		add(column3);
+		repaint();
+		
+		dealer.deal();
+	}
 
 	/* this method will be called from the Dealer object when the board is resized.
 	 * Dealer has a reference to the board, and adds a Component listener to board.

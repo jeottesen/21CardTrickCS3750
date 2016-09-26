@@ -35,6 +35,7 @@ public class Column extends JPanel {
 	public void clearColumn()
 	{
 		cards.clear();
+		removeAll();
 		repaint();
 	}
 	
